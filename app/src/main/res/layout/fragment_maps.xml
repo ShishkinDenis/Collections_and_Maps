@@ -8,27 +8,111 @@
     tools:context=".MapsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tvMaps"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
-        android:text="Maps"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnMapsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Calculate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.891" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="325dp"
+        android:layout_height="359dp"
+        android:clickable="false"
+        android:visibility="visible"
+        app:columnCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582"
+        app:rowCount="3">
+
+        <TextView android:id="@+id/tvVoid" />
+
+        <TextView
+            android:id="@+id/tvHashMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HashMap" />
+
+        <TextView
+            android:id="@+id/tvTreeMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TreeMap" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adding new" />
+
+        <TextView
+            android:id="@+id/tvAddingNewHashMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ms" />
+
+        <TextView
+            android:id="@+id/tvAddingNewTreeMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ms" />
+
+        <TextView
+            android:id="@+id/tvRemoving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Removing" />
+
+        <TextView
+            android:id="@+id/tvRemovingHashMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ms" />
+
+        <TextView
+            android:id="@+id/tvRemovingTreeMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ms" />
+
+        <TextView
+            android:id="@+id/tvSearchByKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search by key" />
+
+        <TextView
+            android:id="@+id/tvSearchByKeyHashMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ms" />
+
+        <TextView
+            android:id="@+id/tvSearchByKeyTreeMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ms" />
+    </androidx.gridlayout.widget.GridLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="371dp"
+        android:layout_height="64dp"
+        android:hint="hint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.179" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

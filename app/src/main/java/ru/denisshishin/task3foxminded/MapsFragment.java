@@ -20,8 +20,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @InjectPresenter
     MapsFragmentPresenter mapsFragmentPresenter;
 
-    //public MapsFragment(){}
-    TextView tvMaps;
+    TextView tvAddingNewHashMap;
     Button btnMapsFragment;
 
     @Override
@@ -36,7 +35,8 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
         super.onViewCreated(view, savedInstanceState);
 
         btnMapsFragment = view.findViewById(R.id.btnMapsFragment);
-        tvMaps = view.findViewById(R.id.tvMaps);
+        tvAddingNewHashMap = view.findViewById(R.id.tvAddingNewHashMap);
+
 
         btnMapsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +48,8 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
 
 
     @Override
-    public void showTvMapsFragment() {
-        tvMaps.setText("Что-то");
-///перенести значение в Presenter
+    public void showTvMapsFragment(String string) {
+        tvAddingNewHashMap.setText(string);
+
     }
 }

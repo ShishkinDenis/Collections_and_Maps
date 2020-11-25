@@ -5,5 +5,5 @@ import moxy.viewstate.strategy.alias.AddToEndSingle;
 
 public interface MapsFragmentView extends MvpView {
     @AddToEndSingle
-    void showTvMapsFragment();
+    void showTvMapsFragment(String string);
 }
