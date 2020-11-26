@@ -4,12 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import moxy.MvpAppCompatFragment;
@@ -21,7 +22,10 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     MapsFragmentPresenter mapsFragmentPresenter;
 
     TextView tvAddingNewHashMap;
+    TextView tvRemovingHashMap;
     Button btnMapsFragment;
+    ProgressBar pbAddingNewHashMap;
+    EditText etInputNumberMapsFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,12 +40,15 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
 
         btnMapsFragment = view.findViewById(R.id.btnMapsFragment);
         tvAddingNewHashMap = view.findViewById(R.id.tvAddingNewHashMap);
+        pbAddingNewHashMap = view.findViewById(R.id.pbAddingNewHashMap);
+        etInputNumberMapsFragment = view.findViewById(R.id.tietInputNumberMapsFragment);
+        tvRemovingHashMap = view.findViewById(R.id.tvRemovingHashMap);
 
 
         btnMapsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mapsFragmentPresenter.presentTvMapsFragment();
+               mapsFragmentPresenter.presentTvMapsFragment(etInputNumberMapsFragment.getText().toString());
             }
         });
     }
@@ -50,6 +57,33 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @Override
     public void showTvMapsFragment(String string) {
         tvAddingNewHashMap.setText(string);
-
     }
+    @Override
+    public void showTvRemovingHashMap(String string) {
+        tvRemovingHashMap.setText(string);
+    }
+
+    @Override
+    public void showPbMapsFragment() {
+        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+        pbAddingNewHashMap.setVisibility(View.VISIBLE);
+
+        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+        pbAddingNewHashMap.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hidePbMapsFragment() {
+        pbAddingNewHashMap.setVisibility(View.INVISIBLE);
+        tvAddingNewHashMap.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void getNumberMapsFragment() {
+       // tvAddingNewHashMap.setText(etInputNumberMapsFragment.getText().toString());
+         etInputNumberMapsFragment.getText().toString();
+         ///сделать String без интерфейса
+    }
+
+
 }
