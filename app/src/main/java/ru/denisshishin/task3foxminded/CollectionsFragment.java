@@ -23,6 +23,32 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @InjectPresenter
     CollectionFragmentPresenter collectionFragmentPresenter;
 
+    @BindView(R.id.tvAddingInTheBeginningArrayList) TextView tvAddingInTheBeginningArrayList;
+    @BindView(R.id.tvAddingInTheMiddleArrayList) TextView tvAddingInTheMiddleArrayList;
+    @BindView(R.id.tvAddingInTheEndArrayList) TextView tvAddingInTheEndArrayList;
+    @BindView(R.id.tvSearchByValueArrayList) TextView tvSearchByValueArrayList;
+    @BindView(R.id.tvRemovingInTheBeginningArrayList) TextView tvRemovingInTheBeginningArrayList;
+    @BindView(R.id.tvRemovingInTheMiddleArrayList) TextView tvRemovingInTheMiddleArrayList;
+    @BindView(R.id.tvRemovingInTheEndArrayList) TextView tvRemovingInTheEndArrayList;
+
+
+    @BindView(R.id.tvAddingInTheBeginningLinkedList) TextView tvAddingInTheBeginningLinkedList;
+    @BindView(R.id.tvAddingInTheMiddleLinkedList) TextView tvAddingInTheMiddleLinkedList;
+    @BindView(R.id.tvAddingInTheEndLinkedList) TextView tvAddingInTheEndLinkedList;
+    @BindView(R.id.tvSearchByValueLinkedList) TextView tvSearchByValueLinkedList;
+    @BindView(R.id.tvRemovingInTheBeginningLinkedList) TextView tvRemovingInTheBeginningLinkedList;
+    @BindView(R.id.tvRemovingInTheMiddleLinkedList) TextView tvRemovingInTheMiddleLinkedList;
+    @BindView(R.id.tvRemovingInTheEndLinkedList) TextView tvRemovingInTheEndLinkedList;
+
+
+    @BindView(R.id.tvAddingInTheBeginningCopyOnWriteList) TextView tvAddingInTheBeginningCopyOnWriteList;
+    @BindView(R.id.tvAddingInTheMiddleCopyOnWriteList) TextView tvAddingInTheMiddleCopyOnWriteList;
+    @BindView(R.id.tvAddingInTheEndCopyOnWriteList) TextView tvAddingInTheEndCopyOnWriteList;
+    @BindView(R.id.tvSearchByValueCopyOnWriteList) TextView tvSearchByValueCopyOnWriteList;
+    @BindView(R.id.tvRemovingInTheBeginningCopyOnWriteList) TextView tvRemovingInTheBeginningCopyOnWriteList;
+    @BindView(R.id.tvRemovingInTheMiddleCopyOnWriteList) TextView tvRemovingInTheMiddleCopyOnWriteList;
+    @BindView(R.id.tvRemovingInTheEndCopyOnWriteList) TextView tvRemovingInTheEndCopyOnWriteList;
+
 
    //TextView tvCollections;
    // TextView tvCollections2;

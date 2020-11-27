@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -78,6 +81,69 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
 
     public void hidePbPresenter(){
         getViewState().hidePbCollectonsFragment();
+    }
+
+    ArrayList arrayList = new ArrayList();
+    LinkedList linkedList = new LinkedList();
+    CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
+
+    public void addingInTheBeginningArrayList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.add(0, i);
+        }
+    }
+    ///!
+    public void addingInTheMiddleArrayList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.add(1, i);
+        }
+    }
+    public void addingInTheEndArrayList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.add(i);
+        }
+    }
+    public void searchByValueArrayList(String value){
+        int intValue = Integer.parseInt(value);
+        arrayList.indexOf(intValue);
+
+    }
+
+    public void removingInTheBeginningArrayList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.remove(0);
+        }
+    }
+    //!
+    public void removingInTheMiddleArrayList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.remove(1);
+        }
+    }
+    public void removingInTheEndArrayList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.remove(i);
+        }
+    }
+
+    public void addingInTheBeginningLinkedList(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            linkedList.addFirst(i);
+        }
     }
 
 }

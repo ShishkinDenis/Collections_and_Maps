@@ -9,25 +9,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/tvCollections"
-        android:layout_width="52dp"
-        android:layout_height="51dp"
-        android:gravity="center"
-        android:text="0 ms"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242" />
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditText"
         android:layout_width="318dp"
         android:layout_height="57dp"
         android:gravity="center"
-        android:hint="hint"
+        android:hint="Input number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -47,48 +34,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.935" />
 
-    <ProgressBar
-        android:id="@+id/pbCollectionsFragment"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.241" />
-
-    <TextView
-        android:id="@+id/tvCollections2"
-        android:layout_width="45dp"
-        android:layout_height="41dp"
-        android:gravity="center"
-        android:text="0 ms"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
-
-    <ProgressBar
-        android:id="@+id/pbCollections2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.241" />
-
     <TableLayout
-        android:layout_width="347dp"
-        android:layout_height="367dp"
+        android:layout_width="391dp"
+        android:layout_height="365dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.465"
@@ -110,14 +58,14 @@
                 android:id="@+id/tvArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ArrayList"
+                android:text="ArrayList   "
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LinkedList"
+                android:text="LinkedList   "
                 android:textSize="12sp" />
 
             <TextView
@@ -131,7 +79,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvAddingInTheBeginning"
@@ -140,27 +88,27 @@
                 android:text="Adding in the beginning" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvAddingInTheBeginningLinkedList"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/tvAddingInTheBeginningCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvAddingInTheMiddle"
@@ -169,167 +117,167 @@
                 android:text="Adding in the middle" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/tvAddingInTheMiddleArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/tvAddingInTheMiddleLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tvAddingInTheMiddleCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/tvAddingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Adding in the end" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/tvAddingInTheEndArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/tvAddingInTheEndLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/tvAddingInTheEndCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvSearchByValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search by value" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tvSearchByValueArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/tvSearchByValueLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/tvSearchByValueCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/tvRemovingInTheBeginning"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Removing in the beginning" />
+                android:layout_height="match_parent"
+                android:text="Removing in the beginning   " />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/tvRemovingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/tvRemovingInTheBeginningLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheBeginningCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvRemovingInTheMiddle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Removing in the middle" />
 
             <TextView
-                android:id="@+id/textView22"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvRemovingInTheMiddleArrayList"
+                android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/tvRemovingInTheMiddleLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/tvRemovingInTheMiddleCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Removing in the end" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/tvRemovingInTheEndArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/tvRemovingInTheEndLinkedList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/tvRemovingInTheEndCopyOnWriteList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="0 ms" />
         </TableRow>
 
     </TableLayout>
