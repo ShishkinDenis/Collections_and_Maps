@@ -4,16 +4,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 
@@ -52,7 +52,9 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
 
    //TextView tvCollections;
    // TextView tvCollections2;
-    Button btnCollectionsFragment;
+    //@BindView(R.id.btnCollectionsFragment)
+   Button btnCollectionsFragment;
+    @BindView(R.id.tietInputNumberCollectionsFragment) EditText tietInputNumberCollectionsFragment;
    // ProgressBar pbCollectionsFragment;
   //  ProgressBar pbCollections2;
 
@@ -61,6 +63,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View viewCollectionsFragment = inflater.inflate(R.layout.fragment_collections, container, false);
+        ButterKnife.bind(this,viewCollectionsFragment);
         return viewCollectionsFragment;
     }
 
@@ -80,12 +83,118 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
             public void onClick(View v) {
               //  pbCollectionsFragment.setVisibility(View.VISIBLE );
                // collectionFragmentPresenter.presentPbCollectionsFragment();
-                collectionFragmentPresenter.presentTvFragment();
+                collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
                // collectionFragmentPresenter.hidePbPresenter();
             }
         });
     }
 
+
+    @Override
+    public void showAddingInTheBeginningArrayList(String string) {
+        tvAddingInTheBeginningArrayList.setText(string);
+
+    }
+
+    @Override
+    public void showAddingInTheMiddleArrayList(String string) {
+        tvAddingInTheMiddleArrayList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheEndArrayList(String string) {
+        tvAddingInTheMiddleArrayList.setText(string);
+    }
+
+    @Override
+    public void showSearchByValueArrayList(String string) {
+        tvSearchByValueArrayList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheBeginningArrayList(String string) {
+        tvRemovingInTheBeginningArrayList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheMiddleArrayList(String string) {
+        tvRemovingInTheMiddleArrayList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheEndArrayList(String string) {
+        tvRemovingInTheEndArrayList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheBeginningLinkedList(String string) {
+        tvAddingInTheBeginningLinkedList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheMiddleLinkedList(String string) {
+        tvAddingInTheMiddleLinkedList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheEndLinkedList(String string) {
+        tvAddingInTheEndLinkedList.setText(string);
+    }
+
+    @Override
+    public void showSearchByValueLinkedList(String string) {
+        tvSearchByValueLinkedList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheBeginningLinkedList(String string) {
+        tvRemovingInTheBeginningLinkedList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheMiddleLinkedList(String string) {
+        tvRemovingInTheMiddleLinkedList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheEndLinkedList(String string) {
+        tvRemovingInTheMiddleLinkedList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheBeginningCopyOnWriteArrayList(String string) {
+        tvAddingInTheBeginningCopyOnWriteList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheMiddleCopyOnWriteArrayList(String string) {
+        tvAddingInTheMiddleCopyOnWriteList.setText(string);
+    }
+
+    @Override
+    public void showAddingInTheEndCopyOnWriteArrayList(String string) {
+        tvAddingInTheEndCopyOnWriteList.setText(string);
+    }
+
+    @Override
+    public void showSearchByValueCopyOnWriteArrayList(String string) {
+        tvSearchByValueCopyOnWriteList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheBeginningCopyOnWriteArrayList(String string) {
+        tvRemovingInTheBeginningLinkedList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheMiddleCopyOnWriteArrayList(String string) {
+        tvRemovingInTheEndCopyOnWriteList.setText(string);
+    }
+
+    @Override
+    public void showRemovingInTheEndCopyOnWriteArrayList(String string) {
+        tvRemovingInTheMiddleCopyOnWriteList.setText(string);
+    }
 
     @Override
     public void showTvFragment(String string) {

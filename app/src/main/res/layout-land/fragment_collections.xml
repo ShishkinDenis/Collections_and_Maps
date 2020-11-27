@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.403" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+        android:id="@+id/tietInputNumberCollectionsFragment"
         android:layout_width="318dp"
         android:layout_height="57dp"
         android:gravity="center"
