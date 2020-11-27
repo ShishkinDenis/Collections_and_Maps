@@ -44,4 +44,7 @@ dependencies {
     implementation "com.github.moxy-community:moxy:2.2.0"
     annotationProcessor "com.github.moxy-community:moxy-compiler:2.2.0"
     implementation "com.github.moxy-community:moxy-androidx:2.2.0"
+
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 }

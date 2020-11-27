@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 
@@ -21,29 +23,33 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @InjectPresenter
     MapsFragmentPresenter mapsFragmentPresenter;
 
-    TextView tvAddingNewHashMap;
-    TextView tvRemovingHashMap;
-    Button btnMapsFragment;
-    ProgressBar pbAddingNewHashMap;
-    EditText etInputNumberMapsFragment;
+    @BindView (R.id.tvAddingNewHashMap) TextView tvAddingNewHashMap;
+    @BindView (R.id.tvRemovingHashMap) TextView tvRemovingHashMap;
+    @BindView (R.id.tvSearchByKeyHashMap) TextView tvSearchByKeyHashMap;
+
+    @BindView (R.id.tvAddingNewTreeMap) TextView tvAddingNewTreeMap;
+    @BindView (R.id.tvRemovingTreeMap) TextView tvRemovingTreeMap;
+    @BindView (R.id.tvSearchByKeyTreeMap) TextView tvSearchByKeyTreeMap;
+
+
+    @BindView (R.id.btnMapsFragment) Button btnMapsFragment;
+
+    @BindView (R.id.pbAddingNewHashMap) ProgressBar pbAddingNewHashMap;
+
+    @BindView (R.id.tietInputNumberMapsFragment)EditText etInputNumberMapsFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View viewMapsFragment = inflater.inflate(R.layout.fragment_maps, container, false);
+        ButterKnife.bind(this,viewMapsFragment);
+
         return viewMapsFragment;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        btnMapsFragment = view.findViewById(R.id.btnMapsFragment);
-        tvAddingNewHashMap = view.findViewById(R.id.tvAddingNewHashMap);
-        pbAddingNewHashMap = view.findViewById(R.id.pbAddingNewHashMap);
-        etInputNumberMapsFragment = view.findViewById(R.id.tietInputNumberMapsFragment);
-        tvRemovingHashMap = view.findViewById(R.id.tvRemovingHashMap);
-
 
         btnMapsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,19 +61,35 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
 
 
     @Override
-    public void showTvMapsFragment(String string) {
+    public void showTvAddingNewHashMap(String string) {
         tvAddingNewHashMap.setText(string);
     }
     @Override
     public void showTvRemovingHashMap(String string) {
         tvRemovingHashMap.setText(string);
     }
+    @Override
+    public void showTvSearchByKeyHashMap(String string) {
+        tvSearchByKeyHashMap.setText(string);
+    }
+
+
+    @Override
+    public void showTvAddingNewTreeMap(String string) {
+        tvAddingNewTreeMap.setText(string);
+    }
+    @Override
+    public void showTvRemovingTreeMap(String string) {
+        tvRemovingTreeMap.setText(string);
+    }
+    @Override
+    public void showTvSearchByKeyTreeMap(String string) {
+        tvSearchByKeyTreeMap.setText(string);
+    }
+
 
     @Override
     public void showPbMapsFragment() {
-        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
-        pbAddingNewHashMap.setVisibility(View.VISIBLE);
-
         tvAddingNewHashMap.setVisibility(View.INVISIBLE);
         pbAddingNewHashMap.setVisibility(View.VISIBLE);
     }

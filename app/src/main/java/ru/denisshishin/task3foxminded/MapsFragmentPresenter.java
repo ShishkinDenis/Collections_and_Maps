@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 
 import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +18,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
     public MapsFragmentPresenter(){}
 
     public void presentTvMapsFragment(String value) {
-        //getViewState().showTvMapsFragment();
+
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(numberOfCores, numberOfCores,
@@ -23,30 +26,17 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
 
         getViewState().showPbMapsFragment();
 
-       // String value = getViewState().getNumberMapsFragment();
-
-        threadPool.execute(new Runnable() {
+      /*  Future future = threadPool.submit(new Runnable() {
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-               /* try {
-                    Thread.sleep(5000);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
                 addingNewElementHashMap(value);
                 long time2 = System.currentTimeMillis() - time;
-
-              //  int value2 = Integer.parseInt(value) + 999;
-
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        //getViewState().showTvMapsFragment(String.valueOf(time2));
                         getViewState().showTvMapsFragment(String.valueOf(time2) + " ms");
-                       // getViewState().getNumberMapsFragment();
                         getViewState().hidePbMapsFragment();
 
                     }
@@ -54,53 +44,160 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
             }
 
         });
-
+        try {
+            future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }*/
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-               /* try {
-                    Thread.sleep(5000);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-                removingElementHashMap(value);
+                addingNewElementHashMap(value);
                 long time2 = System.currentTimeMillis() - time;
-
-              //  int value2 = Integer.parseInt(value) + 999;
-
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        //getViewState().showTvMapsFragment(String.valueOf(time2));
-                        getViewState().showTvMapsFragment(String.valueOf(time2) + " ms");
-                       // getViewState().getNumberMapsFragment();
-                       // getViewState().hidePbMapsFragment();
+                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
+                        getViewState().hidePbMapsFragment();
 
                     }
                 });
             }
 
         });
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                removingElementHashMap(value);
+                long time2 = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvRemovingHashMap(String.valueOf(time2) + " ms");
+                    }
+                });
+            }
+        });
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                searchByKeyHashMap(value);
+                long time2 = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvSearchByKeyHashMap(String.valueOf(time2) + " ms");
+                    }
+                });
+            }
+        });
+
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                addingNewElementTreeMap(value);
+                long time2 = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvAddingNewTreeMap(String.valueOf(time2) + " ms");
+                   //     getViewState().hidePbMapsFragment();
+
+                    }
+                });
+            }
+
+        });
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                removingElementTreeMap(value);
+                long time2 = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvRemovingTreeMap(String.valueOf(time2) + " ms");
+                    }
+                });
+            }
+        });
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                searchByKeyTreeMap(value);
+                long time2 = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvSearchByKeyTreeMap(String.valueOf(time2) + " ms");
+                    }
+                });
+            }
+        });
 
     }
 
-    public void addingNewElementHashMap(String value){
-        int value2 = Integer.parseInt(value);
+    HashMap hashMap = new HashMap();
 
-        HashMap hashMap = new HashMap();
-        for (int i = 0; i < value2; i++) {
+    public void addingNewElementHashMap(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
             hashMap.put(i, i);
         }
     }
-    public void removingElementHashMap(String value){
-        int value2 = Integer.parseInt(value);
 
-        HashMap hashMap = new HashMap();
-        for (int i = 0; i < value2; i++) {
+    public void removingElementHashMap(String value){
+        int intValue = Integer.parseInt(value);
+        for (int i = 0; i < intValue; i++) {
             hashMap.remove(i, i);
         }
     }
+
+    public void searchByKeyHashMap(String value){
+        int intValue = Integer.parseInt(value);
+        hashMap.get(intValue);
+    }
+
+
+
+    TreeMap treeMap = new TreeMap();
+
+    public void addingNewElementTreeMap(String value){
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            treeMap.put(i, i);
+        }
+    }
+
+    public void removingElementTreeMap(String value){
+        int intValue = Integer.parseInt(value);
+        for (int i = 0; i < intValue; i++) {
+            treeMap.remove(i, i);
+        }
+    }
+
+    public void searchByKeyTreeMap(String value){
+        int intValue = Integer.parseInt(value);
+        treeMap.get(intValue);
+    }
+
+
+
+
 }
+
+

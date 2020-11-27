@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 
@@ -22,11 +23,12 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @InjectPresenter
     CollectionFragmentPresenter collectionFragmentPresenter;
 
-    TextView tvCollections;
-    TextView tvCollections2;
+
+   //TextView tvCollections;
+   // TextView tvCollections2;
     Button btnCollectionsFragment;
-    ProgressBar pbCollectionsFragment;
-    ProgressBar pbCollections2;
+   // ProgressBar pbCollectionsFragment;
+  //  ProgressBar pbCollections2;
 
 
     @Override
@@ -41,10 +43,10 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         super.onViewCreated(view, savedInstanceState);
 
         btnCollectionsFragment = view.findViewById(R.id.btnCollectionsFragment);
-        tvCollections = view.findViewById(R.id.tvCollections);
-        tvCollections2 = view.findViewById(R.id.tvCollections2);
-        pbCollectionsFragment = view.findViewById(R.id.pbCollectionsFragment);
-        pbCollections2 = view.findViewById(R.id.pbCollections2);
+        //tvCollections = view.findViewById(R.id.tvCollections);
+      //  tvCollections2 = view.findViewById(R.id.tvCollections2);
+       // pbCollectionsFragment = view.findViewById(R.id.pbCollectionsFragment);
+      //  pbCollections2 = view.findViewById(R.id.pbCollections2);
 
 
         btnCollectionsFragment.setOnClickListener(new View.OnClickListener() {
@@ -61,33 +63,34 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
 
     @Override
     public void showTvFragment(String string) {
-        tvCollections.setText(string);
+      //  tvCollections.setText(string);
     }
     @Override
     public void showTv2Fragment(String string) {
-        tvCollections2.setText(string);
+   //    tvCollections2.setText(string);
     }
 
     @Override
     public void showPbCollectonsFragment() {
-        tvCollections.setVisibility(View.INVISIBLE);
+
+        /*tvCollections.setVisibility(View.INVISIBLE);
         pbCollectionsFragment.setVisibility(View.VISIBLE);
 
         tvCollections2.setVisibility(View.INVISIBLE);
         pbCollections2.setVisibility(View.VISIBLE);
 
-
+*/
     }
 
     @Override
     public void hidePbCollectonsFragment() {
-        pbCollectionsFragment.setVisibility(View.INVISIBLE);
-        tvCollections.setVisibility(View.VISIBLE);
+        /*pbCollectionsFragment.setVisibility(View.INVISIBLE);
+        tvCollections.setVisibility(View.VISIBLE);*/
     }
 
     @Override
     public void hidePbCollectons2() {
-        pbCollections2.setVisibility(View.INVISIBLE);
-        tvCollections2.setVisibility(View.VISIBLE);
+    /*    pbCollections2.setVisibility(View.INVISIBLE);
+        tvCollections2.setVisibility(View.VISIBLE);*/
     }
 }

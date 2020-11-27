@@ -101,12 +101,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ArrayList"
@@ -132,13 +131,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Adding in the beginning" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
@@ -161,13 +160,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Adding in the middle" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
@@ -190,13 +189,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Adding in the end" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
@@ -219,13 +218,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search by value" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
@@ -248,13 +247,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Removing in the beginning" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
@@ -277,13 +276,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Removing in the middle" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
@@ -306,13 +305,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvRemovingInTheEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Removing in the end" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvAddingInTheBeginningArrayList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 ms" />
