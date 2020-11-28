@@ -282,4 +282,269 @@
 
     </TableLayout>
 
+    <TableLayout
+        android:id="@+id/tlProgressBar"
+        android:layout_width="391dp"
+        android:layout_height="365dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61">
+
+        <TableRow
+            android:id="@+id/trTitles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/tvVoid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvArrayList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ArrayList   "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvLinkedList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LinkedList   "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvACopyOnWriteList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CopyOnWriteList"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAddingInTheBeginning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adding in the beginning"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheBeginningArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheBeginningLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheBeginningCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="83dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAddingInTheMiddle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adding in the middle"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheMiddleArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheMiddleLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="60dp"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheMiddleCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="83dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAddingInTheEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adding in the end"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheEndArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheEndLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbAddingInTheEndCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="76dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvSearchByValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search by value"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbSearchByValueArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbSearchByValueLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="65dp"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbSearchByValueCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="87dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvRemovingInTheBeginning"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Removing in the beginning   "
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheBeginningArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheBeginningLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheBeginningCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="75dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvRemovingInTheMiddle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Removing in the middle"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheMiddleArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheMiddleLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheMiddleCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="82dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvRemovingInTheEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Removing in the end"
+                android:visibility="invisible" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheEndArrayList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheEndLinkedList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="62dp"
+                android:layout_height="18dp" />
+
+            <ProgressBar
+                android:id="@+id/pbRemovingInTheEndCopyOnWriteList"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="82dp"
+                android:layout_height="match_parent" />
+
+        </TableRow>
+
+    </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

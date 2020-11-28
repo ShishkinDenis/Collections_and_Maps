@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -31,7 +32,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @BindView(R.id.tvRemovingInTheMiddleArrayList) TextView tvRemovingInTheMiddleArrayList;
     @BindView(R.id.tvRemovingInTheEndArrayList) TextView tvRemovingInTheEndArrayList;
 
-
     @BindView(R.id.tvAddingInTheBeginningLinkedList) TextView tvAddingInTheBeginningLinkedList;
     @BindView(R.id.tvAddingInTheMiddleLinkedList) TextView tvAddingInTheMiddleLinkedList;
     @BindView(R.id.tvAddingInTheEndLinkedList) TextView tvAddingInTheEndLinkedList;
@@ -39,7 +39,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @BindView(R.id.tvRemovingInTheBeginningLinkedList) TextView tvRemovingInTheBeginningLinkedList;
     @BindView(R.id.tvRemovingInTheMiddleLinkedList) TextView tvRemovingInTheMiddleLinkedList;
     @BindView(R.id.tvRemovingInTheEndLinkedList) TextView tvRemovingInTheEndLinkedList;
-
 
     @BindView(R.id.tvAddingInTheBeginningCopyOnWriteList) TextView tvAddingInTheBeginningCopyOnWriteList;
     @BindView(R.id.tvAddingInTheMiddleCopyOnWriteList) TextView tvAddingInTheMiddleCopyOnWriteList;
@@ -50,13 +49,35 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @BindView(R.id.tvRemovingInTheEndCopyOnWriteList) TextView tvRemovingInTheEndCopyOnWriteList;
 
 
-   //TextView tvCollections;
-   // TextView tvCollections2;
-    //@BindView(R.id.btnCollectionsFragment)
+
+    @BindView(R.id.pbAddingInTheBeginningArrayList) ProgressBar pbAddingInTheBeginningArrayList;
+    @BindView(R.id.pbAddingInTheMiddleArrayList) ProgressBar pbAddingInTheMiddleArrayList;
+    @BindView(R.id.pbAddingInTheEndArrayList) ProgressBar pbAddingInTheEndArrayList;
+    @BindView(R.id.pbSearchByValueArrayList) ProgressBar pbSearchByValueArrayList;
+    @BindView(R.id.pbRemovingInTheBeginningArrayList) ProgressBar pbRemovingInTheBeginningArrayList;
+    @BindView(R.id.pbRemovingInTheMiddleArrayList) ProgressBar pbRemovingInTheMiddleArrayList;
+    @BindView(R.id.pbRemovingInTheEndArrayList) ProgressBar pbRemovingInTheEndArrayList;
+
+    @BindView(R.id.pbAddingInTheBeginningLinkedList) ProgressBar pbAddingInTheBeginningLinkedList;
+    @BindView(R.id.pbAddingInTheMiddleLinkedList) ProgressBar pbAddingInTheMiddleLinkedList;
+    @BindView(R.id.pbAddingInTheEndLinkedList) ProgressBar pbAddingInTheEndLinkedList;
+    @BindView(R.id.pbSearchByValueLinkedList) ProgressBar pbSearchByValueLinkedList;
+    @BindView(R.id.pbRemovingInTheBeginningLinkedList) ProgressBar pbRemovingInTheBeginningLinkedList;
+    @BindView(R.id.pbRemovingInTheMiddleLinkedList) ProgressBar pbRemovingInTheMiddleLinkedList;
+    @BindView(R.id.pbRemovingInTheEndLinkedList) ProgressBar pbRemovingInTheEndLinkedList;
+
+    @BindView(R.id.pbAddingInTheBeginningCopyOnWriteList) ProgressBar pbAddingInTheBeginningCopyOnWriteList;
+    @BindView(R.id.pbAddingInTheMiddleCopyOnWriteList) ProgressBar pbAddingInTheMiddleCopyOnWriteList;
+    @BindView(R.id.pbAddingInTheEndCopyOnWriteList) ProgressBar pbAddingInTheEndCopyOnWriteList;
+    @BindView(R.id.pbSearchByValueCopyOnWriteList) ProgressBar pbSearchByValueCopyOnWriteList;
+    @BindView(R.id.pbRemovingInTheBeginningCopyOnWriteList) ProgressBar pbRemovingInTheBeginningCopyOnWriteList;
+    @BindView(R.id.pbRemovingInTheMiddleCopyOnWriteList) ProgressBar pbRemovingInTheMiddleCopyOnWriteList;
+    @BindView(R.id.pbRemovingInTheEndCopyOnWriteList) ProgressBar pbRemovingInTheEndCopyOnWriteList;
+
+
+
    Button btnCollectionsFragment;
     @BindView(R.id.tietInputNumberCollectionsFragment) EditText tietInputNumberCollectionsFragment;
-   // ProgressBar pbCollectionsFragment;
-  //  ProgressBar pbCollections2;
 
 
     @Override
@@ -72,19 +93,13 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         super.onViewCreated(view, savedInstanceState);
 
         btnCollectionsFragment = view.findViewById(R.id.btnCollectionsFragment);
-        //tvCollections = view.findViewById(R.id.tvCollections);
-      //  tvCollections2 = view.findViewById(R.id.tvCollections2);
-       // pbCollectionsFragment = view.findViewById(R.id.pbCollectionsFragment);
-      //  pbCollections2 = view.findViewById(R.id.pbCollections2);
+
 
 
         btnCollectionsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  pbCollectionsFragment.setVisibility(View.VISIBLE );
-               // collectionFragmentPresenter.presentPbCollectionsFragment();
                 collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
-               // collectionFragmentPresenter.hidePbPresenter();
             }
         });
     }
@@ -207,14 +222,29 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
 
     @Override
     public void showPbCollectonsFragment() {
+        pbAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+        pbAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+        pbAddingInTheEndArrayList.setVisibility(View.VISIBLE);
+        pbSearchByValueArrayList.setVisibility(View.VISIBLE);
+        pbRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+        pbRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+        pbRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
 
-        /*tvCollections.setVisibility(View.INVISIBLE);
-        pbCollectionsFragment.setVisibility(View.VISIBLE);
+        pbAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+        pbAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+        pbAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
+        pbSearchByValueLinkedList.setVisibility(View.VISIBLE);
+        pbRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+        pbRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+        pbRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
 
-        tvCollections2.setVisibility(View.INVISIBLE);
-        pbCollections2.setVisibility(View.VISIBLE);
-
-*/
+        pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+        pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+        pbAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+        pbSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
+        pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+        pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+        pbRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
 
     @Override

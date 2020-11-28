@@ -34,9 +34,16 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
 
     @BindView (R.id.btnMapsFragment) Button btnMapsFragment;
 
-    @BindView (R.id.pbAddingNewHashMap) ProgressBar pbAddingNewHashMap;
-
     @BindView (R.id.tietInputNumberMapsFragment)EditText etInputNumberMapsFragment;
+
+    @BindView (R.id.pbAddingNewHashMap) ProgressBar pbAddingNewHashMap;
+    @BindView (R.id.pbRemovingHashMap) ProgressBar pbRemovingHashMap;
+    @BindView (R.id.pbSearchByKeyHashMap) ProgressBar pbSearchByKeyHashMap;
+    @BindView (R.id.pbAddingNewTreeMap) ProgressBar pbAddingNewTreeMap;
+    @BindView (R.id.pbRemovingTreeMap) ProgressBar pbRemovingTreeMap;
+    @BindView (R.id.pbSearchByKeyTreeMap) ProgressBar pbSearchByKeyTreeMap;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,8 +97,13 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
 
     @Override
     public void showPbMapsFragment() {
-        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+       // tvAddingNewHashMap.setVisibility(View.INVISIBLE);
         pbAddingNewHashMap.setVisibility(View.VISIBLE);
+        pbRemovingHashMap.setVisibility(View.VISIBLE);
+        pbSearchByKeyHashMap.setVisibility(View.VISIBLE);
+        pbAddingNewTreeMap.setVisibility(View.VISIBLE);
+        pbRemovingTreeMap.setVisibility(View.VISIBLE);
+        pbSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
 
     @Override
