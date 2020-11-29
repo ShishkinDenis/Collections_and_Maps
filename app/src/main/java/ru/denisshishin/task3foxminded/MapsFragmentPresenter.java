@@ -18,7 +18,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
     public MapsFragmentPresenter(){}
 
     public void presentTvMapsFragment(String value) {
-        long time = System.currentTimeMillis();
+       /* long time = System.currentTimeMillis();
         addingNewElementHashMap(value);
         long time2 = System.currentTimeMillis() - time;
         getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
@@ -26,15 +26,15 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         long time3 = System.currentTimeMillis();
         addingNewElementTreeMap(value);
         long time4 = System.currentTimeMillis() - time;
-        getViewState().showTvAddingNewTreeMap(String.valueOf(time4) + " ms");
-
+        getViewState().showTvAddingNewTreeMap(String.valueOf(time4) + " ms");*/
 
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(numberOfCores, numberOfCores,
                 1, TimeUnit.SECONDS, fifoQueue);
 
-        //getViewState().showPbMapsFragment();
+        getViewState().hideTextViewMapsFragment();
+        getViewState().showProgressBarMapsFragment();
 
        /* Thread thread = new Thread(new Runnable() {
             @Override
@@ -103,6 +103,23 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
+                addingNewElementHashMap(value);
+                long time2 = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
+
+
+                    }
+                });
+            }
+        });
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
                 removingElementHashMap(value);
                 long time2 = System.currentTimeMillis() - time;
 
@@ -110,6 +127,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
                     @Override
                     public void run() {
                         getViewState().showTvRemovingHashMap(String.valueOf(time2) + " ms");
+
                     }
                 });
             }
@@ -129,7 +147,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
                 });
             }
         });
-
        /* Future future2 = threadPool.submit(new Runnable() {
             @Override
             public void run() {
@@ -157,7 +174,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         }
 
         */
-
        /* Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -182,8 +198,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-
-        /*threadPool.execute(new Runnable() {
+        threadPool.execute(new Runnable() {
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
@@ -194,13 +209,13 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
                     @Override
                     public void run() {
                         getViewState().showTvAddingNewTreeMap(String.valueOf(time2) + " ms");
-                   //     getViewState().hidePbMapsFragment();
+
 
                     }
                 });
             }
 
-        });*/
+        });
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -234,50 +249,63 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
 
     }
 
-    HashMap hashMap = new HashMap();
 
     public void addingNewElementHashMap(String value){
         int intValue = Integer.parseInt(value);
+        HashMap hashMap = new HashMap();
 
         for (int i = 0; i < intValue; i++) {
             hashMap.put(i, i);
         }
+        hashMap.clear();
     }
-
     public void removingElementHashMap(String value){
         int intValue = Integer.parseInt(value);
+        HashMap hashMap = new HashMap();
+
         for (int i = 0; i < intValue; i++) {
+            hashMap.put(i, i);
             hashMap.remove(i, i);
         }
+        hashMap.clear();
     }
-
     public void searchByKeyHashMap(String value){
         int intValue = Integer.parseInt(value);
+        HashMap hashMap = new HashMap();
+        for (int i = 0; i < intValue; i++) {
+            hashMap.put(i, i);
+        }
         hashMap.get(intValue);
+        hashMap.clear();
     }
 
-
-
-    TreeMap treeMap = new TreeMap();
 
     public void addingNewElementTreeMap(String value){
         int intValue = Integer.parseInt(value);
+        TreeMap treeMap = new TreeMap();
 
         for (int i = 0; i < intValue; i++) {
             treeMap.put(i, i);
         }
+        treeMap.clear();
     }
-
     public void removingElementTreeMap(String value){
         int intValue = Integer.parseInt(value);
+        TreeMap treeMap = new TreeMap();
         for (int i = 0; i < intValue; i++) {
+            treeMap.put(i, i);
             treeMap.remove(i, i);
         }
+        treeMap.clear();
     }
-
     public void searchByKeyTreeMap(String value){
         int intValue = Integer.parseInt(value);
+        TreeMap treeMap = new TreeMap();
+        for (int i = 0; i < intValue; i++) {
+            treeMap.put(i, i);
+        }
         treeMap.get(intValue);
+        treeMap.clear();
     }
 
 

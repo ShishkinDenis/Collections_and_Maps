@@ -105,123 +105,9 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     }
 
 
-    @Override
-    public void showAddingInTheBeginningArrayList(String string) {
-        tvAddingInTheBeginningArrayList.setText(string);
-
-    }
 
     @Override
-    public void showAddingInTheMiddleArrayList(String string) {
-        tvAddingInTheMiddleArrayList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheEndArrayList(String string) {
-        tvAddingInTheMiddleArrayList.setText(string);
-    }
-
-    @Override
-    public void showSearchByValueArrayList(String string) {
-        tvSearchByValueArrayList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheBeginningArrayList(String string) {
-        tvRemovingInTheBeginningArrayList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheMiddleArrayList(String string) {
-        tvRemovingInTheMiddleArrayList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheEndArrayList(String string) {
-        tvRemovingInTheEndArrayList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheBeginningLinkedList(String string) {
-        tvAddingInTheBeginningLinkedList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheMiddleLinkedList(String string) {
-        tvAddingInTheMiddleLinkedList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheEndLinkedList(String string) {
-        tvAddingInTheEndLinkedList.setText(string);
-    }
-
-    @Override
-    public void showSearchByValueLinkedList(String string) {
-        tvSearchByValueLinkedList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheBeginningLinkedList(String string) {
-        tvRemovingInTheBeginningLinkedList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheMiddleLinkedList(String string) {
-        tvRemovingInTheMiddleLinkedList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheEndLinkedList(String string) {
-        tvRemovingInTheMiddleLinkedList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheBeginningCopyOnWriteArrayList(String string) {
-        tvAddingInTheBeginningCopyOnWriteList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheMiddleCopyOnWriteArrayList(String string) {
-        tvAddingInTheMiddleCopyOnWriteList.setText(string);
-    }
-
-    @Override
-    public void showAddingInTheEndCopyOnWriteArrayList(String string) {
-        tvAddingInTheEndCopyOnWriteList.setText(string);
-    }
-
-    @Override
-    public void showSearchByValueCopyOnWriteArrayList(String string) {
-        tvSearchByValueCopyOnWriteList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheBeginningCopyOnWriteArrayList(String string) {
-        tvRemovingInTheBeginningLinkedList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheMiddleCopyOnWriteArrayList(String string) {
-        tvRemovingInTheEndCopyOnWriteList.setText(string);
-    }
-
-    @Override
-    public void showRemovingInTheEndCopyOnWriteArrayList(String string) {
-        tvRemovingInTheMiddleCopyOnWriteList.setText(string);
-    }
-
-    @Override
-    public void showTvFragment(String string) {
-      //  tvCollections.setText(string);
-    }
-    @Override
-    public void showTv2Fragment(String string) {
-   //    tvCollections2.setText(string);
-    }
-
-    @Override
-    public void showPbCollectonsFragment() {
+    public void showProgressBarCollectionsFragment() {
         pbAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
         pbAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
         pbAddingInTheEndArrayList.setVisibility(View.VISIBLE);
@@ -248,14 +134,191 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     }
 
     @Override
-    public void hidePbCollectonsFragment() {
-        /*pbCollectionsFragment.setVisibility(View.INVISIBLE);
-        tvCollections.setVisibility(View.VISIBLE);*/
+    public void hideTextViewCollectionsFragment() {
+        tvAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        tvAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        tvAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        tvSearchByValueArrayList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
+
+        tvAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        tvAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        tvAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        tvSearchByValueLinkedList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+
+        tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
     }
 
+
     @Override
-    public void hidePbCollectons2() {
-    /*    pbCollections2.setVisibility(View.INVISIBLE);
-        tvCollections2.setVisibility(View.VISIBLE);*/
+    public void showAddingInTheBeginningArrayList(String string) {
+        tvAddingInTheBeginningArrayList.setText(string);
+
+        pbAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        tvAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+
     }
+    @Override
+    public void showAddingInTheMiddleArrayList(String string) {
+        tvAddingInTheMiddleArrayList.setText(string);
+
+        pbAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        tvAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showAddingInTheEndArrayList(String string) {
+        tvAddingInTheEndArrayList.setText(string);
+
+        pbAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        tvAddingInTheEndArrayList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showSearchByValueArrayList(String string) {
+        tvSearchByValueArrayList.setText(string);
+
+        pbSearchByValueArrayList.setVisibility(View.INVISIBLE);
+        tvSearchByValueArrayList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheBeginningArrayList(String string) {
+        tvRemovingInTheBeginningArrayList.setText(string);
+
+        pbRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheMiddleArrayList(String string) {
+        tvRemovingInTheMiddleArrayList.setText(string);
+
+        pbRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheEndArrayList(String string){
+        tvRemovingInTheEndArrayList.setText(string);
+
+        pbRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
+    }
+
+
+
+    @Override
+    public void showAddingInTheBeginningLinkedList(String string) {
+        tvAddingInTheBeginningLinkedList.setText(string);
+
+        pbAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        tvAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showAddingInTheMiddleLinkedList(String string) {
+        tvAddingInTheMiddleLinkedList.setText(string);
+
+        pbAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        tvAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showAddingInTheEndLinkedList(String string) {
+        tvAddingInTheEndLinkedList.setText(string);
+
+        pbAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        tvAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showSearchByValueLinkedList(String string) {
+        tvSearchByValueLinkedList.setText(string);
+
+        pbSearchByValueLinkedList.setVisibility(View.INVISIBLE);
+        tvSearchByValueLinkedList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheBeginningLinkedList(String string) {
+        tvRemovingInTheBeginningLinkedList.setText(string);
+
+        pbRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheMiddleLinkedList(String string) {
+        tvRemovingInTheMiddleLinkedList.setText(string);
+
+        pbRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheEndLinkedList(String string) {
+        tvRemovingInTheEndLinkedList.setText(string);
+
+        pbRemovingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    public void showAddingInTheBeginningCopyOnWriteArrayList(String string) {
+        tvAddingInTheBeginningCopyOnWriteList.setText(string);
+
+        pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showAddingInTheMiddleCopyOnWriteArrayList(String string) {
+        tvAddingInTheMiddleCopyOnWriteList.setText(string);
+
+        pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showAddingInTheEndCopyOnWriteArrayList(String string) {
+        tvAddingInTheEndCopyOnWriteList.setText(string);
+
+        pbAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showSearchByValueCopyOnWriteArrayList(String string) {
+        tvSearchByValueCopyOnWriteList.setText(string);
+
+        pbSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheBeginningCopyOnWriteArrayList(String string) {
+        tvRemovingInTheBeginningCopyOnWriteList.setText(string);
+
+        pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void showRemovingInTheMiddleCopyOnWriteArrayList(String string) {
+        tvRemovingInTheMiddleCopyOnWriteList.setText(string);
+
+        pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+
+
+    }
+    @Override
+    public void showRemovingInTheEndCopyOnWriteArrayList(String string) {
+        tvRemovingInTheEndCopyOnWriteList.setText(string);
+
+        pbRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        tvRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+
+    }
+
+
+
+
 }

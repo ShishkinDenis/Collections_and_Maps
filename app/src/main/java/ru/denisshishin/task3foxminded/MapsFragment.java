@@ -70,34 +70,46 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @Override
     public void showTvAddingNewHashMap(String string) {
         tvAddingNewHashMap.setText(string);
+        pbAddingNewHashMap.setVisibility(View.INVISIBLE);
+        tvAddingNewHashMap.setVisibility(View.VISIBLE);
+
     }
     @Override
     public void showTvRemovingHashMap(String string) {
         tvRemovingHashMap.setText(string);
+        pbRemovingHashMap.setVisibility(View.INVISIBLE);
+        tvRemovingHashMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void showTvSearchByKeyHashMap(String string) {
         tvSearchByKeyHashMap.setText(string);
+        pbSearchByKeyHashMap.setVisibility(View.INVISIBLE);
+        tvSearchByKeyHashMap.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void showTvAddingNewTreeMap(String string) {
         tvAddingNewTreeMap.setText(string);
+        pbAddingNewTreeMap.setVisibility(View.INVISIBLE);
+        tvAddingNewTreeMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void showTvRemovingTreeMap(String string) {
         tvRemovingTreeMap.setText(string);
+        pbRemovingTreeMap.setVisibility(View.INVISIBLE);
+        tvRemovingTreeMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void showTvSearchByKeyTreeMap(String string) {
         tvSearchByKeyTreeMap.setText(string);
+        pbSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
+        tvSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
 
 
     @Override
-    public void showPbMapsFragment() {
-       // tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+    public void showProgressBarMapsFragment() {
         pbAddingNewHashMap.setVisibility(View.VISIBLE);
         pbRemovingHashMap.setVisibility(View.VISIBLE);
         pbSearchByKeyHashMap.setVisibility(View.VISIBLE);
@@ -107,9 +119,13 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     }
 
     @Override
-    public void hidePbMapsFragment() {
-        pbAddingNewHashMap.setVisibility(View.INVISIBLE);
-        tvAddingNewHashMap.setVisibility(View.VISIBLE);
+    public void hideTextViewMapsFragment() {
+        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+        tvRemovingHashMap.setVisibility(View.INVISIBLE);
+        tvSearchByKeyHashMap.setVisibility(View.INVISIBLE);
+        tvAddingNewTreeMap.setVisibility(View.INVISIBLE);
+        tvRemovingTreeMap.setVisibility(View.INVISIBLE);
+        tvSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -119,5 +135,34 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
          ///сделать String без интерфейса
     }
 
+   /* @Override
+    public void hideProgressBarAddingNewHashMap() {
+        //pbAddingNewHashMap.setVisibility(View.INVISIBLE);
+       // tvAddingNewHashMap.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void hideProgressBarRemovingHashMap() {
+
+    }
+
+    @Override
+    public void hideProgressBarSearchByKeyHashMap() {
+
+    }
+
+    @Override
+    public void hideProgressBarAddingNewTreeMap() {
+
+    }
+
+    @Override
+    public void hideProgressBarRemovingTreeMap() {
+
+    }
+
+    @Override
+    public void hideProgressBarSearchByKeyTreeMap() {
+
+    }*/
 
 }

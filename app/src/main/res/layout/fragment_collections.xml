@@ -343,19 +343,22 @@
                 android:id="@+id/pbAddingInTheBeginningArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingInTheBeginningLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingInTheBeginningCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="83dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -374,19 +377,22 @@
                 android:id="@+id/pbAddingInTheMiddleArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingInTheMiddleLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="60dp"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingInTheMiddleCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="83dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -405,19 +411,22 @@
                 android:id="@+id/pbAddingInTheEndArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingInTheEndLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingInTheEndCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="76dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -436,19 +445,22 @@
                 android:id="@+id/pbSearchByValueArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbSearchByValueLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="65dp"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbSearchByValueCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="87dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -467,19 +479,22 @@
                 android:id="@+id/pbRemovingInTheBeginningArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingInTheBeginningLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingInTheBeginningCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="75dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -498,19 +513,22 @@
                 android:id="@+id/pbRemovingInTheMiddleArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingInTheMiddleLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingInTheMiddleCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="82dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -529,19 +547,22 @@
                 android:id="@+id/pbRemovingInTheEndArrayList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingInTheEndLinkedList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="62dp"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingInTheEndCopyOnWriteList"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="82dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 

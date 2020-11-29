@@ -26,7 +26,6 @@ public interface CollectionFragmentView extends MvpView {
     void showRemovingInTheEndArrayList(String string);
 
 
-
     @AddToEndSingle
     void showAddingInTheBeginningLinkedList(String string);
 
@@ -70,19 +69,10 @@ public interface CollectionFragmentView extends MvpView {
     void showRemovingInTheEndCopyOnWriteArrayList(String string);
 
 
+    @AddToEndSingle
+    void showProgressBarCollectionsFragment();
 
     @AddToEndSingle
-    void showTvFragment(String string);
+    void hideTextViewCollectionsFragment();
 
-    @AddToEndSingle
-    void showTv2Fragment(String string);
-
-    @AddToEndSingle
-    void showPbCollectonsFragment();
-
-    @AddToEndSingle
-    void hidePbCollectonsFragment();
-
-    @AddToEndSingle
-    void hidePbCollectons2();
 }

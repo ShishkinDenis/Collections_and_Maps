@@ -190,13 +190,15 @@
                 android:id="@+id/pbAddingNewHashMap"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="4dp"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbAddingNewTreeMap"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -215,13 +217,15 @@
                 android:id="@+id/pbRemovingHashMap"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="36dp"
-                android:layout_height="18dp" />
+                android:layout_height="18dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbRemovingTreeMap"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -240,13 +244,15 @@
                 android:id="@+id/pbSearchByKeyHashMap"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="19dp" />
+                android:layout_height="19dp"
+                android:visibility="invisible" />
 
             <ProgressBar
                 android:id="@+id/pbSearchByKeyTreeMap"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </TableRow>
     </TableLayout>

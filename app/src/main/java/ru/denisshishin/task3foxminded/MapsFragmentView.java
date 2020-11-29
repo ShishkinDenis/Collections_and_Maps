@@ -1,5 +1,8 @@
 package ru.denisshishin.task3foxminded;
 
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import moxy.MvpView;
 import moxy.viewstate.strategy.alias.AddToEndSingle;
 
@@ -25,13 +28,27 @@ public interface MapsFragmentView extends MvpView {
 
 
     @AddToEndSingle
-     void showPbMapsFragment();
+     void showProgressBarMapsFragment();
 
     @AddToEndSingle
-    void hidePbMapsFragment();
+    void hideTextViewMapsFragment();
 
     @AddToEndSingle
     void getNumberMapsFragment();
 
+
+
+    /*@AddToEndSingle
+    void hideProgressBarAddingNewHashMap();
+    @AddToEndSingle
+    void hideProgressBarRemovingHashMap();
+    @AddToEndSingle
+    void hideProgressBarSearchByKeyHashMap();
+    @AddToEndSingle
+    void hideProgressBarAddingNewTreeMap();
+    @AddToEndSingle
+    void  hideProgressBarRemovingTreeMap();
+    @AddToEndSingle
+    void hideProgressBarSearchByKeyTreeMap();*/
 
 }
