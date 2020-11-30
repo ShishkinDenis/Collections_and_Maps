@@ -16,26 +16,19 @@ import moxy.MvpPresenter;
 public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
 
     public MapsFragmentPresenter(){
-    //    for (int i = 0; i < 1000000 ; i++) {
-     //       hashMap.put(i,i);
-    //    }
-
-     //   for (int i = 0; i < 1000000 ; i++) {
-     //       treeMap.put(i,i);
-    //    }
 
     }
 
     public void presentTvMapsFragment(String value) {
-       /* long time = System.currentTimeMillis();
-        addingNewElementHashMap(value);
-        long time2 = System.currentTimeMillis() - time;
-        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
+        hashMap.clear();
+        treeMap.clear();
 
-        long time3 = System.currentTimeMillis();
-        addingNewElementTreeMap(value);
-        long time4 = System.currentTimeMillis() - time;
-        getViewState().showTvAddingNewTreeMap(String.valueOf(time4) + " ms");*/
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            hashMap.put(i,i);
+            treeMap.put(i,i);
+        }
 
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
@@ -45,93 +38,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         getViewState().hideTextViewMapsFragment();
         getViewState().showProgressBarMapsFragment();
 
-       /* Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
-                        getViewState().hidePbMapsFragment();
-                    }
-                });
-            }
-        });
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-       /*Future future = threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
-                        getViewState().hidePbMapsFragment();
-
-                    }
-                });
-            }
-
-        });
-        try {
-            future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-       /* threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
-                        getViewState().hidePbMapsFragment();
-
-                    }
-                });
-            }
-
-        });*/
-
-        /*Future future = threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
-
-
-                    }
-                });
-            }
-        });
-        try {
-            future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
+        //HashMap
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -180,82 +87,8 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
                 });
             }
         });
-       /* Future future2 = threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementTreeMap(value);
-                long time2 = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewTreeMap(String.valueOf(time2) + " ms");
-                        //     getViewState().hidePbMapsFragment();
-
-                    }
-                });
-            }
-
-        });
-        try {
-            future2.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        */
-       /* Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementTreeMap(value);
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewTreeMap(String.valueOf(time2) + " ms");
-                        //     getViewState().hidePbMapsFragment();
-
-                    }
-                });
-            }
-
-        });
-        thread2.start();
-        try {
-            thread2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-        /*Future future2 = threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementTreeMap(value);
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewTreeMap(String.valueOf(time2) + " ms");
-
-
-                    }
-                });
-            }
-
-        });
-        try {
-            future2.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
+        //TreeMap
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -313,68 +146,40 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
 
     public void addingNewElementHashMap(String value){
         int intValue = Integer.parseInt(value);
-        //HashMap hashMap = new HashMap();
         synchronized(this) {
-            for (int i = 0; i < intValue; i++) {
-                hashMap.put(i, i);
-            }
-            //  hashMap.clear();
+                hashMap.put(intValue, intValue);
         }
     }
     public void removingElementHashMap(String value){
         int intValue = Integer.parseInt(value);
-     //   HashMap hashMap = new HashMap();
-synchronized(this) {
-            for (int i = 0; i < intValue; i++) {
-                //   hashMap.put(i, i);
-                hashMap.remove(i, i);
+        synchronized(this) {
+                hashMap.remove(intValue);
             }
-        }
-  //      hashMap.clear();
     }
     public void searchByKeyHashMap(String value){
         int intValue = Integer.parseInt(value);
-       // HashMap hashMap = new HashMap();
-    //    for (int i = 0; i < intValue; i++) {
-   //         hashMap.put(i, i);
-    //    }
         synchronized(this) {
             hashMap.get(intValue);
-            //     hashMap.clear();
         }
     }
 
 
     public void addingNewElementTreeMap(String value){
         int intValue = Integer.parseInt(value);
-    //    TreeMap treeMap = new TreeMap();
         synchronized(this) {
-            for (int i = 0; i < intValue; i++) {
-                treeMap.put(i, i);
-            }
+                treeMap.put(intValue, intValue);
         }
-    //    treeMap.clear();
     }
     public void removingElementTreeMap(String value){
         int intValue = Integer.parseInt(value);
-     //   TreeMap treeMap = new TreeMap();
         synchronized(this) {
-            for (int i = 0; i < intValue; i++) {
-                //     treeMap.put(i, i);
-                treeMap.remove(i);
-            }
-            //    treeMap.clear();
+                treeMap.remove(intValue);
         }
     }
     public void searchByKeyTreeMap(String value){
         int intValue = Integer.parseInt(value);
-     //   TreeMap treeMap = new TreeMap();
-      //  for (int i = 0; i < intValue; i++) {
-    //        treeMap.put(i, i);
-   //     }
         synchronized(this) {
             treeMap.get(intValue);
-            //    treeMap.clear();
         }
     }
 

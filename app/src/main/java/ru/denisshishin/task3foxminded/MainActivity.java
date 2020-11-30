@@ -46,8 +46,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private ViewPagerAdapter createCardAdapter() {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
-        return adapter;
+        return new ViewPagerAdapter(this);
     }
 
 }

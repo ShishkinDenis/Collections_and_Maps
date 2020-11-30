@@ -29,7 +29,8 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             linkedList.add(i);
         }
 
-        for (int i = 0; i < intValue/100000; i++) {
+        //Костьль!Заполняю в 10 000 раз меньшим количеством элементов
+        for (int i = 0; i < intValue/10000; i++) {
             copyOnWriteArrayList.add(i);
         }
 
@@ -42,82 +43,12 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         getViewState().hideTextViewCollectionsFragment();
         getViewState().showProgressBarCollectionsFragment();
 
-       /* threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvFragment(String.valueOf(time2));
-                        getViewState().hidePbCollectonsFragment();
-
-                    }
-                });
-            }
-
-        });
-
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                long time2 = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTv2Fragment(String.valueOf(time2));
-                        getViewState().hidePbCollectons2();
-
-                    }
-                });
-            }
-
-        });*/
-
         //ArrayList
-       /* Future future = threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheBeginningArrayList(value);
-                long threadTime = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
-        });
-        try {
-            future.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheBeginningArrayList(value);
+                addingInTheBeginningArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -133,7 +64,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheMiddleArrayList(value);
+                addingInTheMiddleArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -149,7 +80,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheEndArrayList(value);
+                addingInTheEndArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -183,7 +114,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheBeginningArrayList(value);
+                removingInTheBeginningArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -199,7 +130,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheMiddleArrayList(value);
+                removingInTheMiddleArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -215,7 +146,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheEndArrayList(value);
+                removingInTheEndArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -233,7 +164,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheBeginningLinkedList(value);
+                addingInTheBeginningLinkedList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -249,7 +180,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheMiddleLinkedList(value);
+                addingInTheMiddleLinkedList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -265,7 +196,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheEndLinkedList(value);
+                addingInTheEndLinkedList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -299,7 +230,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheBeginningLinkedList(value);
+                removingInTheBeginningLinkedList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -315,7 +246,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheMiddleLinkedList(value);
+                removingInTheMiddleLinkedList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -331,7 +262,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheEndLinkedList(value);
+                removingInTheEndLinkedList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -349,7 +280,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheBeginningCopyOnWriteArrayList(value);
+                addingInTheBeginningCopyOnWriteArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -365,7 +296,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheMiddleCopyOnWriteArrayList(value);
+                addingInTheMiddleCopyOnWriteArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -381,7 +312,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                addingInTheEndCopyOnWriteArrayList(value);
+                addingInTheEndCopyOnWriteArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -415,7 +346,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheBeginningCopyOnWriteArrayList(value);
+                removingInTheBeginningCopyOnWriteArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -431,7 +362,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheMiddleCopyOnWriteArrayList(value);
+                removingInTheMiddleCopyOnWriteArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -447,7 +378,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             @Override
             public void run() {
                 long time = System.currentTimeMillis();
-                removingInTheEndCopyOnWriteArrayList(value);
+                removingInTheEndCopyOnWriteArrayList();
                 long threadTime = System.currentTimeMillis() - time;
 
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -460,7 +391,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
 
         });
 
-
     }
 
 
@@ -469,176 +399,96 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
     CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList();
 
 
-    public void addingInTheBeginningArrayList(String value){
-        int intValue = Integer.parseInt(value);
-        //ArrayList arrayList = new ArrayList();
+
+    public void addingInTheBeginningArrayList(){
         synchronized(this) {
-           // for (int i = 0; i < intValue; i++) {
                 arrayList.add(0);
-       //     }
         }
-        //arrayList.clear();
     }
-    public void addingInTheMiddleArrayList(String value){
-        int intValue = Integer.parseInt(value);
-        //ArrayList arrayList = new ArrayList() ;
+    public void addingInTheMiddleArrayList(){
         synchronized(this) {
-        //    for (int i = 0; i < intValue-1; i++) {
                 arrayList.add(arrayList.size() / 2);
-     //       }
         }
-      //  arrayList.clear();
+
     }
-    public void addingInTheEndArrayList(String value){
-        int intValue = Integer.parseInt(value);
-       // ArrayList arrayList = new ArrayList();
+    public void addingInTheEndArrayList(){
         synchronized(this) {
-        //    for (int i = 0; i < intValue-1; i++) {
                 arrayList.add(arrayList.size()-1);
             }
-     //   }
-       // arrayList.clear();
     }
     public void searchByValueArrayList(String value){
         int intValue = Integer.parseInt(value);
-      //  ArrayList arrayList = new ArrayList();
         synchronized(this) {
-            // for (int i = 0; i < intValue; i++) {
-            //      arrayList.add(i, i);
-            //  }
-
             arrayList.indexOf(intValue);
         }
-      //  arrayList.clear();
-
     }
-    public void removingInTheBeginningArrayList(String value){
-        int intValue = Integer.parseInt(value);
-       // ArrayList arrayList = new ArrayList();
-       // for (int i = 0; i < intValue; i++) {
-      //      arrayList.add(i, i);
-      //  }
+    public void removingInTheBeginningArrayList(){
         synchronized(this) {
-        //    for (int i = 0; i < intValue; i++) {
                 arrayList.remove(0);
-      //      }
         }
-      //  arrayList.clear();
     }
-
-    public void removingInTheMiddleArrayList(String value){
-        int intValue = Integer.parseInt(value);
-
-        //ArrayList arrayList = new ArrayList();
-       // for (int i = 0; i < intValue; i++) {
-       //     arrayList.add(i, i);
-       // }
+    public void removingInTheMiddleArrayList(){
         synchronized(this) {
-          //  for (int i = 0; i < intValue-1; i++) {
                 arrayList.remove(arrayList.size() / 2);
             }
-      //  }
-       // arrayList.clear();
     }
-    //!
-    public void removingInTheEndArrayList(String value){
-        int intValue = Integer.parseInt(value);
-        //ArrayList arrayList = new ArrayList();
-       // for (int i = 0; i < intValue; i++) {
-     //       arrayList.add(i, i);
-    //    }
+    public void removingInTheEndArrayList(){
+
         synchronized(this){
-       // for (int i = 0; i < intValue-1; i++) {
             arrayList.remove(arrayList.size()-1);
         }
-    //   }
-        //arrayList.clear();
     }
 
 
-    public void addingInTheBeginningLinkedList(String value){
-        int intValue = Integer.parseInt(value);
-
-      //  LinkedList linkedList = new LinkedList();
+    public void addingInTheBeginningLinkedList(){
         synchronized(this) {
-       //     for (int i = 0; i < intValue-1; i++) {
                 linkedList.add(0);
             }
-    //    }
-      //  linkedList.clear();
     }
-    public void addingInTheMiddleLinkedList(String value){
-        int intValue = Integer.parseInt(value);
-      //  LinkedList linkedList = new LinkedList();
+    public void addingInTheMiddleLinkedList(){
         synchronized(this) {
-          //  for (int i = 0; i < intValue-1; i++) {
                 linkedList.add(linkedList.size() / 2);
             }
-     //   }
-    //    linkedList.clear();
     }
-    public void addingInTheEndLinkedList(String value){
-        int intValue = Integer.parseInt(value);
-        //LinkedList linkedList = new LinkedList();
+    public void addingInTheEndLinkedList(){
         synchronized(this) {
-         //   for (int i = 0; i < intValue-1; i++) {
                 linkedList.add(linkedList.size()-1);
             }
-   //     }
-       // linkedList.clear();
     }
     public void searchByValueLinkedList(String value){
         int intValue = Integer.parseInt(value);
-       // LinkedList linkedList = new LinkedList();
-      //  for (int i = 0; i < intValue; i++) {
-      //      linkedList.add(i);
-     //   }
         synchronized(this) {
             linkedList.indexOf(intValue);
         }
-     //   linkedList.clear();
     }
-    public void removingInTheBeginningLinkedList(String value){
-        int intValue = Integer.parseInt(value);
-
+    public void removingInTheBeginningLinkedList(){
         synchronized(this) {
-          //  for (int i = 0; i < intValue-1; i++) {
                 linkedList.remove(0);
             }
-    //    }
     }
-    public void removingInTheMiddleLinkedList(String value){
-        int intValue = Integer.parseInt(value);
+    public void removingInTheMiddleLinkedList(){
         synchronized(this) {
-      //      for (int i = 0; i < intValue-1; i++) {
                 linkedList.remove(linkedList.size()/2);
             }
-    //    }
     }
-    public void removingInTheEndLinkedList(String value){
-        int intValue = Integer.parseInt(value);
+    public void removingInTheEndLinkedList(){
         synchronized(this) {
-          //  for (int i = 0; i < intValue-1; i++) {
                 linkedList.remove(linkedList.size()-1);
             }
-    //    }
     }
 
 
-    public void addingInTheBeginningCopyOnWriteArrayList(String value){
-        int intValue = Integer.parseInt(value);
+    public void addingInTheBeginningCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.add(0);
             }
     }
-    public void addingInTheMiddleCopyOnWriteArrayList(String value){
-        int intValue = Integer.parseInt(value);
+    public void addingInTheMiddleCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.add(copyOnWriteArrayList.size() / 2);
         }
     }
-    public void addingInTheEndCopyOnWriteArrayList(String value){
-        int intValue = Integer.parseInt(value);
+    public void addingInTheEndCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.add(copyOnWriteArrayList.size()-1);
             }
@@ -649,22 +499,17 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             copyOnWriteArrayList.indexOf(intValue);
         }
     }
-    public void removingInTheBeginningCopyOnWriteArrayList(String value){
-        int intValue = Integer.parseInt(value);
+    public void removingInTheBeginningCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.remove(0);
         }
-
     }
-    public void removingInTheMiddleCopyOnWriteArrayList(String value){
-        int intValue = Integer.parseInt(value);
+    public void removingInTheMiddleCopyOnWriteArrayList(){
         synchronized(this) {
-          //  for (int i = 0; i < intValue-1; i++) {
                 copyOnWriteArrayList.remove(copyOnWriteArrayList.size() / 2);
             }
     }
-    public void removingInTheEndCopyOnWriteArrayList(String value){
-        int intValue = Integer.parseInt(value);
+    public void removingInTheEndCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.remove(copyOnWriteArrayList.size()-1);
             }
