@@ -2,7 +2,6 @@ package ru.denisshishin.task3foxminded;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,6 +18,21 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
     public CollectionFragmentPresenter(){}
 
     public void presentTvFragment(String value) {
+        arrayList.clear();
+        linkedList.clear();
+        copyOnWriteArrayList.clear();
+
+        int intValue = Integer.parseInt(value);
+
+        for (int i = 0; i < intValue; i++) {
+            arrayList.add(i);
+            linkedList.add(i);
+        }
+
+        for (int i = 0; i < intValue/100000; i++) {
+            copyOnWriteArrayList.add(i);
+        }
+
 
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
@@ -26,7 +40,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
                 1, TimeUnit.SECONDS, fifoQueue);
 
         getViewState().hideTextViewCollectionsFragment();
-         getViewState().showProgressBarCollectionsFragment();
+        getViewState().showProgressBarCollectionsFragment();
 
        /* threadPool.execute(new Runnable() {
             @Override
@@ -75,6 +89,30 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         });*/
 
         //ArrayList
+       /* Future future = threadPool.submit(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                addingInTheBeginningArrayList(value);
+                long threadTime = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
+                    }
+                });
+            }
+
+        });
+        try {
+            future.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -426,218 +464,210 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
     }
 
 
-   // ArrayList arrayList = new ArrayList();
-  //  LinkedList linkedList = new LinkedList();
-   // CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
+    ArrayList<Integer> arrayList = new ArrayList();
+    LinkedList<Integer> linkedList = new LinkedList();
+    CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList();
 
 
     public void addingInTheBeginningArrayList(String value){
         int intValue = Integer.parseInt(value);
-        ArrayList arrayList = new ArrayList();
-
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(0, i);
+        //ArrayList arrayList = new ArrayList();
+        synchronized(this) {
+           // for (int i = 0; i < intValue; i++) {
+                arrayList.add(0);
+       //     }
         }
-        arrayList.clear();
+        //arrayList.clear();
     }
     public void addingInTheMiddleArrayList(String value){
         int intValue = Integer.parseInt(value);
-        ArrayList arrayList = new ArrayList();
-
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(arrayList.size()/2, i);
+        //ArrayList arrayList = new ArrayList() ;
+        synchronized(this) {
+        //    for (int i = 0; i < intValue-1; i++) {
+                arrayList.add(arrayList.size() / 2);
+     //       }
         }
-        arrayList.clear();
+      //  arrayList.clear();
     }
     public void addingInTheEndArrayList(String value){
         int intValue = Integer.parseInt(value);
-        ArrayList arrayList = new ArrayList();
-
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(i, i);
-        }
-        arrayList.clear();
+       // ArrayList arrayList = new ArrayList();
+        synchronized(this) {
+        //    for (int i = 0; i < intValue-1; i++) {
+                arrayList.add(arrayList.size()-1);
+            }
+     //   }
+       // arrayList.clear();
     }
     public void searchByValueArrayList(String value){
         int intValue = Integer.parseInt(value);
-        ArrayList arrayList = new ArrayList();
+      //  ArrayList arrayList = new ArrayList();
+        synchronized(this) {
+            // for (int i = 0; i < intValue; i++) {
+            //      arrayList.add(i, i);
+            //  }
 
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(i, i);
+            arrayList.indexOf(intValue);
         }
-
-        arrayList.indexOf(intValue);
-        arrayList.clear();
+      //  arrayList.clear();
 
     }
     public void removingInTheBeginningArrayList(String value){
         int intValue = Integer.parseInt(value);
-        ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(i, i);
+       // ArrayList arrayList = new ArrayList();
+       // for (int i = 0; i < intValue; i++) {
+      //      arrayList.add(i, i);
+      //  }
+        synchronized(this) {
+        //    for (int i = 0; i < intValue; i++) {
+                arrayList.remove(0);
+      //      }
         }
-
-        for (int i = 0; i < intValue; i++) {
-            arrayList.remove(0);
-        }
-        arrayList.clear();
+      //  arrayList.clear();
     }
+
     public void removingInTheMiddleArrayList(String value){
         int intValue = Integer.parseInt(value);
 
-        ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(i, i);
-        }
-
-        for (int i = 0; i < intValue; i++) {
-            arrayList.remove(arrayList.size()/2);
-        }
-        arrayList.clear();
+        //ArrayList arrayList = new ArrayList();
+       // for (int i = 0; i < intValue; i++) {
+       //     arrayList.add(i, i);
+       // }
+        synchronized(this) {
+          //  for (int i = 0; i < intValue-1; i++) {
+                arrayList.remove(arrayList.size() / 2);
+            }
+      //  }
+       // arrayList.clear();
     }
     //!
     public void removingInTheEndArrayList(String value){
         int intValue = Integer.parseInt(value);
-        ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(i, i);
-        }
+        //ArrayList arrayList = new ArrayList();
        // for (int i = 0; i < intValue; i++) {
-       //     arrayList.remove(i);
-     //   }
-        arrayList.clear();
+     //       arrayList.add(i, i);
+    //    }
+        synchronized(this){
+       // for (int i = 0; i < intValue-1; i++) {
+            arrayList.remove(arrayList.size()-1);
+        }
+    //   }
+        //arrayList.clear();
     }
 
 
     public void addingInTheBeginningLinkedList(String value){
         int intValue = Integer.parseInt(value);
 
-        LinkedList linkedList = new LinkedList();
-
-        for (int i = 0; i < intValue; i++) {
-            linkedList.addFirst(i);
-        }
-        linkedList.clear();
+      //  LinkedList linkedList = new LinkedList();
+        synchronized(this) {
+       //     for (int i = 0; i < intValue-1; i++) {
+                linkedList.add(0);
+            }
+    //    }
+      //  linkedList.clear();
     }
     public void addingInTheMiddleLinkedList(String value){
         int intValue = Integer.parseInt(value);
-        LinkedList linkedList = new LinkedList();
-        for (int i = 0; i < intValue; i++) {
-            linkedList.add(linkedList.size()/2);
-        }
-        linkedList.clear();
+      //  LinkedList linkedList = new LinkedList();
+        synchronized(this) {
+          //  for (int i = 0; i < intValue-1; i++) {
+                linkedList.add(linkedList.size() / 2);
+            }
+     //   }
+    //    linkedList.clear();
     }
     public void addingInTheEndLinkedList(String value){
         int intValue = Integer.parseInt(value);
-        LinkedList linkedList = new LinkedList();
-        for (int i = 0; i < intValue; i++) {
-            linkedList.addLast(i);
-        }
-        linkedList.clear();
+        //LinkedList linkedList = new LinkedList();
+        synchronized(this) {
+         //   for (int i = 0; i < intValue-1; i++) {
+                linkedList.add(linkedList.size()-1);
+            }
+   //     }
+       // linkedList.clear();
     }
     public void searchByValueLinkedList(String value){
         int intValue = Integer.parseInt(value);
-        LinkedList linkedList = new LinkedList();
-        for (int i = 0; i < intValue; i++) {
-            linkedList.add(i);
+       // LinkedList linkedList = new LinkedList();
+      //  for (int i = 0; i < intValue; i++) {
+      //      linkedList.add(i);
+     //   }
+        synchronized(this) {
+            linkedList.indexOf(intValue);
         }
-        linkedList.indexOf(intValue);
-        linkedList.clear();
+     //   linkedList.clear();
     }
     public void removingInTheBeginningLinkedList(String value){
         int intValue = Integer.parseInt(value);
 
-
-   //     for (int i = 0; i < intValue; i++) {
-   //         linkedList.removeFirst();
+        synchronized(this) {
+          //  for (int i = 0; i < intValue-1; i++) {
+                linkedList.remove(0);
+            }
     //    }
     }
     public void removingInTheMiddleLinkedList(String value){
         int intValue = Integer.parseInt(value);
-
-     //   for (int i = 0; i < intValue; i++) {
-   //         linkedList.remove();
-   //     }
+        synchronized(this) {
+      //      for (int i = 0; i < intValue-1; i++) {
+                linkedList.remove(linkedList.size()/2);
+            }
+    //    }
     }
     public void removingInTheEndLinkedList(String value){
         int intValue = Integer.parseInt(value);
-
-        //for (int i = 0; i < intValue; i++) {
-      //      linkedList.remove(i);
-     //   }
+        synchronized(this) {
+          //  for (int i = 0; i < intValue-1; i++) {
+                linkedList.remove(linkedList.size()-1);
+            }
+    //    }
     }
 
 
     public void addingInTheBeginningCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(0, i);
-        }
-        copyOnWriteArrayList.clear();
+        synchronized(this) {
+                copyOnWriteArrayList.add(0);
+            }
     }
     public void addingInTheMiddleCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(copyOnWriteArrayList.size()/2, i);
+        synchronized(this) {
+                copyOnWriteArrayList.add(copyOnWriteArrayList.size() / 2);
         }
-        copyOnWriteArrayList.clear();
     }
     public void addingInTheEndCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(i);
-        }
-        copyOnWriteArrayList.clear();
+        synchronized(this) {
+                copyOnWriteArrayList.add(copyOnWriteArrayList.size()-1);
+            }
     }
     public void searchByValueCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(i);
+        synchronized(this) {
+            copyOnWriteArrayList.indexOf(intValue);
         }
-        copyOnWriteArrayList.indexOf(intValue);
-        copyOnWriteArrayList.clear();
     }
     public void removingInTheBeginningCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(i);
+        synchronized(this) {
+                copyOnWriteArrayList.remove(0);
         }
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.remove(0);
-        }
-        copyOnWriteArrayList.clear();
+
     }
     public void removingInTheMiddleCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(i);
-        }
-
-       for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.remove(copyOnWriteArrayList.size()/2);
-        }
-       copyOnWriteArrayList.clear();
+        synchronized(this) {
+          //  for (int i = 0; i < intValue-1; i++) {
+                copyOnWriteArrayList.remove(copyOnWriteArrayList.size() / 2);
+            }
     }
-    //!
     public void removingInTheEndCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
-        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
-        for (int i = 0; i < intValue; i++) {
-            copyOnWriteArrayList.add(i);
-        }
-
-      //  for (int i = 0; i < intValue; i++) {
-     //       copyOnWriteArrayList.remove(i);
-     //   }
-
-        copyOnWriteArrayList.clear();
+        synchronized(this) {
+                copyOnWriteArrayList.remove(copyOnWriteArrayList.size()-1);
+            }
     }
 
 }

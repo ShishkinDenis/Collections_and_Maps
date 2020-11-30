@@ -38,17 +38,4 @@ public interface MapsFragmentView extends MvpView {
 
 
 
-    /*@AddToEndSingle
-    void hideProgressBarAddingNewHashMap();
-    @AddToEndSingle
-    void hideProgressBarRemovingHashMap();
-    @AddToEndSingle
-    void hideProgressBarSearchByKeyHashMap();
-    @AddToEndSingle
-    void hideProgressBarAddingNewTreeMap();
-    @AddToEndSingle
-    void  hideProgressBarRemovingTreeMap();
-    @AddToEndSingle
-    void hideProgressBarSearchByKeyTreeMap();*/
-
 }

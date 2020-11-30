@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,9 +75,8 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @BindView(R.id.pbRemovingInTheMiddleCopyOnWriteList) ProgressBar pbRemovingInTheMiddleCopyOnWriteList;
     @BindView(R.id.pbRemovingInTheEndCopyOnWriteList) ProgressBar pbRemovingInTheEndCopyOnWriteList;
 
+    @BindView(R.id.btnCollectionsFragment) Button btnCollectionsFragment;
 
-
-   Button btnCollectionsFragment;
     @BindView(R.id.tietInputNumberCollectionsFragment) EditText tietInputNumberCollectionsFragment;
 
 
@@ -92,14 +92,18 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnCollectionsFragment = view.findViewById(R.id.btnCollectionsFragment);
-
-
-
         btnCollectionsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
+
+                if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
+                    collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
+                }
+                else {
+                    Toast toast = Toast.makeText(getActivity(),"Please input number",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
     }
@@ -317,8 +321,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         tvRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
 
     }
-
-
 
 
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,11 +27,9 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @BindView (R.id.tvAddingNewHashMap) TextView tvAddingNewHashMap;
     @BindView (R.id.tvRemovingHashMap) TextView tvRemovingHashMap;
     @BindView (R.id.tvSearchByKeyHashMap) TextView tvSearchByKeyHashMap;
-
     @BindView (R.id.tvAddingNewTreeMap) TextView tvAddingNewTreeMap;
     @BindView (R.id.tvRemovingTreeMap) TextView tvRemovingTreeMap;
     @BindView (R.id.tvSearchByKeyTreeMap) TextView tvSearchByKeyTreeMap;
-
 
     @BindView (R.id.btnMapsFragment) Button btnMapsFragment;
 
@@ -61,9 +60,42 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
         btnMapsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mapsFragmentPresenter.presentTvMapsFragment(etInputNumberMapsFragment.getText().toString());
+                if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
+                    mapsFragmentPresenter.presentTvMapsFragment(etInputNumberMapsFragment.getText().toString());
+                }
+                else {
+                    Toast toast = Toast.makeText(getActivity(),"Please input number",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
+    }
+
+    @Override
+    public void getNumberMapsFragment() {
+        //etInputNumberMapsFragment.getText().toString();
+       // if (!etInputNumberMapsFragment.getText().toString().isEmpty())
+
+    }
+
+    @Override
+    public void showProgressBarMapsFragment() {
+        pbAddingNewHashMap.setVisibility(View.VISIBLE);
+        pbRemovingHashMap.setVisibility(View.VISIBLE);
+        pbSearchByKeyHashMap.setVisibility(View.VISIBLE);
+        pbAddingNewTreeMap.setVisibility(View.VISIBLE);
+        pbRemovingTreeMap.setVisibility(View.VISIBLE);
+        pbSearchByKeyTreeMap.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void hideTextViewMapsFragment() {
+        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+        tvRemovingHashMap.setVisibility(View.INVISIBLE);
+        tvSearchByKeyHashMap.setVisibility(View.INVISIBLE);
+        tvAddingNewTreeMap.setVisibility(View.INVISIBLE);
+        tvRemovingTreeMap.setVisibility(View.INVISIBLE);
+        tvSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
     }
 
 
@@ -108,61 +140,6 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     }
 
 
-    @Override
-    public void showProgressBarMapsFragment() {
-        pbAddingNewHashMap.setVisibility(View.VISIBLE);
-        pbRemovingHashMap.setVisibility(View.VISIBLE);
-        pbSearchByKeyHashMap.setVisibility(View.VISIBLE);
-        pbAddingNewTreeMap.setVisibility(View.VISIBLE);
-        pbRemovingTreeMap.setVisibility(View.VISIBLE);
-        pbSearchByKeyTreeMap.setVisibility(View.VISIBLE);
-    }
 
-    @Override
-    public void hideTextViewMapsFragment() {
-        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
-        tvRemovingHashMap.setVisibility(View.INVISIBLE);
-        tvSearchByKeyHashMap.setVisibility(View.INVISIBLE);
-        tvAddingNewTreeMap.setVisibility(View.INVISIBLE);
-        tvRemovingTreeMap.setVisibility(View.INVISIBLE);
-        tvSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void getNumberMapsFragment() {
-       // tvAddingNewHashMap.setText(etInputNumberMapsFragment.getText().toString());
-         etInputNumberMapsFragment.getText().toString();
-         ///сделать String без интерфейса
-    }
-
-   /* @Override
-    public void hideProgressBarAddingNewHashMap() {
-        //pbAddingNewHashMap.setVisibility(View.INVISIBLE);
-       // tvAddingNewHashMap.setVisibility(View.VISIBLE);
-    }
-    @Override
-    public void hideProgressBarRemovingHashMap() {
-
-    }
-
-    @Override
-    public void hideProgressBarSearchByKeyHashMap() {
-
-    }
-
-    @Override
-    public void hideProgressBarAddingNewTreeMap() {
-
-    }
-
-    @Override
-    public void hideProgressBarRemovingTreeMap() {
-
-    }
-
-    @Override
-    public void hideProgressBarSearchByKeyTreeMap() {
-
-    }*/
 
 }

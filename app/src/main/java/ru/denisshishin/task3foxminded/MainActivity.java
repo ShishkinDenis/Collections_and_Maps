@@ -23,7 +23,6 @@ public class MainActivity extends FragmentActivity {
     ViewPager2 viewPager;
     TabLayout tabLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +43,11 @@ public class MainActivity extends FragmentActivity {
             }
         })
                 .attach();
-
-
     }
 
     private ViewPagerAdapter createCardAdapter() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
         return adapter;
     }
-
 
 }
