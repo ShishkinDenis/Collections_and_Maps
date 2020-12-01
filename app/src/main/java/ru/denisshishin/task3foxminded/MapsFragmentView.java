@@ -1,41 +1,25 @@
 package ru.denisshishin.task3foxminded;
 
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import moxy.MvpView;
-import moxy.viewstate.strategy.alias.AddToEndSingle;
+import moxy.viewstate.strategy.AddToEndSingleStrategy;
+import moxy.viewstate.strategy.StateStrategyType;
+
+@StateStrategyType(AddToEndSingleStrategy.class)
 
 public interface MapsFragmentView extends MvpView {
-    @AddToEndSingle
-    void showTvAddingNewHashMap(String string);
 
-    @AddToEndSingle
-    void showTvRemovingHashMap(String string);
+    void showProgressBarMapsFragment();
 
-    @AddToEndSingle
-    void showTvSearchByKeyHashMap(String string);
-
-    @AddToEndSingle
-    void showTvAddingNewTreeMap(String string);
-
-    @AddToEndSingle
-    void showTvRemovingTreeMap(String string);
-
-    @AddToEndSingle
-    void showTvSearchByKeyTreeMap(String string);
-
-
-
-    @AddToEndSingle
-     void showProgressBarMapsFragment();
-
-    @AddToEndSingle
     void hideTextViewMapsFragment();
 
-    @AddToEndSingle
     void getNumberMapsFragment();
 
+    void showTvAddingNewHashMap(String string);
+    void showTvRemovingHashMap(String string);
+    void showTvSearchByKeyHashMap(String string);
 
+    void showTvAddingNewTreeMap(String string);
+    void showTvRemovingTreeMap(String string);
+    void showTvSearchByKeyTreeMap(String string);
 
 }
