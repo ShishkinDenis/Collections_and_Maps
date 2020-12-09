@@ -1,4 +1,4 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.collections;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -362,9 +362,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             }
     }
 
-    private void log(String message){
-        Log.i("Callback",message);
-    }
 
     public String measureThreadTime(Callable<Void> collectionsOperation){
         long time = System.currentTimeMillis();

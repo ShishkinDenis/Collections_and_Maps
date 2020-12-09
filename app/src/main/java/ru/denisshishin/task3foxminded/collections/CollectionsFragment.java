@@ -1,10 +1,6 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.collections;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import ru.denisshishin.task3foxminded.R;
 
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionFragmentView {
 

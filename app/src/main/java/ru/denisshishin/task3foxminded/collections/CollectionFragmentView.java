@@ -1,4 +1,4 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.collections;
 
 import moxy.MvpView;
 import moxy.viewstate.strategy.AddToEndSingleStrategy;

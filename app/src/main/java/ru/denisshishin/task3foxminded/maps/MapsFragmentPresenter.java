@@ -1,4 +1,4 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.maps;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -7,8 +7,6 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -160,10 +158,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         }
     }
 
-
-    private void log(String message){
-        Log.i("Callback",message);
-    }
 
     public String measureThreadTime(Callable<Void> collectionsOperation){
         long time = System.currentTimeMillis();

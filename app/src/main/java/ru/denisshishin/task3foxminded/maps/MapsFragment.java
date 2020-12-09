@@ -1,4 +1,4 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.maps;
 
 import android.os.Bundle;
 
@@ -18,10 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import ru.denisshishin.task3foxminded.R;
 
 
 public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentView {
-    @InjectPresenter
+   @InjectPresenter
     MapsFragmentPresenter mapsFragmentPresenter;
 
     @BindView (R.id.tvAddingNewHashMap) TextView tvAddingNewHashMap;
