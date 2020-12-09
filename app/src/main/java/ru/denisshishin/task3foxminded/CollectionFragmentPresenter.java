@@ -65,22 +65,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
 }
 
     public void presentTvCollectionsFragment(String value) {
-   //     arrayList.clear();
-    //    linkedList.clear();
-   //     copyOnWriteArrayList.clear();
-
-    //    int intValue = Integer.parseInt(value);
-
-   //     for (int i = 0; i < intValue; i++) {
-   //         arrayList.add(i);
-    //        linkedList.add(i);
-    //    }
-
-        //Костьль!Заполняю в 10 000 раз меньшим количеством элементов
-   //     for (int i = 0; i < intValue/10000; i++) {
-    //        copyOnWriteArrayList.add(i);
-     //   }
-
 
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
@@ -91,359 +75,202 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         getViewState().showProgressBarCollectionsFragment();
 
         //ArrayList
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheBeginningArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheBeginningArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheBeginningArrayList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                //выделить в метод измерение в секундах
-               // return long
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheMiddleArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-               // Runnable вынести в отдельный класс
-                //класс для run(),класс для handler
-                //гугли примеры ThreadPool
-
-                long time = System.currentTimeMillis();
-                addingInTheMiddleArrayList();
-                long threadTime = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheMiddleArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheMiddleArrayList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheEndArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheEndArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheEndArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheEndArrayList(threadTime + " ms"));
         });
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                searchByValueArrayList(value);
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            searchByValueArrayList(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showSearchByValueArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showSearchByValueArrayList(threadTime + " ms"));
         });
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheBeginningArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheBeginningArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheBeginningArrayList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheMiddleArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheMiddleArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheMiddleArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheMiddleArrayList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheEndArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheEndArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheEndArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheEndArrayList(threadTime + " ms"));
         });
 
         //LinkedList
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheBeginningLinkedList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheBeginningLinkedList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheBeginningLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheBeginningLinkedList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheMiddleLinkedList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheMiddleLinkedList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheMiddleLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheMiddleLinkedList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheEndLinkedList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheEndLinkedList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheEndLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheEndLinkedList(threadTime + " ms"));
         });
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                searchByValueLinkedList(value);
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            searchByValueLinkedList(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showSearchByValueLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showSearchByValueLinkedList(threadTime + " ms"));
         });
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheBeginningLinkedList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheBeginningLinkedList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheBeginningLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheBeginningLinkedList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheMiddleLinkedList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheMiddleLinkedList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheMiddleLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheMiddleLinkedList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheEndLinkedList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheEndLinkedList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheEndLinkedList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheEndLinkedList(threadTime + " ms"));
         });
 
         //CopyOnWriteLinkedList
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheBeginningCopyOnWriteArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+       /* threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheBeginningCopyOnWriteArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheBeginningCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheBeginningCopyOnWriteArrayList(threadTime + " ms"));
+        });*/
 
-        });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheMiddleCopyOnWriteArrayList();
-                long threadTime = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheMiddleCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
-        });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingInTheEndCopyOnWriteArrayList();
-                long threadTime = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showAddingInTheEndCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+         threadPool.execute(() -> {
+            new Handler(Looper.getMainLooper()).post(() ->
+                   getViewState().showAddingInTheBeginningCopyOnWriteArrayList(measureThreadTime(() -> {
+                       addingInTheBeginningCopyOnWriteArrayList();
+                       return null;
+                   }) + " ms"));
         });
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                searchByValueCopyOnWriteArrayList(value);
-                long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showSearchByValueCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheMiddleCopyOnWriteArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheMiddleCopyOnWriteArrayList(threadTime + " ms"));
+        });
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingInTheEndCopyOnWriteArrayList();
+            long threadTime = System.currentTimeMillis() - time;
+
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showAddingInTheEndCopyOnWriteArrayList(threadTime + " ms"));
         });
 
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheBeginningCopyOnWriteArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            searchByValueCopyOnWriteArrayList(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showSearchByValueCopyOnWriteArrayList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheMiddleCopyOnWriteArrayList();
-                long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheBeginningCopyOnWriteArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingInTheEndCopyOnWriteArrayList();
-                long threadTime = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheMiddleCopyOnWriteArrayList();
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showRemovingInTheEndCopyOnWriteArrayList(String.valueOf(threadTime) + " ms");
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(threadTime + " ms"));
         });
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingInTheEndCopyOnWriteArrayList();
+            long threadTime = System.currentTimeMillis() - time;
+
+            new Handler(Looper.getMainLooper()).post(() ->
+                   getViewState().showRemovingInTheEndCopyOnWriteArrayList(threadTime + " ms"));
+        });
+
+        /*threadPool.execute(() -> {
+            new Handler(Looper.getMainLooper()).post(() ->
+                   getViewState().showRemovingInTheEndCopyOnWriteArrayList(measureThreadTime(() -> {
+                       removingInTheEndCopyOnWriteArrayList();
+                       return null;
+                   }) + " ms"));
+        });*/
 
     }
 
@@ -575,39 +402,11 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         Log.i("Callback",message);
     }
 
-
-    /*public void superMethod(ThreadPoolExecutor threadPoolExecutor,Callable<Void> methodParam, Callable<Void> methodParam2){
-       threadPoolExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                try {
-                    methodParam.call();
-                    // addingInTheBeginningArrayList();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                long threadTime = System.currentTimeMillis() - time;
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                           //  getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                            methodParam2.call();
-
-                            // getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-            }
-
-        });
-
+    public long measureTime(Callable callable){
+        long time = System.currentTimeMillis();
+        removingInTheEndCopyOnWriteArrayList();
+        long threadTime = System.currentTimeMillis() - time;
+        return threadTime;
     }
 
     public long measureThreadTime(Callable<Void> collectionsOperation){
@@ -621,36 +420,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         return threadTime;
     }
 
-    public void superMethod2(ThreadPoolExecutor threadPoolExecutor,Callable<Void> methodParam, Callable<Void> methodParam2){
-        threadPoolExecutor.execute(new Runnable() {
-            long l;
-            @Override
-            public void run() {
-                try {
-                l = measureThreadTime(methodParam);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                           // getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                            methodParam2.call();
-
-                            // getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-            }
-
-        });
-
-    }
-*/
 }
 

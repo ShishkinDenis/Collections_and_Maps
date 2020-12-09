@@ -39,7 +39,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         void onReady();
     }
 
-
     public void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
 
@@ -69,103 +68,55 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         getViewState().showProgressBarMapsFragment();
 
         //HashMap
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingNewElementHashMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewHashMap(String.valueOf(time2) + " ms");
-
-
-                    }
-                });
-            }
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showTvAddingNewHashMap(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingElementHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingElementHashMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvRemovingHashMap(String.valueOf(time2) + " ms");
-
-                    }
-                });
-            }
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showTvRemovingHashMap(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                searchByKeyHashMap(value);
-                long time2 = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            searchByKeyHashMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvSearchByKeyHashMap(String.valueOf(time2) + " ms");
-                    }
-                });
-            }
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showTvSearchByKeyHashMap(threadTime + " ms"));
         });
 
         //TreeMap
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                addingNewElementTreeMap(value);
-                long time2 = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingNewElementTreeMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewTreeMap(String.valueOf(time2) + " ms");
-
-
-                    }
-                });
-            }
-
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showTvAddingNewTreeMap(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                removingElementTreeMap(value);
-                long time2 = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            removingElementTreeMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvRemovingTreeMap(String.valueOf(time2) + " ms");
-                    }
-                });
-            }
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showTvRemovingTreeMap(threadTime + " ms"));
         });
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                long time = System.currentTimeMillis();
-                searchByKeyTreeMap(value);
-                long time2 = System.currentTimeMillis() - time;
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            searchByKeyTreeMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvSearchByKeyTreeMap(String.valueOf(time2) + " ms");
-                    }
-                });
-            }
+            new Handler(Looper.getMainLooper()).post(() ->
+                    getViewState().showTvSearchByKeyTreeMap(threadTime + " ms"));
         });
 
     }
@@ -217,7 +168,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
     private void log(String message){
         Log.i("Callback",message);
     }
-
 
 }
 
