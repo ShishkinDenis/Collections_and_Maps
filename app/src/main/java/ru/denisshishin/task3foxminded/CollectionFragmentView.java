@@ -13,6 +13,10 @@ public interface CollectionFragmentView extends MvpView {
 
     void hideTextViewCollectionsFragment();
 
+    void showProgressBarFillingCollections();
+
+    void hideProgressBarFillingCollections();
+
     void showAddingInTheBeginningArrayList(String string);
     void showAddingInTheMiddleArrayList(String string);
     void showAddingInTheEndArrayList(String string);

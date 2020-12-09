@@ -22,54 +22,19 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
 
     public void launch(String string){
 
-        log("Creating callback");
-
         CollectionFragmentPresenter.ReadyCallback readyCallback = new CollectionFragmentPresenter.ReadyCallback() {
             @Override
             public void onReady() {
-                log("Ready to do anything");
-                // getViewState().showTvFragment("Callback works!");
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //getViewState().showAddingInTheBeginningArrayList("Callback works!");
-
-                        presentTvFragment(string);
-
-                }
-                });
-               // presentTvFragment(string);
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    presentTvCollectionsFragment(string);
+            });
             }
         };
 
-        log("callback created,launching thread");
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                    //Thread.sleep(5000);
-                    log("Start filling collections");
-               // try {
-              //      Thread.sleep(5000);
-              //  } catch (InterruptedException e) {
-              //      e.printStackTrace();
-             //   }
-                fillCollections(string);
-                    log("End filling collections");
-
-                    log("Start Callback");
-                    readyCallback.onReady();
-                    log("End Callback");
-            }
+        new Thread(() -> {
+            fillCollections(string);
+                readyCallback.onReady();
         }).start();
-
-       // readyCallback.onReady();
-        log("thread launched");
-
-    }
-
-    private void log(String message){
-        Log.i("Callback",message);
     }
 
     private interface ReadyCallback{
@@ -77,13 +42,9 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
     }
 
     public void fillCollections(String value) {
-    //new Thread(new Runnable() {
-    //    public void run() {
-            //arrayList.clear();
-            //linkedList.clear();
-            //copyOnWriteArrayList.clear();
+        int intValue = Integer.parseInt(value);
 
-            int intValue = Integer.parseInt(value);
+        new Handler(Looper.getMainLooper()).post(() -> getViewState().showProgressBarFillingCollections());
 
             if (arrayList.size() < intValue) {
                 for (int i = 0; i < (intValue-arrayList.size()); i++) {
@@ -99,11 +60,11 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
                     copyOnWriteArrayList.remove(i);
                 }
             }
-    //    }
-   // }).start();
+
+        new Handler(Looper.getMainLooper()).post(() -> getViewState().hideProgressBarFillingCollections());
 }
 
-    public void presentTvFragment(String value) {
+    public void presentTvCollectionsFragment(String value) {
    //     arrayList.clear();
     //    linkedList.clear();
    //     copyOnWriteArrayList.clear();
@@ -130,26 +91,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         getViewState().showProgressBarCollectionsFragment();
 
         //ArrayList
-
-       // String s = "s";
-
-        //superMethod(threadPool,addingInTheBeginningArrayList(),getViewState().showAddingInTheBeginningArrayList(s));
-       /* superMethod(threadPool, () -> {
-            addingInTheBeginningArrayList();
-            return null;
-        }, () -> {
-            getViewState().showAddingInTheBeginningArrayList(addingInTheBeginningArrayList());
-            return null;
-        });
-
-        measureThreadTime(new Callable<Void>() {
-            @Override
-            public Void call() throws Exception {
-                addingInTheBeginningArrayList();
-                return null;
-            }
-        });*/
-
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -166,8 +107,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             }
 
         });
-
-
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -509,11 +448,9 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
     }
 
 
-
     ArrayList<Integer> arrayList = new ArrayList();
     LinkedList<Integer> linkedList = new LinkedList();
     CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList();
-
 
 
     public void addingInTheBeginningArrayList(){
@@ -580,25 +517,20 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         }
     }
     public void removingInTheBeginningLinkedList(){
-       // if (linkedList.size() != 0) {
+
             synchronized (this) {
                 linkedList.remove(0);
             }
-      //  }
     }
     public void removingInTheMiddleLinkedList(){
-     //   if (linkedList.size() != 0) {
             synchronized (this) {
                 linkedList.remove(linkedList.size() / 2);
             }
-      //  }
     }
     public void removingInTheEndLinkedList(){
-       // if (linkedList.size() != 0) {
             synchronized (this) {
                 linkedList.remove(linkedList.size() - 1);
             }
-     //   }
     }
 
 
@@ -639,8 +571,12 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             }
     }
 
+    private void log(String message){
+        Log.i("Callback",message);
+    }
 
-    public void superMethod(ThreadPoolExecutor threadPoolExecutor,Callable<Void> methodParam, Callable<Void> methodParam2){
+
+    /*public void superMethod(ThreadPoolExecutor threadPoolExecutor,Callable<Void> methodParam, Callable<Void> methodParam2){
        threadPoolExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -715,6 +651,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         });
 
     }
-
+*/
 }
 

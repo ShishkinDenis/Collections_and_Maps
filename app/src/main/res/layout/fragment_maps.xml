@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:gravity="center"
         android:hint="Input number"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -262,5 +263,36 @@
 
         </TableRow>
     </TableLayout>
+    <ProgressBar
+        android:id="@+id/pbFillingMaps"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="206dp"
+        android:layout_height="54dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="Filling Maps"
+        android:indeterminate="true"
+        android:indeterminateBehavior="cycle"
+        android:indeterminateOnly="true"
+        android:indeterminateTint="#673AB7"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <TextView
+        android:id="@+id/tvFillingMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filling Maps"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.448" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

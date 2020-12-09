@@ -9,10 +9,10 @@ import moxy.viewstate.strategy.StateStrategyType;
 public interface MapsFragmentView extends MvpView {
 
     void showProgressBarMapsFragment();
-
     void hideTextViewMapsFragment();
 
-    void getNumberMapsFragment();
+    void showProgressBarFillingMaps();
+    void hideProgressBarFillingMaps();
 
     void showTvAddingNewHashMap(String string);
     void showTvRemovingHashMap(String string);

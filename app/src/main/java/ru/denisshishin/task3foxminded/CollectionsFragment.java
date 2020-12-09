@@ -79,6 +79,9 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
 
     @BindView(R.id.tietInputNumberCollectionsFragment) EditText tietInputNumberCollectionsFragment;
 
+    @BindView(R.id.pbFillingCollections) ProgressBar pbFillingCollections;
+    @BindView(R.id.tvFillingCollections) TextView tvFillingCollections;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,12 +98,8 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         btnCollectionsFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
-
-                   // collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
                     collectionFragmentPresenter.launch(tietInputNumberCollectionsFragment.getText().toString());
-
                 }
                 else {
                     Toast toast = Toast.makeText(getActivity(),"Please input number",
@@ -139,7 +138,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
         pbRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
-
     @Override
     public void hideTextViewCollectionsFragment() {
         tvAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
@@ -165,6 +163,17 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
         tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
         tvRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showProgressBarFillingCollections() {
+        pbFillingCollections.setVisibility(View.VISIBLE);
+        tvFillingCollections.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void hideProgressBarFillingCollections() {
+        pbFillingCollections.setVisibility(View.INVISIBLE);
+        tvFillingCollections.setVisibility(View.INVISIBLE);
     }
 
 

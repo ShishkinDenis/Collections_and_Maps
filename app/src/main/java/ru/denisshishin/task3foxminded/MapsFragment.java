@@ -42,7 +42,8 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @BindView (R.id.pbRemovingTreeMap) ProgressBar pbRemovingTreeMap;
     @BindView (R.id.pbSearchByKeyTreeMap) ProgressBar pbSearchByKeyTreeMap;
 
-
+    @BindView(R.id.pbFillingMaps) ProgressBar pbFillingMaps;
+    @BindView(R.id.tvFillingMaps) TextView tvFillingMaps;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,8 +62,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
             @Override
             public void onClick(View v) {
                 if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
-                    //mapsFragmentPresenter.presentTvMapsFragment(etInputNumberMapsFragment.getText().toString());
-                    mapsFragmentPresenter.launch();
+                    mapsFragmentPresenter.launch(etInputNumberMapsFragment.getText().toString());
                 }
                 else {
                     Toast toast = Toast.makeText(getActivity(),"Please input number",
@@ -73,11 +73,18 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
         });
     }
 
-    @Override
-    public void getNumberMapsFragment() {
-        //etInputNumberMapsFragment.getText().toString();
-       // if (!etInputNumberMapsFragment.getText().toString().isEmpty())
 
+
+    @Override
+    public void showProgressBarFillingMaps() {
+        pbFillingMaps.setVisibility(View.VISIBLE);
+        tvFillingMaps.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBarFillingMaps() {
+        pbFillingMaps.setVisibility(View.INVISIBLE);
+        tvFillingMaps.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -139,8 +146,5 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
         pbSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
         tvSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
-
-
-
 
 }

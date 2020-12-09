@@ -19,62 +19,47 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
     public MapsFragmentPresenter(){
     }
 
-    public void launch(){
-
-        log("Creating callback");
+    public void launch(String string){
 
         ReadyCallback readyCallback = new ReadyCallback() {
             @Override
             public void onReady() {
-                log("Ready to do anything");
-                // getViewState().showTvFragment("Callback works!");
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getViewState().showTvAddingNewHashMap("Callback works!");
-
-                    }
-                });
+                new Handler(Looper.getMainLooper()).post(() ->
+                        presentTvMapsFragment(string));
             }
         };
 
-        log("callback created,launching thread");
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                    readyCallback.onReady();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+        new Thread(() -> {
+            fillMaps(string);
+            readyCallback.onReady();
         }).start();
-
-        log("thread launched");
-
-    }
-
-    private void log(String message){
-        Log.i("Callback",message);
     }
 
     private interface ReadyCallback{
         void onReady();
     }
 
-    public void presentTvMapsFragment(String value) {
-        hashMap.clear();
-        treeMap.clear();
 
+    public void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
 
-        for (int i = 0; i < intValue; i++) {
-            hashMap.put(i,i);
-            treeMap.put(i,i);
+        new Handler(Looper.getMainLooper()).post(() -> getViewState().showProgressBarFillingMaps());
+        if (hashMap.size() < intValue) {
+            for (int i = 0; i < (intValue-hashMap.size()); i++) {
+                hashMap.put(i,i);
+                treeMap.put(i,i);
+            }
         }
+        else {
+            for (int i = 0; i < (hashMap.size()-intValue); i++) {
+                hashMap.remove(i);
+                treeMap.remove(i);
+            }
+        }
+        new Handler(Looper.getMainLooper()).post(() -> getViewState().hideProgressBarFillingMaps());
+    }
 
+    public void presentTvMapsFragment(String value) {
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(numberOfCores, numberOfCores,
@@ -183,8 +168,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
             }
         });
 
-
-
     }
 
     HashMap hashMap = new HashMap();
@@ -231,7 +214,9 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
     }
 
 
-
+    private void log(String message){
+        Log.i("Callback",message);
+    }
 
 
 }
