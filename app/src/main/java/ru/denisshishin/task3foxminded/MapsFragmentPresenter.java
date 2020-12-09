@@ -2,6 +2,7 @@ package ru.denisshishin.task3foxminded;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -16,7 +17,51 @@ import moxy.MvpPresenter;
 public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
 
     public MapsFragmentPresenter(){
+    }
 
+    public void launch(){
+
+        log("Creating callback");
+
+        ReadyCallback readyCallback = new ReadyCallback() {
+            @Override
+            public void onReady() {
+                log("Ready to do anything");
+                // getViewState().showTvFragment("Callback works!");
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getViewState().showTvAddingNewHashMap("Callback works!");
+
+                    }
+                });
+            }
+        };
+
+        log("callback created,launching thread");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    readyCallback.onReady();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        log("thread launched");
+
+    }
+
+    private void log(String message){
+        Log.i("Callback",message);
+    }
+
+    private interface ReadyCallback{
+        void onReady();
     }
 
     public void presentTvMapsFragment(String value) {
@@ -138,6 +183,8 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
             }
         });
 
+
+
     }
 
     HashMap hashMap = new HashMap();
@@ -182,6 +229,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
             treeMap.get(intValue);
         }
     }
+
 
 
 

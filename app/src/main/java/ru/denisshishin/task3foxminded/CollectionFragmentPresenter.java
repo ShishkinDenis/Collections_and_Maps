@@ -2,9 +2,11 @@ package ru.denisshishin.task3foxminded;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -15,24 +17,108 @@ import moxy.MvpPresenter;
 
 @InjectViewState
 public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragmentView> {
+
     public CollectionFragmentPresenter(){}
 
+    public void launch(String string){
+
+        log("Creating callback");
+
+        CollectionFragmentPresenter.ReadyCallback readyCallback = new CollectionFragmentPresenter.ReadyCallback() {
+            @Override
+            public void onReady() {
+                log("Ready to do anything");
+                // getViewState().showTvFragment("Callback works!");
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //getViewState().showAddingInTheBeginningArrayList("Callback works!");
+
+                        presentTvFragment(string);
+
+                }
+                });
+               // presentTvFragment(string);
+            }
+        };
+
+        log("callback created,launching thread");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                    //Thread.sleep(5000);
+                    log("Start filling collections");
+               // try {
+              //      Thread.sleep(5000);
+              //  } catch (InterruptedException e) {
+              //      e.printStackTrace();
+             //   }
+                fillCollections(string);
+                    log("End filling collections");
+
+                    log("Start Callback");
+                    readyCallback.onReady();
+                    log("End Callback");
+            }
+        }).start();
+
+       // readyCallback.onReady();
+        log("thread launched");
+
+    }
+
+    private void log(String message){
+        Log.i("Callback",message);
+    }
+
+    private interface ReadyCallback{
+        void onReady();
+    }
+
+    public void fillCollections(String value) {
+    //new Thread(new Runnable() {
+    //    public void run() {
+            //arrayList.clear();
+            //linkedList.clear();
+            //copyOnWriteArrayList.clear();
+
+            int intValue = Integer.parseInt(value);
+
+            if (arrayList.size() < intValue) {
+                for (int i = 0; i < (intValue-arrayList.size()); i++) {
+                    arrayList.add(i);
+                    linkedList.add(i);
+                    copyOnWriteArrayList.add(i);
+                }
+            }
+            else {
+                for (int i = 0; i < (arrayList.size()-intValue); i++) {
+                    arrayList.remove(i);
+                    linkedList.remove(i);
+                    copyOnWriteArrayList.remove(i);
+                }
+            }
+    //    }
+   // }).start();
+}
+
     public void presentTvFragment(String value) {
-        arrayList.clear();
-        linkedList.clear();
-        copyOnWriteArrayList.clear();
+   //     arrayList.clear();
+    //    linkedList.clear();
+   //     copyOnWriteArrayList.clear();
 
-        int intValue = Integer.parseInt(value);
+    //    int intValue = Integer.parseInt(value);
 
-        for (int i = 0; i < intValue; i++) {
-            arrayList.add(i);
-            linkedList.add(i);
-        }
+   //     for (int i = 0; i < intValue; i++) {
+   //         arrayList.add(i);
+    //        linkedList.add(i);
+    //    }
 
         //Костьль!Заполняю в 10 000 раз меньшим количеством элементов
-        for (int i = 0; i < intValue/10000; i++) {
-            copyOnWriteArrayList.add(i);
-        }
+   //     for (int i = 0; i < intValue/10000; i++) {
+    //        copyOnWriteArrayList.add(i);
+     //   }
 
 
         int numberOfCores = Runtime.getRuntime().availableProcessors();
@@ -44,6 +130,26 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         getViewState().showProgressBarCollectionsFragment();
 
         //ArrayList
+
+       // String s = "s";
+
+        //superMethod(threadPool,addingInTheBeginningArrayList(),getViewState().showAddingInTheBeginningArrayList(s));
+       /* superMethod(threadPool, () -> {
+            addingInTheBeginningArrayList();
+            return null;
+        }, () -> {
+            getViewState().showAddingInTheBeginningArrayList(addingInTheBeginningArrayList());
+            return null;
+        });
+
+        measureThreadTime(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                addingInTheBeginningArrayList();
+                return null;
+            }
+        });*/
+
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -60,9 +166,18 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             }
 
         });
+
+
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
+                //выделить в метод измерение в секундах
+               // return long
+
+               // Runnable вынести в отдельный класс
+                //класс для run(),класс для handler
+                //гугли примеры ThreadPool
+
                 long time = System.currentTimeMillis();
                 addingInTheMiddleArrayList();
                 long threadTime = System.currentTimeMillis() - time;
@@ -394,6 +509,7 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
     }
 
 
+
     ArrayList<Integer> arrayList = new ArrayList();
     LinkedList<Integer> linkedList = new LinkedList();
     CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList();
@@ -451,9 +567,11 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             }
     }
     public void addingInTheEndLinkedList(){
-        synchronized(this) {
-                linkedList.add(linkedList.size()-1);
+
+            synchronized (this) {
+                linkedList.add(linkedList.size() - 1);
             }
+
     }
     public void searchByValueLinkedList(String value){
         int intValue = Integer.parseInt(value);
@@ -462,19 +580,25 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         }
     }
     public void removingInTheBeginningLinkedList(){
-        synchronized(this) {
+       // if (linkedList.size() != 0) {
+            synchronized (this) {
                 linkedList.remove(0);
             }
+      //  }
     }
     public void removingInTheMiddleLinkedList(){
-        synchronized(this) {
-                linkedList.remove(linkedList.size()/2);
+     //   if (linkedList.size() != 0) {
+            synchronized (this) {
+                linkedList.remove(linkedList.size() / 2);
             }
+      //  }
     }
     public void removingInTheEndLinkedList(){
-        synchronized(this) {
-                linkedList.remove(linkedList.size()-1);
+       // if (linkedList.size() != 0) {
+            synchronized (this) {
+                linkedList.remove(linkedList.size() - 1);
             }
+     //   }
     }
 
 
@@ -513,6 +637,83 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
         synchronized(this) {
                 copyOnWriteArrayList.remove(copyOnWriteArrayList.size()-1);
             }
+    }
+
+
+    public void superMethod(ThreadPoolExecutor threadPoolExecutor,Callable<Void> methodParam, Callable<Void> methodParam2){
+       threadPoolExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                long time = System.currentTimeMillis();
+                try {
+                    methodParam.call();
+                    // addingInTheBeginningArrayList();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                long threadTime = System.currentTimeMillis() - time;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                           //  getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
+                            methodParam2.call();
+
+                            // getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+
+        });
+
+    }
+
+    public long measureThreadTime(Callable<Void> collectionsOperation){
+        long time = System.currentTimeMillis();
+        try {
+            collectionsOperation.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        long threadTime = System.currentTimeMillis() - time;
+        return threadTime;
+    }
+
+    public void superMethod2(ThreadPoolExecutor threadPoolExecutor,Callable<Void> methodParam, Callable<Void> methodParam2){
+        threadPoolExecutor.execute(new Runnable() {
+            long l;
+            @Override
+            public void run() {
+                try {
+                l = measureThreadTime(methodParam);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                           // getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
+                            methodParam2.call();
+
+                            // getViewState().showAddingInTheBeginningArrayList(String.valueOf(threadTime) + " ms");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+
+        });
+
     }
 
 }

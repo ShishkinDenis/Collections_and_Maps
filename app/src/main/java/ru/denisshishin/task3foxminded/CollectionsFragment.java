@@ -97,7 +97,10 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
             public void onClick(View v) {
 
                 if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
-                    collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
+
+                   // collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
+                    collectionFragmentPresenter.launch(tietInputNumberCollectionsFragment.getText().toString());
+
                 }
                 else {
                     Toast toast = Toast.makeText(getActivity(),"Please input number",

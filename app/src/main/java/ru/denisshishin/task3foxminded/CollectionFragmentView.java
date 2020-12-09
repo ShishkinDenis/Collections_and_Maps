@@ -38,6 +38,4 @@ public interface CollectionFragmentView extends MvpView {
     void showRemovingInTheEndCopyOnWriteArrayList(String string);
 
 
-////
-
 }
