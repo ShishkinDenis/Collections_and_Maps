@@ -19,11 +19,11 @@ import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import ru.denisshishin.task3foxminded.R;
 
-public class CollectionsFragment extends MvpAppCompatFragment implements CollectionFragmentView {
+public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
 
 
     @InjectPresenter
-    CollectionFragmentPresenter collectionFragmentPresenter;
+    CollectionsPresenter collectionsPresenter;
 
     @BindView(R.id.tvAddingInTheBeginningArrayList) TextView tvAddingInTheBeginningArrayList;
     @BindView(R.id.tvAddingInTheMiddleArrayList) TextView tvAddingInTheMiddleArrayList;
@@ -95,17 +95,14 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnCollectionsFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
-                    collectionFragmentPresenter.launchCollections(tietInputNumberCollectionsFragment.getText().toString());
-                }
-                else {
-                    Toast toast = Toast.makeText(getActivity(),"Please input number",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+        btnCollectionsFragment.setOnClickListener(v -> {
+            if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
+                collectionsPresenter.launchCollections(tietInputNumberCollectionsFragment.getText().toString());
+            }
+            else {
+                Toast toast = Toast.makeText(getActivity(),"Please input number",
+                        Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
     }

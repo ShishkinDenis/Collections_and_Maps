@@ -12,10 +12,9 @@ import java.util.concurrent.TimeUnit;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
-public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
+public class MapsPresenter extends MvpPresenter<MapsView> {
 
-    public MapsFragmentPresenter(){
-    }
+    public MapsPresenter(){}
 
     public void launchMaps(String inputValue){
 

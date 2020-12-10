@@ -15,9 +15,9 @@ import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
 @InjectViewState
-public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragmentView> {
+public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
-    public CollectionFragmentPresenter(){}
+    public CollectionsPresenter(){}
 
     public void launchCollections(String inputValue){
 
@@ -29,7 +29,6 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
                 readyCallback.onReady();
         }).start();
     }
-
 
     public void fillCollections(String value) {
         int intValue = Integer.parseInt(value);
@@ -285,11 +284,9 @@ public class CollectionFragmentPresenter extends MvpPresenter<CollectionFragment
             }
     }
     public void addingInTheEndLinkedList(){
-
             synchronized (this) {
                 linkedList.add(linkedList.size() - 1);
             }
-
     }
     public void searchByValueLinkedList(String value){
         int intValue = Integer.parseInt(value);

@@ -21,9 +21,9 @@ import moxy.presenter.InjectPresenter;
 import ru.denisshishin.task3foxminded.R;
 
 
-public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentView {
+public class MapsFragment extends MvpAppCompatFragment implements MapsView {
    @InjectPresenter
-    MapsFragmentPresenter mapsFragmentPresenter;
+    MapsPresenter mapsPresenter;
 
     @BindView (R.id.tvAddingNewHashMap) TextView tvAddingNewHashMap;
     @BindView (R.id.tvRemovingHashMap) TextView tvRemovingHashMap;
@@ -59,17 +59,14 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnMapsFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
-                    mapsFragmentPresenter.launchMaps(etInputNumberMapsFragment.getText().toString());
-                }
-                else {
-                    Toast toast = Toast.makeText(getActivity(),"Please input number",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+        btnMapsFragment.setOnClickListener(v -> {
+            if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
+                mapsPresenter.launchMaps(etInputNumberMapsFragment.getText().toString());
+            }
+            else {
+                Toast toast = Toast.makeText(getActivity(),"Please input number",
+                        Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
     }

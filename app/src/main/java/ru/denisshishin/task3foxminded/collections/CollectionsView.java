@@ -7,7 +7,7 @@ import moxy.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 
-public interface CollectionFragmentView extends MvpView {
+public interface CollectionsView extends MvpView {
 
     void showProgressBarCollectionsFragment();
 
