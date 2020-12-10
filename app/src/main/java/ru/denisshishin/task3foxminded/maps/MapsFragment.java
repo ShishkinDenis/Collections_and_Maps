@@ -63,7 +63,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
             @Override
             public void onClick(View v) {
                 if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
-                    mapsFragmentPresenter.launch(etInputNumberMapsFragment.getText().toString());
+                    mapsFragmentPresenter.launchMaps(etInputNumberMapsFragment.getText().toString());
                 }
                 else {
                     Toast toast = Toast.makeText(getActivity(),"Please input number",

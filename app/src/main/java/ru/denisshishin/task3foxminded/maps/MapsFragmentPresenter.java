@@ -2,41 +2,32 @@ package ru.denisshishin.task3foxminded.maps;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.TreeMap;
-import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import moxy.MvpPresenter;
+import ru.denisshishin.task3foxminded.ReadyCallback;
 
 public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
 
     public MapsFragmentPresenter(){
     }
 
-    public void launch(String string){
+    public void launchMaps(String inputValue){
 
-        ReadyCallback readyCallback = new ReadyCallback() {
-            @Override
-            public void onReady() {
-                new Handler(Looper.getMainLooper()).post(() ->
-                        presentTvMapsFragment(string));
-            }
-        };
+        ReadyCallback readyCallback = () -> new Handler(Looper.getMainLooper()).post(() ->
+                executeMapsThreads(inputValue));
 
         new Thread(() -> {
-            fillMaps(string);
+            fillMaps(inputValue);
             readyCallback.onReady();
         }).start();
     }
 
-    private interface ReadyCallback{
-        void onReady();
-    }
 
     public void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
@@ -57,7 +48,7 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         new Handler(Looper.getMainLooper()).post(() -> getViewState().hideProgressBarFillingMaps());
     }
 
-    public void presentTvMapsFragment(String value) {
+    public void executeMapsThreads(String value) {
         int numberOfCores = Runtime.getRuntime().availableProcessors();
         LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(numberOfCores, numberOfCores,
@@ -66,53 +57,54 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         getViewState().hideTextViewMapsFragment();
         getViewState().showProgressBarMapsFragment();
 
-        //HashMap
+        Handler handler = new Handler(Looper.getMainLooper());
 
+        //HashMap
         threadPool.execute(() -> {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    getViewState().showTvAddingNewHashMap(measureThreadTime(() -> {
-                        addingNewElementHashMap(value);
-                        return null;
-                    })));
+            long time = System.currentTimeMillis();
+            addingNewElementHashMap(value);
+            long threadTime = System.currentTimeMillis() - time;
+
+            handler.post(() -> getViewState().showTvAddingNewHashMap(threadTime + " ms"));
         });
         threadPool.execute(() -> {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    getViewState().showTvRemovingHashMap(measureThreadTime(() -> {
-                        removingElementHashMap(value);
-                        return null;
-                    })));
+            long time = System.currentTimeMillis();
+            removingElementHashMap(value);
+            long threadTime = System.currentTimeMillis() - time;
+
+            handler.post(() -> getViewState().showTvRemovingHashMap(threadTime + " ms"));
         });
         threadPool.execute(() -> {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    getViewState().showTvSearchByKeyHashMap(measureThreadTime(() -> {
-                        searchByKeyHashMap(value);
-                        return null;
-                    })));
+            long time = System.currentTimeMillis();
+            searchByKeyHashMap(value);
+            long threadTime = System.currentTimeMillis() - time;
+
+            handler.post(() -> getViewState().showTvSearchByKeyHashMap(threadTime + " ms"));
         });
 
         //TreeMap
+        threadPool.execute(() -> {
+            long time = System.currentTimeMillis();
+            addingNewElementTreeMap(value);
+            long threadTime = System.currentTimeMillis() - time;
 
-        threadPool.execute(() -> {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    getViewState().showTvAddingNewTreeMap(measureThreadTime(() -> {
-                        addingNewElementTreeMap(value);
-                        return null;
-                    })));
+            handler.post(() -> getViewState().showTvAddingNewTreeMap(threadTime + " ms"));
         });
         threadPool.execute(() -> {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    getViewState().showTvRemovingTreeMap(measureThreadTime(() -> {
-                        removingElementTreeMap(value);
-                        return null;
-                    })));
+            long time = System.currentTimeMillis();
+            removingElementTreeMap(value);
+            long threadTime = System.currentTimeMillis() - time;
+
+            handler.post(() -> getViewState().showTvRemovingTreeMap(threadTime + " ms"));
         });
         threadPool.execute(() -> {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    getViewState().showTvSearchByKeyTreeMap(measureThreadTime(() -> {
-                        searchByKeyTreeMap(value);
-                        return null;
-                    })));
+            long time = System.currentTimeMillis();
+            searchByKeyTreeMap(value);
+            long threadTime = System.currentTimeMillis() - time;
+
+            handler.post(() -> getViewState().showTvSearchByKeyTreeMap(threadTime + " ms"));
         });
+
     }
 
     HashMap hashMap = new HashMap();
@@ -158,17 +150,6 @@ public class MapsFragmentPresenter extends MvpPresenter<MapsFragmentView> {
         }
     }
 
-
-    public String measureThreadTime(Callable<Void> collectionsOperation){
-        long time = System.currentTimeMillis();
-        try {
-            collectionsOperation.call();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        long threadTime = System.currentTimeMillis() - time;
-        return threadTime + " ms";
-    }
 
 }
 
