@@ -1,18 +1,17 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.maps;
 
 import moxy.MvpView;
 import moxy.viewstate.strategy.AddToEndSingleStrategy;
 import moxy.viewstate.strategy.StateStrategyType;
-
 @StateStrategyType(AddToEndSingleStrategy.class)
 
-public interface MapsFragmentView extends MvpView {
+public interface MapsView extends MvpView {
 
     void showProgressBarMapsFragment();
-
     void hideTextViewMapsFragment();
 
-    void getNumberMapsFragment();
+    void showProgressBarFillingMaps();
+    void hideProgressBarFillingMaps();
 
     void showTvAddingNewHashMap(String string);
     void showTvRemovingHashMap(String string);

@@ -1,4 +1,4 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.collections;
 
 import moxy.MvpView;
 import moxy.viewstate.strategy.AddToEndSingleStrategy;
@@ -7,11 +7,15 @@ import moxy.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 
-public interface CollectionFragmentView extends MvpView {
+public interface CollectionsView extends MvpView {
 
     void showProgressBarCollectionsFragment();
 
     void hideTextViewCollectionsFragment();
+
+    void showProgressBarFillingCollections();
+
+    void hideProgressBarFillingCollections();
 
     void showAddingInTheBeginningArrayList(String string);
     void showAddingInTheMiddleArrayList(String string);
@@ -37,7 +41,5 @@ public interface CollectionFragmentView extends MvpView {
     void showRemovingInTheMiddleCopyOnWriteArrayList(String string);
     void showRemovingInTheEndCopyOnWriteArrayList(String string);
 
-
-///
 
 }

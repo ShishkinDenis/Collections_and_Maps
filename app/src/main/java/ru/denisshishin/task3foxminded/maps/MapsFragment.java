@@ -1,4 +1,4 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.maps;
 
 import android.os.Bundle;
 
@@ -18,11 +18,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import ru.denisshishin.task3foxminded.R;
 
 
-public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentView {
-    @InjectPresenter
-    MapsFragmentPresenter mapsFragmentPresenter;
+public class MapsFragment extends MvpAppCompatFragment implements MapsView {
+   @InjectPresenter
+    MapsPresenter mapsPresenter;
 
     @BindView (R.id.tvAddingNewHashMap) TextView tvAddingNewHashMap;
     @BindView (R.id.tvRemovingHashMap) TextView tvRemovingHashMap;
@@ -42,7 +43,8 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     @BindView (R.id.pbRemovingTreeMap) ProgressBar pbRemovingTreeMap;
     @BindView (R.id.pbSearchByKeyTreeMap) ProgressBar pbSearchByKeyTreeMap;
 
-
+    @BindView(R.id.pbFillingMaps) ProgressBar pbFillingMaps;
+    @BindView(R.id.tvFillingMaps) TextView tvFillingMaps;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,26 +59,30 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnMapsFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
-                    mapsFragmentPresenter.presentTvMapsFragment(etInputNumberMapsFragment.getText().toString());
-                }
-                else {
-                    Toast toast = Toast.makeText(getActivity(),"Please input number",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+        btnMapsFragment.setOnClickListener(v -> {
+            if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
+                mapsPresenter.launchMaps(etInputNumberMapsFragment.getText().toString());
+            }
+            else {
+                Toast toast = Toast.makeText(getActivity(),"Please input number",
+                        Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
     }
 
-    @Override
-    public void getNumberMapsFragment() {
-        //etInputNumberMapsFragment.getText().toString();
-       // if (!etInputNumberMapsFragment.getText().toString().isEmpty())
 
+
+    @Override
+    public void showProgressBarFillingMaps() {
+        pbFillingMaps.setVisibility(View.VISIBLE);
+        tvFillingMaps.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBarFillingMaps() {
+        pbFillingMaps.setVisibility(View.INVISIBLE);
+        tvFillingMaps.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -138,8 +144,5 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsFragmentVi
         pbSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
         tvSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
-
-
-
 
 }

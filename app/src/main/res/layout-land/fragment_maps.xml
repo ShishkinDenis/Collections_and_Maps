@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsFragment">
+    tools:context=".maps.MapsFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -16,10 +16,10 @@
         android:text="Calculate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
+        app:layout_constraintVertical_bias="0.955" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tietInputNumberMapsFragment"
@@ -35,7 +35,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277" />
+        app:layout_constraintVertical_bias="0.313" />
 
     <TableLayout
         android:layout_width="389dp"
@@ -269,5 +269,37 @@
 
         </TableRow>
     </TableLayout>
+    <ProgressBar
+        android:id="@+id/pbFillingMaps"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="206dp"
+        android:layout_height="54dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="Filling Maps"
+        android:indeterminate="true"
+        android:indeterminateBehavior="cycle"
+        android:indeterminateOnly="true"
+        android:indeterminateTint="#673AB7"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.165" />
+
+    <TextView
+        android:id="@+id/tvFillingMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filling Maps"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

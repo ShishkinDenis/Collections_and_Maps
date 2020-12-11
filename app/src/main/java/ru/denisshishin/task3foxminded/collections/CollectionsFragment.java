@@ -1,10 +1,6 @@
-package ru.denisshishin.task3foxminded;
+package ru.denisshishin.task3foxminded.collections;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +10,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import ru.denisshishin.task3foxminded.R;
 
-public class CollectionsFragment extends MvpAppCompatFragment implements CollectionFragmentView {
+public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
 
 
     @InjectPresenter
-    CollectionFragmentPresenter collectionFragmentPresenter;
+    CollectionsPresenter collectionsPresenter;
 
     @BindView(R.id.tvAddingInTheBeginningArrayList) TextView tvAddingInTheBeginningArrayList;
     @BindView(R.id.tvAddingInTheMiddleArrayList) TextView tvAddingInTheMiddleArrayList;
@@ -79,6 +79,9 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
 
     @BindView(R.id.tietInputNumberCollectionsFragment) EditText tietInputNumberCollectionsFragment;
 
+    @BindView(R.id.pbFillingCollections) ProgressBar pbFillingCollections;
+    @BindView(R.id.tvFillingCollections) TextView tvFillingCollections;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,18 +95,14 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnCollectionsFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
-                    collectionFragmentPresenter.presentTvFragment(tietInputNumberCollectionsFragment.getText().toString());
-                }
-                else {
-                    Toast toast = Toast.makeText(getActivity(),"Please input number",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+        btnCollectionsFragment.setOnClickListener(v -> {
+            if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
+                collectionsPresenter.launchCollections(tietInputNumberCollectionsFragment.getText().toString());
+            }
+            else {
+                Toast toast = Toast.makeText(getActivity(),"Please input number",
+                        Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
     }
@@ -136,7 +135,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
         pbRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
-
     @Override
     public void hideTextViewCollectionsFragment() {
         tvAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
@@ -162,6 +160,17 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
         tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
         tvRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showProgressBarFillingCollections() {
+        pbFillingCollections.setVisibility(View.VISIBLE);
+        tvFillingCollections.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void hideProgressBarFillingCollections() {
+        pbFillingCollections.setVisibility(View.INVISIBLE);
+        tvFillingCollections.setVisibility(View.INVISIBLE);
     }
 
 
