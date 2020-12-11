@@ -1,57 +1,36 @@
 package ru.denisshishin.task3foxminded.maps;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
-import ru.denisshishin.task3foxminded.R;
+import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
+
+
 
 
 public class MapsFragment extends MvpAppCompatFragment implements MapsView {
    @InjectPresenter
     MapsPresenter mapsPresenter;
 
-    @BindView (R.id.tvAddingNewHashMap) TextView tvAddingNewHashMap;
-    @BindView (R.id.tvRemovingHashMap) TextView tvRemovingHashMap;
-    @BindView (R.id.tvSearchByKeyHashMap) TextView tvSearchByKeyHashMap;
-    @BindView (R.id.tvAddingNewTreeMap) TextView tvAddingNewTreeMap;
-    @BindView (R.id.tvRemovingTreeMap) TextView tvRemovingTreeMap;
-    @BindView (R.id.tvSearchByKeyTreeMap) TextView tvSearchByKeyTreeMap;
+    private FragmentMapsBinding binding;
 
-    @BindView (R.id.btnMapsFragment) Button btnMapsFragment;
 
-    @BindView (R.id.tietInputNumberMapsFragment)EditText etInputNumberMapsFragment;
-
-    @BindView (R.id.pbAddingNewHashMap) ProgressBar pbAddingNewHashMap;
-    @BindView (R.id.pbRemovingHashMap) ProgressBar pbRemovingHashMap;
-    @BindView (R.id.pbSearchByKeyHashMap) ProgressBar pbSearchByKeyHashMap;
-    @BindView (R.id.pbAddingNewTreeMap) ProgressBar pbAddingNewTreeMap;
-    @BindView (R.id.pbRemovingTreeMap) ProgressBar pbRemovingTreeMap;
-    @BindView (R.id.pbSearchByKeyTreeMap) ProgressBar pbSearchByKeyTreeMap;
-
-    @BindView(R.id.pbFillingMaps) ProgressBar pbFillingMaps;
-    @BindView(R.id.tvFillingMaps) TextView tvFillingMaps;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View viewMapsFragment = inflater.inflate(R.layout.fragment_maps, container, false);
-        ButterKnife.bind(this,viewMapsFragment);
 
+
+        binding = FragmentMapsBinding.inflate(inflater, container, false);
+        View viewMapsFragment = binding.getRoot();
         return viewMapsFragment;
     }
 
@@ -59,9 +38,9 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnMapsFragment.setOnClickListener(v -> {
-            if (!etInputNumberMapsFragment.getText().toString().isEmpty()) {
-                mapsPresenter.launchMaps(etInputNumberMapsFragment.getText().toString());
+        binding.btnMapsFragment.setOnClickListener(v -> {
+            if (!binding.tietInputNumberMapsFragment.getText().toString().isEmpty()) {
+                mapsPresenter.launchMaps(binding.tietInputNumberMapsFragment.getText().toString());
             }
             else {
                 Toast toast = Toast.makeText(getActivity(),"Please input number",
@@ -75,74 +54,74 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
 
     @Override
     public void showProgressBarFillingMaps() {
-        pbFillingMaps.setVisibility(View.VISIBLE);
-        tvFillingMaps.setVisibility(View.VISIBLE);
+        binding.pbFillingMaps.setVisibility(View.VISIBLE);
+        binding.tvFillingMaps.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressBarFillingMaps() {
-        pbFillingMaps.setVisibility(View.INVISIBLE);
-        tvFillingMaps.setVisibility(View.INVISIBLE);
+        binding.pbFillingMaps.setVisibility(View.INVISIBLE);
+        binding.tvFillingMaps.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showProgressBarMapsFragment() {
-        pbAddingNewHashMap.setVisibility(View.VISIBLE);
-        pbRemovingHashMap.setVisibility(View.VISIBLE);
-        pbSearchByKeyHashMap.setVisibility(View.VISIBLE);
-        pbAddingNewTreeMap.setVisibility(View.VISIBLE);
-        pbRemovingTreeMap.setVisibility(View.VISIBLE);
-        pbSearchByKeyTreeMap.setVisibility(View.VISIBLE);
+        binding.pbAddingNewHashMap.setVisibility(View.VISIBLE);
+        binding.pbRemovingHashMap.setVisibility(View.VISIBLE);
+        binding.pbSearchByKeyHashMap.setVisibility(View.VISIBLE);
+        binding.pbAddingNewTreeMap.setVisibility(View.VISIBLE);
+        binding.pbRemovingTreeMap.setVisibility(View.VISIBLE);
+        binding.pbSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void hideTextViewMapsFragment() {
-        tvAddingNewHashMap.setVisibility(View.INVISIBLE);
-        tvRemovingHashMap.setVisibility(View.INVISIBLE);
-        tvSearchByKeyHashMap.setVisibility(View.INVISIBLE);
-        tvAddingNewTreeMap.setVisibility(View.INVISIBLE);
-        tvRemovingTreeMap.setVisibility(View.INVISIBLE);
-        tvSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
+        binding.tvAddingNewHashMap.setVisibility(View.INVISIBLE);
+        binding.tvRemovingHashMap.setVisibility(View.INVISIBLE);
+        binding.tvSearchByKeyHashMap.setVisibility(View.INVISIBLE);
+        binding.tvAddingNewTreeMap.setVisibility(View.INVISIBLE);
+        binding.tvRemovingTreeMap.setVisibility(View.INVISIBLE);
+        binding.tvSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
     }
 
 
     @Override
     public void showTvAddingNewHashMap(String string) {
-        tvAddingNewHashMap.setText(string);
-        pbAddingNewHashMap.setVisibility(View.INVISIBLE);
-        tvAddingNewHashMap.setVisibility(View.VISIBLE);
+        binding.tvAddingNewHashMap.setText(string);
+        binding.pbAddingNewHashMap.setVisibility(View.INVISIBLE);
+        binding.tvAddingNewHashMap.setVisibility(View.VISIBLE);
 
     }
     @Override
     public void showTvRemovingHashMap(String string) {
-        tvRemovingHashMap.setText(string);
-        pbRemovingHashMap.setVisibility(View.INVISIBLE);
-        tvRemovingHashMap.setVisibility(View.VISIBLE);
+        binding.tvRemovingHashMap.setText(string);
+        binding.pbRemovingHashMap.setVisibility(View.INVISIBLE);
+        binding.tvRemovingHashMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void showTvSearchByKeyHashMap(String string) {
-        tvSearchByKeyHashMap.setText(string);
-        pbSearchByKeyHashMap.setVisibility(View.INVISIBLE);
-        tvSearchByKeyHashMap.setVisibility(View.VISIBLE);
+        binding.tvSearchByKeyHashMap.setText(string);
+        binding.pbSearchByKeyHashMap.setVisibility(View.INVISIBLE);
+        binding.tvSearchByKeyHashMap.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void showTvAddingNewTreeMap(String string) {
-        tvAddingNewTreeMap.setText(string);
-        pbAddingNewTreeMap.setVisibility(View.INVISIBLE);
-        tvAddingNewTreeMap.setVisibility(View.VISIBLE);
+        binding.tvAddingNewTreeMap.setText(string);
+        binding.pbAddingNewTreeMap.setVisibility(View.INVISIBLE);
+        binding.tvAddingNewTreeMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void showTvRemovingTreeMap(String string) {
-        tvRemovingTreeMap.setText(string);
-        pbRemovingTreeMap.setVisibility(View.INVISIBLE);
-        tvRemovingTreeMap.setVisibility(View.VISIBLE);
+        binding.tvRemovingTreeMap.setText(string);
+        binding.pbRemovingTreeMap.setVisibility(View.INVISIBLE);
+        binding.tvRemovingTreeMap.setVisibility(View.VISIBLE);
     }
     @Override
     public void showTvSearchByKeyTreeMap(String string) {
-        tvSearchByKeyTreeMap.setText(string);
-        pbSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
-        tvSearchByKeyTreeMap.setVisibility(View.VISIBLE);
+        binding.tvSearchByKeyTreeMap.setText(string);
+        binding.pbSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
+        binding.tvSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
 
 }
