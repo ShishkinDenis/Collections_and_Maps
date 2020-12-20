@@ -10,6 +10,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import moxy.InjectViewState;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
@@ -65,22 +68,64 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
         Handler handler = new Handler(Looper.getMainLooper());
 
+        /*Observable
+                .just("")
+                .subscribeOn(Schedulers.io())
+                .map(s->{
+                    long time = System.currentTimeMillis();
+                    addingInTheBeginningArrayList();
+                    return System.currentTimeMillis() - time;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));*/
+
+
+
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    addingInTheBeginningArrayList();
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
+
+
 
         //ArrayList
-        threadPool.execute(() -> {
+       /* threadPool.execute(() -> {
             long time = System.currentTimeMillis();
             addingInTheBeginningArrayList();
             long threadTime = System.currentTimeMillis() - time;
 
-            handler.post(() -> getViewState().showAddingInTheBeginningArrayList(threadTime + "ms"));
-        });
-        threadPool.execute(() -> {
+            handler.post(() -> getViewState().showAddingInTheBeginningArrayList(threadTime + " ms"));
+        });*/
+
+
+
+
+
+        Observable
+                .just("")
+                .subscribeOn(Schedulers.io())
+                .map(s->{
+                    long time = System.currentTimeMillis();
+                    addingInTheMiddleArrayList();
+                    return System.currentTimeMillis() - time;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
+
+       /* threadPool.execute(() -> {
             long time = System.currentTimeMillis();
             addingInTheMiddleArrayList();
             long threadTime = System.currentTimeMillis() - time;
 
             handler.post(() -> getViewState().showAddingInTheMiddleArrayList(threadTime + " ms"));
-        });
+        });*/
+
         threadPool.execute(() -> {
             long time = System.currentTimeMillis();
             addingInTheEndArrayList();

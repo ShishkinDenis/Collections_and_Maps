@@ -20,8 +20,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     private FragmentCollectionsBinding binding;
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

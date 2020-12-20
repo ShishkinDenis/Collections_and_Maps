@@ -21,10 +21,6 @@ public class MainActivity extends FragmentActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
-
-
-
         binding.viewPager.setAdapter(createCardAdapter());
         new TabLayoutMediator(binding.tabLayout,binding.viewPager, (tab, position) -> {
             if (position == 0){

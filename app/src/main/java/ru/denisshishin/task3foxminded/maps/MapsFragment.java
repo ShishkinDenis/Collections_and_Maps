@@ -28,7 +28,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+ 
         binding = FragmentMapsBinding.inflate(inflater, container, false);
         View viewMapsFragment = binding.getRoot();
         return viewMapsFragment;
