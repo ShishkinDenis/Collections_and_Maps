@@ -9,16 +9,24 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import dagger.Component;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
 
 
-
+@Component
+interface Maps{
+    MapsPresenter getMapsPresenter();
+}
 
 public class MapsFragment extends MvpAppCompatFragment implements MapsView {
-   @InjectPresenter
-    MapsPresenter mapsPresenter;
+   //@InjectPresenter
+   // MapsPresenter mapsPresenter;
+
+    Maps component = DaggerMaps.create();
+    @InjectPresenter
+    MapsPresenter mapsPresenter = component.getMapsPresenter();
 
     private FragmentMapsBinding binding;
 

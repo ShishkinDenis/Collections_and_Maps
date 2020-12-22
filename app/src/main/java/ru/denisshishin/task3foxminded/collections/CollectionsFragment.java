@@ -5,20 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import dagger.Component;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
 
+@Component
+interface Collections{
+    CollectionsPresenter getCollectionsPresenter();
+}
+
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
 
 
-    @InjectPresenter
-    CollectionsPresenter collectionsPresenter;
+//    @InjectPresenter
+//    CollectionsPresenter collectionsPresenter
+
+Collections component = DaggerCollections.create();
+@InjectPresenter
+CollectionsPresenter collectionsPresenter = component.getCollectionsPresenter();
+
 
     private FragmentCollectionsBinding binding;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

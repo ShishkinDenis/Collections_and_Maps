@@ -5,15 +5,18 @@ import android.os.Looper;
 
 import java.util.HashMap;
 import java.util.TreeMap;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
 public class MapsPresenter extends MvpPresenter<MapsView> {
 
+    @Inject
     public MapsPresenter(){}
 
     public void launchMaps(String inputValue){
@@ -27,8 +30,7 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
         }).start();
     }
 
-
-    public void fillMaps(String value) {
+    private void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
 
         new Handler(Looper.getMainLooper()).post(() -> getViewState().showProgressBarFillingMaps());
@@ -47,62 +49,78 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
         new Handler(Looper.getMainLooper()).post(() -> getViewState().hideProgressBarFillingMaps());
     }
 
-    public void executeMapsThreads(String value) {
-        int numberOfCores = Runtime.getRuntime().availableProcessors();
-        LinkedBlockingQueue<Runnable> fifoQueue = new LinkedBlockingQueue<Runnable>();
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(numberOfCores, numberOfCores,
-                1, TimeUnit.SECONDS, fifoQueue);
+    private void executeMapsThreads(String value) {
 
         getViewState().hideTextViewMapsFragment();
         getViewState().showProgressBarMapsFragment();
 
-        Handler handler = new Handler(Looper.getMainLooper());
-
         //HashMap
-        threadPool.execute(() -> {
-            long time = System.currentTimeMillis();
-            addingNewElementHashMap(value);
-            long threadTime = System.currentTimeMillis() - time;
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    addingNewElementHashMap(value);
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showTvAddingNewHashMap(s + " ms"));
 
-            handler.post(() -> getViewState().showTvAddingNewHashMap(threadTime + " ms"));
-        });
-        threadPool.execute(() -> {
-            long time = System.currentTimeMillis();
-            removingElementHashMap(value);
-            long threadTime = System.currentTimeMillis() - time;
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    removingElementHashMap(value);
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showTvRemovingHashMap(s + " ms"));
 
-            handler.post(() -> getViewState().showTvRemovingHashMap(threadTime + " ms"));
-        });
-        threadPool.execute(() -> {
-            long time = System.currentTimeMillis();
-            searchByKeyHashMap(value);
-            long threadTime = System.currentTimeMillis() - time;
-
-            handler.post(() -> getViewState().showTvSearchByKeyHashMap(threadTime + " ms"));
-        });
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    searchByKeyHashMap(value);
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showTvSearchByKeyHashMap(s + " ms"));
 
         //TreeMap
-        threadPool.execute(() -> {
-            long time = System.currentTimeMillis();
-            addingNewElementTreeMap(value);
-            long threadTime = System.currentTimeMillis() - time;
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    addingNewElementTreeMap(value);
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showTvAddingNewTreeMap(s + " ms"));
 
-            handler.post(() -> getViewState().showTvAddingNewTreeMap(threadTime + " ms"));
-        });
-        threadPool.execute(() -> {
-            long time = System.currentTimeMillis();
-            removingElementTreeMap(value);
-            long threadTime = System.currentTimeMillis() - time;
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    removingElementTreeMap(value);
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showTvRemovingTreeMap(s + " ms"));
 
-            handler.post(() -> getViewState().showTvRemovingTreeMap(threadTime + " ms"));
-        });
-        threadPool.execute(() -> {
-            long time = System.currentTimeMillis();
-            searchByKeyTreeMap(value);
-            long threadTime = System.currentTimeMillis() - time;
-
-            handler.post(() -> getViewState().showTvSearchByKeyTreeMap(threadTime + " ms"));
-        });
+        Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    searchByKeyTreeMap(value);
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s-> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
 
     }
 
@@ -110,19 +128,19 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
 
     TreeMap treeMap = new TreeMap();
 
-    public void addingNewElementHashMap(String value){
+    private void addingNewElementHashMap(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
                 hashMap.put(intValue, intValue);
         }
     }
-    public void removingElementHashMap(String value){
+    private void removingElementHashMap(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
                 hashMap.remove(intValue);
             }
     }
-    public void searchByKeyHashMap(String value){
+    private void searchByKeyHashMap(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
             hashMap.get(intValue);
@@ -130,19 +148,19 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
     }
 
 
-    public void addingNewElementTreeMap(String value){
+    private void addingNewElementTreeMap(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
                 treeMap.put(intValue, intValue);
         }
     }
-    public void removingElementTreeMap(String value){
+    private void removingElementTreeMap(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
                 treeMap.remove(intValue);
         }
     }
-    public void searchByKeyTreeMap(String value){
+    private void searchByKeyTreeMap(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
             treeMap.get(intValue);
