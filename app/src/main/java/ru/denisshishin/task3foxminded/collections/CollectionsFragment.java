@@ -1,5 +1,6 @@
 package ru.denisshishin.task3foxminded.collections;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,26 +10,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import dagger.Component;
+import javax.inject.Inject;
+
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
-
-@Component
-interface Collections{
-    CollectionsPresenter getCollectionsPresenter();
-}
 
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
 
-
-//    @InjectPresenter
-//    CollectionsPresenter collectionsPresenter
-
-Collections component = DaggerCollections.create();
-@InjectPresenter
-CollectionsPresenter collectionsPresenter = component.getCollectionsPresenter();
-
+    @Inject
+    @InjectPresenter
+    CollectionsPresenter collectionsPresenter;
 
     private FragmentCollectionsBinding binding;
 
@@ -56,7 +49,11 @@ CollectionsPresenter collectionsPresenter = component.getCollectionsPresenter();
         });
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        DaggerApplicationComponent.create().inject(this);
+    }
 
     @Override
     public void showProgressBarCollectionsFragment() {

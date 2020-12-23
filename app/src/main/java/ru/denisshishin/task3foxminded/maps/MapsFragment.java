@@ -1,5 +1,6 @@
 package ru.denisshishin.task3foxminded.maps;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,34 +10,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import dagger.Component;
+import javax.inject.Inject;
+
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
+import ru.denisshishin.task3foxminded.MainActivity;
 import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
 
 
-@Component
-interface Maps{
-    MapsPresenter getMapsPresenter();
-}
-
 public class MapsFragment extends MvpAppCompatFragment implements MapsView {
-   //@InjectPresenter
-   // MapsPresenter mapsPresenter;
 
-    Maps component = DaggerMaps.create();
+    @Inject
     @InjectPresenter
-    MapsPresenter mapsPresenter = component.getMapsPresenter();
+    MapsPresenter mapsPresenter;
 
     private FragmentMapsBinding binding;
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
- 
         binding = FragmentMapsBinding.inflate(inflater, container, false);
         View viewMapsFragment = binding.getRoot();
         return viewMapsFragment;
@@ -58,7 +52,11 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
         });
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        DaggerApplicationComponent.create().inject(this);
+    }
 
     @Override
     public void showProgressBarFillingMaps() {
