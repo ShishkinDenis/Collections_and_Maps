@@ -1,93 +1,35 @@
 package ru.denisshishin.task3foxminded.collections;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import javax.inject.Inject;
+
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
-import ru.denisshishin.task3foxminded.R;
+import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
+import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
 
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
 
-
+    @Inject
     @InjectPresenter
     CollectionsPresenter collectionsPresenter;
 
-    @BindView(R.id.tvAddingInTheBeginningArrayList) TextView tvAddingInTheBeginningArrayList;
-    @BindView(R.id.tvAddingInTheMiddleArrayList) TextView tvAddingInTheMiddleArrayList;
-    @BindView(R.id.tvAddingInTheEndArrayList) TextView tvAddingInTheEndArrayList;
-    @BindView(R.id.tvSearchByValueArrayList) TextView tvSearchByValueArrayList;
-    @BindView(R.id.tvRemovingInTheBeginningArrayList) TextView tvRemovingInTheBeginningArrayList;
-    @BindView(R.id.tvRemovingInTheMiddleArrayList) TextView tvRemovingInTheMiddleArrayList;
-    @BindView(R.id.tvRemovingInTheEndArrayList) TextView tvRemovingInTheEndArrayList;
-
-    @BindView(R.id.tvAddingInTheBeginningLinkedList) TextView tvAddingInTheBeginningLinkedList;
-    @BindView(R.id.tvAddingInTheMiddleLinkedList) TextView tvAddingInTheMiddleLinkedList;
-    @BindView(R.id.tvAddingInTheEndLinkedList) TextView tvAddingInTheEndLinkedList;
-    @BindView(R.id.tvSearchByValueLinkedList) TextView tvSearchByValueLinkedList;
-    @BindView(R.id.tvRemovingInTheBeginningLinkedList) TextView tvRemovingInTheBeginningLinkedList;
-    @BindView(R.id.tvRemovingInTheMiddleLinkedList) TextView tvRemovingInTheMiddleLinkedList;
-    @BindView(R.id.tvRemovingInTheEndLinkedList) TextView tvRemovingInTheEndLinkedList;
-
-    @BindView(R.id.tvAddingInTheBeginningCopyOnWriteList) TextView tvAddingInTheBeginningCopyOnWriteList;
-    @BindView(R.id.tvAddingInTheMiddleCopyOnWriteList) TextView tvAddingInTheMiddleCopyOnWriteList;
-    @BindView(R.id.tvAddingInTheEndCopyOnWriteList) TextView tvAddingInTheEndCopyOnWriteList;
-    @BindView(R.id.tvSearchByValueCopyOnWriteList) TextView tvSearchByValueCopyOnWriteList;
-    @BindView(R.id.tvRemovingInTheBeginningCopyOnWriteList) TextView tvRemovingInTheBeginningCopyOnWriteList;
-    @BindView(R.id.tvRemovingInTheMiddleCopyOnWriteList) TextView tvRemovingInTheMiddleCopyOnWriteList;
-    @BindView(R.id.tvRemovingInTheEndCopyOnWriteList) TextView tvRemovingInTheEndCopyOnWriteList;
-
-
-
-    @BindView(R.id.pbAddingInTheBeginningArrayList) ProgressBar pbAddingInTheBeginningArrayList;
-    @BindView(R.id.pbAddingInTheMiddleArrayList) ProgressBar pbAddingInTheMiddleArrayList;
-    @BindView(R.id.pbAddingInTheEndArrayList) ProgressBar pbAddingInTheEndArrayList;
-    @BindView(R.id.pbSearchByValueArrayList) ProgressBar pbSearchByValueArrayList;
-    @BindView(R.id.pbRemovingInTheBeginningArrayList) ProgressBar pbRemovingInTheBeginningArrayList;
-    @BindView(R.id.pbRemovingInTheMiddleArrayList) ProgressBar pbRemovingInTheMiddleArrayList;
-    @BindView(R.id.pbRemovingInTheEndArrayList) ProgressBar pbRemovingInTheEndArrayList;
-
-    @BindView(R.id.pbAddingInTheBeginningLinkedList) ProgressBar pbAddingInTheBeginningLinkedList;
-    @BindView(R.id.pbAddingInTheMiddleLinkedList) ProgressBar pbAddingInTheMiddleLinkedList;
-    @BindView(R.id.pbAddingInTheEndLinkedList) ProgressBar pbAddingInTheEndLinkedList;
-    @BindView(R.id.pbSearchByValueLinkedList) ProgressBar pbSearchByValueLinkedList;
-    @BindView(R.id.pbRemovingInTheBeginningLinkedList) ProgressBar pbRemovingInTheBeginningLinkedList;
-    @BindView(R.id.pbRemovingInTheMiddleLinkedList) ProgressBar pbRemovingInTheMiddleLinkedList;
-    @BindView(R.id.pbRemovingInTheEndLinkedList) ProgressBar pbRemovingInTheEndLinkedList;
-
-    @BindView(R.id.pbAddingInTheBeginningCopyOnWriteList) ProgressBar pbAddingInTheBeginningCopyOnWriteList;
-    @BindView(R.id.pbAddingInTheMiddleCopyOnWriteList) ProgressBar pbAddingInTheMiddleCopyOnWriteList;
-    @BindView(R.id.pbAddingInTheEndCopyOnWriteList) ProgressBar pbAddingInTheEndCopyOnWriteList;
-    @BindView(R.id.pbSearchByValueCopyOnWriteList) ProgressBar pbSearchByValueCopyOnWriteList;
-    @BindView(R.id.pbRemovingInTheBeginningCopyOnWriteList) ProgressBar pbRemovingInTheBeginningCopyOnWriteList;
-    @BindView(R.id.pbRemovingInTheMiddleCopyOnWriteList) ProgressBar pbRemovingInTheMiddleCopyOnWriteList;
-    @BindView(R.id.pbRemovingInTheEndCopyOnWriteList) ProgressBar pbRemovingInTheEndCopyOnWriteList;
-
-    @BindView(R.id.btnCollectionsFragment) Button btnCollectionsFragment;
-
-    @BindView(R.id.tietInputNumberCollectionsFragment) EditText tietInputNumberCollectionsFragment;
-
-    @BindView(R.id.pbFillingCollections) ProgressBar pbFillingCollections;
-    @BindView(R.id.tvFillingCollections) TextView tvFillingCollections;
-
+    private FragmentCollectionsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View viewCollectionsFragment = inflater.inflate(R.layout.fragment_collections, container, false);
-        ButterKnife.bind(this,viewCollectionsFragment);
+        binding = FragmentCollectionsBinding.inflate(inflater, container, false);
+        View viewCollectionsFragment = binding.getRoot();
         return viewCollectionsFragment;
     }
 
@@ -95,9 +37,9 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnCollectionsFragment.setOnClickListener(v -> {
-            if(!tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
-                collectionsPresenter.launchCollections(tietInputNumberCollectionsFragment.getText().toString());
+        binding.btnCollectionsFragment.setOnClickListener(v -> {
+            if(!binding.tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
+                collectionsPresenter.launchCollections(binding.tietInputNumberCollectionsFragment.getText().toString());
             }
             else {
                 Toast toast = Toast.makeText(getActivity(),"Please input number",
@@ -107,227 +49,230 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         });
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        DaggerApplicationComponent.create().inject(this);
+    }
 
     @Override
     public void showProgressBarCollectionsFragment() {
-        pbAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
-        pbAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
-        pbAddingInTheEndArrayList.setVisibility(View.VISIBLE);
-        pbSearchByValueArrayList.setVisibility(View.VISIBLE);
-        pbRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
-        pbRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
-        pbRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheEndArrayList.setVisibility(View.VISIBLE);
+        binding.pbSearchByValueArrayList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
 
-        pbAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
-        pbAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
-        pbAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
-        pbSearchByValueLinkedList.setVisibility(View.VISIBLE);
-        pbRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
-        pbRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
-        pbRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
+        binding.pbSearchByValueLinkedList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
 
-        pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
-        pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
-        pbAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
-        pbSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
-        pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
-        pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
-        pbRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
     @Override
     public void hideTextViewCollectionsFragment() {
-        tvAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
-        tvAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
-        tvAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
-        tvSearchByValueArrayList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        binding.tvSearchByValueArrayList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
 
-        tvAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
-        tvAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
-        tvAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
-        tvSearchByValueLinkedList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvSearchByValueLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheEndLinkedList.setVisibility(View.INVISIBLE);
 
-        tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showProgressBarFillingCollections() {
-        pbFillingCollections.setVisibility(View.VISIBLE);
-        tvFillingCollections.setVisibility(View.VISIBLE);
+        binding.pbFillingCollections.setVisibility(View.VISIBLE);
+        binding.tvFillingCollections.setVisibility(View.VISIBLE);
     }
     @Override
     public void hideProgressBarFillingCollections() {
-        pbFillingCollections.setVisibility(View.INVISIBLE);
-        tvFillingCollections.setVisibility(View.INVISIBLE);
+        binding.pbFillingCollections.setVisibility(View.INVISIBLE);
+        binding.tvFillingCollections.setVisibility(View.INVISIBLE);
     }
 
 
     @Override
     public void showAddingInTheBeginningArrayList(String string) {
-        tvAddingInTheBeginningArrayList.setText(string);
+        binding.tvAddingInTheBeginningArrayList.setText(string);
 
-        pbAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
-        tvAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
 
     }
     @Override
     public void showAddingInTheMiddleArrayList(String string) {
-        tvAddingInTheMiddleArrayList.setText(string);
+        binding.tvAddingInTheMiddleArrayList.setText(string);
 
-        pbAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
-        tvAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showAddingInTheEndArrayList(String string) {
-        tvAddingInTheEndArrayList.setText(string);
+        binding.tvAddingInTheEndArrayList.setText(string);
 
-        pbAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
-        tvAddingInTheEndArrayList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheEndArrayList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showSearchByValueArrayList(String string) {
-        tvSearchByValueArrayList.setText(string);
+        binding.tvSearchByValueArrayList.setText(string);
 
-        pbSearchByValueArrayList.setVisibility(View.INVISIBLE);
-        tvSearchByValueArrayList.setVisibility(View.VISIBLE);
+        binding.pbSearchByValueArrayList.setVisibility(View.INVISIBLE);
+        binding.tvSearchByValueArrayList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheBeginningArrayList(String string) {
-        tvRemovingInTheBeginningArrayList.setText(string);
+        binding.tvRemovingInTheBeginningArrayList.setText(string);
 
-        pbRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheMiddleArrayList(String string) {
-        tvRemovingInTheMiddleArrayList.setText(string);
+        binding.tvRemovingInTheMiddleArrayList.setText(string);
 
-        pbRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheEndArrayList(String string){
-        tvRemovingInTheEndArrayList.setText(string);
+        binding.tvRemovingInTheEndArrayList.setText(string);
 
-        pbRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
     }
 
 
 
     @Override
     public void showAddingInTheBeginningLinkedList(String string) {
-        tvAddingInTheBeginningLinkedList.setText(string);
+        binding.tvAddingInTheBeginningLinkedList.setText(string);
 
-        pbAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
-        tvAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showAddingInTheMiddleLinkedList(String string) {
-        tvAddingInTheMiddleLinkedList.setText(string);
+        binding.tvAddingInTheMiddleLinkedList.setText(string);
 
-        pbAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
-        tvAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showAddingInTheEndLinkedList(String string) {
-        tvAddingInTheEndLinkedList.setText(string);
+        binding.tvAddingInTheEndLinkedList.setText(string);
 
-        pbAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
-        tvAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showSearchByValueLinkedList(String string) {
-        tvSearchByValueLinkedList.setText(string);
+        binding.tvSearchByValueLinkedList.setText(string);
 
-        pbSearchByValueLinkedList.setVisibility(View.INVISIBLE);
-        tvSearchByValueLinkedList.setVisibility(View.VISIBLE);
+        binding.pbSearchByValueLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvSearchByValueLinkedList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheBeginningLinkedList(String string) {
-        tvRemovingInTheBeginningLinkedList.setText(string);
+        binding.tvRemovingInTheBeginningLinkedList.setText(string);
 
-        pbRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheMiddleLinkedList(String string) {
-        tvRemovingInTheMiddleLinkedList.setText(string);
+        binding.tvRemovingInTheMiddleLinkedList.setText(string);
 
-        pbRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheEndLinkedList(String string) {
-        tvRemovingInTheEndLinkedList.setText(string);
+        binding.tvRemovingInTheEndLinkedList.setText(string);
 
-        pbRemovingInTheEndLinkedList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheEndLinkedList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void showAddingInTheBeginningCopyOnWriteArrayList(String string) {
-        tvAddingInTheBeginningCopyOnWriteList.setText(string);
+        binding.tvAddingInTheBeginningCopyOnWriteList.setText(string);
 
-        pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showAddingInTheMiddleCopyOnWriteArrayList(String string) {
-        tvAddingInTheMiddleCopyOnWriteList.setText(string);
+        binding.tvAddingInTheMiddleCopyOnWriteList.setText(string);
 
-        pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showAddingInTheEndCopyOnWriteArrayList(String string) {
-        tvAddingInTheEndCopyOnWriteList.setText(string);
+        binding.tvAddingInTheEndCopyOnWriteList.setText(string);
 
-        pbAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showSearchByValueCopyOnWriteArrayList(String string) {
-        tvSearchByValueCopyOnWriteList.setText(string);
+        binding.tvSearchByValueCopyOnWriteList.setText(string);
 
-        pbSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheBeginningCopyOnWriteArrayList(String string) {
-        tvRemovingInTheBeginningCopyOnWriteList.setText(string);
+        binding.tvRemovingInTheBeginningCopyOnWriteList.setText(string);
 
-        pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
     }
     @Override
     public void showRemovingInTheMiddleCopyOnWriteArrayList(String string) {
-        tvRemovingInTheMiddleCopyOnWriteList.setText(string);
+        binding.tvRemovingInTheMiddleCopyOnWriteList.setText(string);
 
-        pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
-
+        binding.pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
 
     }
     @Override
     public void showRemovingInTheEndCopyOnWriteArrayList(String string) {
-        tvRemovingInTheEndCopyOnWriteList.setText(string);
+        binding.tvRemovingInTheEndCopyOnWriteList.setText(string);
 
-        pbRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
-        tvRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
+        binding.pbRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
+        binding.tvRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
 
     }
 

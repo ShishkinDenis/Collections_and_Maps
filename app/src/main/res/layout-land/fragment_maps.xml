@@ -167,20 +167,17 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvVoid"
                 android:layout_width="103dp"
                 android:layout_height="wrap_content"
                 android:visibility="invisible" />
 
             <TextView
-                android:id="@+id/tvHashMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HashMap"
                 android:visibility="invisible" />
 
             <TextView
-                android:id="@+id/tvTreeMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TreeMap"
@@ -193,7 +190,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvAddingNew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Adding new"
@@ -220,7 +216,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvRemoving"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Removing"
@@ -247,7 +242,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvSearchByKey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search by key"
