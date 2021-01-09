@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
-import ru.denisshishin.task3foxminded.MainActivity;
 import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
 
 

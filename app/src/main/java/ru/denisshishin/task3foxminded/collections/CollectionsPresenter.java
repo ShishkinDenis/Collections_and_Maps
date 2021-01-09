@@ -8,19 +8,34 @@ import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Scheduler;
 import moxy.InjectViewState;
 import moxy.MvpPresenter;
+import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
 @InjectViewState
 public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
     @Inject
-    public CollectionsPresenter(){}
+    @Named("Observer")
+    Scheduler observerScheduler;
+
+    @Inject
+    @Named("Process")
+    Scheduler processScheduler;
+
+    @Inject
+    Handler handler;
+
+
+    @Inject
+    public CollectionsPresenter(){
+        DaggerApplicationComponent.create().inject(this);
+    }
 
 
     public void launchCollections(String inputValue){
@@ -37,7 +52,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
     private void fillCollections(String value) {
         int intValue = Integer.parseInt(value);
 
-        new Handler(Looper.getMainLooper()).post(() -> getViewState().showProgressBarFillingCollections());
+        handler.post(() -> getViewState().showProgressBarFillingCollections());
 
             if (arrayList.size() < intValue) {
                 for (int i = 0; i < (intValue-arrayList.size()); i++) {
@@ -54,7 +69,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 }
             }
 
-        new Handler(Looper.getMainLooper()).post(() -> getViewState().hideProgressBarFillingCollections());
+        handler.post(() -> getViewState().hideProgressBarFillingCollections());
 }
 
     private void executeCollectionsThreads(String value) {
@@ -64,6 +79,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
         //ArrayList
 
+
         Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
@@ -71,8 +87,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
 
         Observable
@@ -82,8 +98,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
 
         Observable
@@ -93,8 +109,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheEndArrayList(s + " ms"));
 
         Observable
@@ -104,8 +120,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showSearchByValueArrayList(s + " ms"));
 
         Observable
@@ -115,8 +131,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheBeginningArrayList(s + " ms"));
 
         Observable
@@ -126,8 +142,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheMiddleArrayList(s + " ms"));
 
         Observable
@@ -137,8 +153,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));
 
         //LinkedList
@@ -150,8 +166,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheBeginningLinkedList(s + " ms"));
 
         Observable
@@ -161,8 +177,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheMiddleLinkedList(s + " ms"));
 
         Observable
@@ -172,8 +188,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheEndLinkedList(s + " ms"));
 
         Observable
@@ -183,8 +199,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showSearchByValueLinkedList(s + " ms"));
 
         Observable
@@ -194,8 +210,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheBeginningLinkedList(s + " ms"));
 
         Observable
@@ -205,8 +221,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheMiddleLinkedList(s + " ms"));
 
         Observable
@@ -216,8 +232,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));
 
         //CopyOnWriteArrayList
@@ -229,8 +245,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheBeginningCopyOnWriteArrayList(s + " ms"));
 
         Observable
@@ -240,8 +256,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheMiddleCopyOnWriteArrayList(s + " ms"));
 
         Observable
@@ -251,8 +267,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheEndCopyOnWriteArrayList(s + " ms"));
 
         Observable
@@ -262,8 +278,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showSearchByValueCopyOnWriteArrayList(s + " ms"));
 
         Observable
@@ -273,8 +289,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(s + " ms"));
 
         Observable
@@ -284,8 +300,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(s + " ms"));
 
         Observable
@@ -295,8 +311,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));
 
     }

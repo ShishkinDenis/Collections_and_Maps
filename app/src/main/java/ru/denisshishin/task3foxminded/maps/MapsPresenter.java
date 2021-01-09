@@ -7,17 +7,31 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Scheduler;
 import moxy.MvpPresenter;
+import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
 public class MapsPresenter extends MvpPresenter<MapsView> {
 
     @Inject
-    public MapsPresenter(){}
+    @Named("Observer")
+    Scheduler observerScheduler;
+
+    @Inject
+    @Named("Process")
+    Scheduler processScheduler;
+
+    @Inject
+    Handler handler;
+
+    @Inject
+    public MapsPresenter(){
+        DaggerApplicationComponent.create().inject(this);
+    }
 
     public void launchMaps(String inputValue){
 
@@ -33,7 +47,7 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
     private void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
 
-        new Handler(Looper.getMainLooper()).post(() -> getViewState().showProgressBarFillingMaps());
+        handler.post(() -> getViewState().showProgressBarFillingMaps());
         if (hashMap.size() < intValue) {
             for (int i = 0; i < (intValue-hashMap.size()); i++) {
                 hashMap.put(i,i);
@@ -46,7 +60,7 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                 treeMap.remove(i);
             }
         }
-        new Handler(Looper.getMainLooper()).post(() -> getViewState().hideProgressBarFillingMaps());
+        handler.post(() -> getViewState().hideProgressBarFillingMaps());
     }
 
     private void executeMapsThreads(String value) {
@@ -62,8 +76,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showTvAddingNewHashMap(s + " ms"));
 
         Observable
@@ -73,8 +87,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showTvRemovingHashMap(s + " ms"));
 
         Observable
@@ -84,8 +98,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showTvSearchByKeyHashMap(s + " ms"));
 
         //TreeMap
@@ -96,8 +110,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showTvAddingNewTreeMap(s + " ms"));
 
         Observable
@@ -107,8 +121,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showTvRemovingTreeMap(s + " ms"));
 
         Observable
@@ -118,8 +132,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
 
     }
