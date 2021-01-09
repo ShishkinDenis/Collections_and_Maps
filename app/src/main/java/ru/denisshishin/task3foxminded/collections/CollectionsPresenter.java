@@ -15,7 +15,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import moxy.InjectViewState;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
-
+//
 @InjectViewState
 public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
