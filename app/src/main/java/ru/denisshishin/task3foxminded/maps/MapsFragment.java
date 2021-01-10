@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import moxy.presenter.ProvidePresenter;
 import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
 
@@ -24,8 +25,12 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     @InjectPresenter
     MapsPresenter mapsPresenter;
 
-    private FragmentMapsBinding binding;
+    @ProvidePresenter
+     MapsPresenter providePresenter(){
+        return mapsPresenter;
+    }
 
+    private FragmentMapsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

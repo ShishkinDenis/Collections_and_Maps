@@ -12,25 +12,19 @@ import javax.inject.Named;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
 import moxy.MvpPresenter;
-import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
 public class MapsPresenter extends MvpPresenter<MapsView> {
 
-    @Inject
-    @Named("Observer")
     Scheduler observerScheduler;
-
-    @Inject
-    @Named("Process")
     Scheduler processScheduler;
-
-    @Inject
     Handler handler;
 
     @Inject
-    public MapsPresenter(){
-        DaggerApplicationComponent.create().inject(this);
+    public MapsPresenter(@Named("Observer") Scheduler observerScheduler,  @Named("Process") Scheduler processScheduler,Handler handler){
+        this.observerScheduler = observerScheduler;
+        this.processScheduler = processScheduler;
+        this.handler = handler;
     }
 
     public void launchMaps(String inputValue){

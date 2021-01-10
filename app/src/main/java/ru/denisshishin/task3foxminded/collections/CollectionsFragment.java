@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
+import moxy.presenter.ProvidePresenter;
 import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
 
@@ -22,6 +23,11 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @Inject
     @InjectPresenter
     CollectionsPresenter collectionsPresenter;
+
+    @ProvidePresenter
+     CollectionsPresenter providePresenter(){
+        return collectionsPresenter;
+    }
 
     private FragmentCollectionsBinding binding;
 

@@ -14,29 +14,23 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
 import moxy.InjectViewState;
 import moxy.MvpPresenter;
-import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
 import ru.denisshishin.task3foxminded.ReadyCallback;
-//
+
 @InjectViewState
 public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
-    @Inject
-    @Named("Observer")
     Scheduler observerScheduler;
-
-    @Inject
-    @Named("Process")
     Scheduler processScheduler;
-
-    @Inject
     Handler handler;
 
 
     @Inject
-    public CollectionsPresenter(){
-        DaggerApplicationComponent.create().inject(this);
+    public CollectionsPresenter(@Named("Observer") Scheduler observerScheduler,
+                                @Named("Process") Scheduler processScheduler,Handler handler){
+        this.observerScheduler = observerScheduler;
+        this.processScheduler = processScheduler;
+        this.handler = handler;
     }
-
 
     public void launchCollections(String inputValue){
 
