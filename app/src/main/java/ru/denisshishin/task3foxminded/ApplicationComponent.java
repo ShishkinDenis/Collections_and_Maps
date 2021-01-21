@@ -7,7 +7,7 @@ import ru.denisshishin.task3foxminded.maps.MapsFragment;
 import ru.denisshishin.task3foxminded.maps.MapsPresenter;
 
 
-@Component(modules = {ApplicationModule.class})
+@Component(modules = {SchedulerModule.class})
 public interface ApplicationComponent {
    void inject(MapsFragment mapsFragment);
    void inject(CollectionsFragment collectionsFragment);

@@ -41,8 +41,11 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    debugImplementation 'androidx.test.ext:junit:1.1.2'
+    debugImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    debugImplementation 'androidx.test:runner:1.1.0'
+    debugImplementation 'androidx.test:rules:1.1.0'
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
@@ -56,4 +59,9 @@ dependencies {
 
     api 'com.google.dagger:dagger:2.30.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.30.1'
+
+    debugImplementation "androidx.fragment:fragment-testing:1.2.5"
+
+    debugImplementation 'org.mockito:mockito-inline:2.25.0'
+
 }

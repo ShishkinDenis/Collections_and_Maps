@@ -60,6 +60,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     public void onAttach(Context context) {
         super.onAttach(context);
         DaggerApplicationComponent.create().inject(this);
+
     }
 
     @Override

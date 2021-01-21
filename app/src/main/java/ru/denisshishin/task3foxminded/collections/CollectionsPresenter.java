@@ -23,27 +23,43 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
     Scheduler processScheduler;
     Handler handler;
 
-
     @Inject
     public CollectionsPresenter(@Named("Observer") Scheduler observerScheduler,
-                                @Named("Process") Scheduler processScheduler,Handler handler){
+                                @Named("Process") Scheduler processScheduler, Handler handler) {
         this.observerScheduler = observerScheduler;
         this.processScheduler = processScheduler;
         this.handler = handler;
     }
 
-    public void launchCollections(String inputValue){
+    public void launchCollections(String inputValue) {
 
-        ReadyCallback readyCallback = () -> new Handler(Looper.getMainLooper()).post(() ->
+        ReadyCallback readyCallback = () -> handler.post(() ->
                 executeCollectionsThreads(inputValue));
 
-        new Thread(() -> {
+       /* new Thread(() -> {
             fillCollections(inputValue);
                 readyCallback.onReady();
-        }).start();
-    }
+        }).start();*/
+//упростить
+        Observable
+                .create(o -> {
+                    fillCollections(inputValue);
+                    readyCallback.onReady();
+                })
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
+                .subscribe();
 
-    private void fillCollections(String value) {
+    }
+    /*public void test(String value) {
+        getViewState().showAddingInTheBeginningArrayList(value);
+    }
+    public void test2(){
+
+    getViewState().showProgressBarCollectionsFragment();
+
+}*/
+    public void fillCollections(String value) {
         int intValue = Integer.parseInt(value);
 
         handler.post(() -> getViewState().showProgressBarFillingCollections());
@@ -66,15 +82,61 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
         handler.post(() -> getViewState().hideProgressBarFillingCollections());
 }
 
-    private void executeCollectionsThreads(String value) {
+    public Observable createObservable(Runnable runnable){
+        return  Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    runnable.run();
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler);
+}
+
+    public void executeCollectionsThreads(String value) {
 
         getViewState().hideTextViewCollectionsFragment();
         getViewState().showProgressBarCollectionsFragment();
 
+//       getViewState().showAddingInTheBeginningArrayList("50000");
+
         //ArrayList
 
+    /*    Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    addingInTheBeginningArrayList();
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
+                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));*/
 
-        Observable
+        createObservable(() -> addingInTheBeginningArrayList())
+                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
+
+        createObservable(() -> addingInTheMiddleArrayList())
+                .subscribe(s-> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
+        
+        createObservable(() -> addingInTheEndArrayList())
+                .subscribe(s-> getViewState().showAddingInTheEndArrayList(s + " ms"));
+
+        createObservable(() ->  searchByValueArrayList(value))
+                .subscribe(s-> getViewState().showSearchByValueArrayList(s + " ms"));
+
+        createObservable(() ->  removingInTheBeginningArrayList())
+                .subscribe(s-> getViewState().showRemovingInTheBeginningArrayList(s + " ms"));
+
+        createObservable(() ->  removingInTheMiddleArrayList())
+                .subscribe(s-> getViewState().showRemovingInTheMiddleArrayList(s + " ms"));
+
+        createObservable(() ->  removingInTheEndArrayList())
+                .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));
+
+/*
+Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     addingInTheBeginningArrayList();
@@ -85,7 +147,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
 
-        Observable
+Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     addingInTheMiddleArrayList();
@@ -95,7 +157,6 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
                 .subscribe(s-> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
-
         Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
@@ -149,11 +210,32 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 })
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));
+                .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));*/
 
         //LinkedList
 
-        Observable
+        createObservable(() -> addingInTheBeginningLinkedList())
+                .subscribe(s-> getViewState().showAddingInTheBeginningLinkedList(s + " ms"));
+
+        createObservable(() -> addingInTheMiddleLinkedList())
+                .subscribe(s-> getViewState().showAddingInTheMiddleLinkedList(s + " ms"));
+
+        createObservable(() -> addingInTheEndLinkedList())
+                .subscribe(s-> getViewState().showAddingInTheEndLinkedList(s + " ms"));
+
+        createObservable(() ->  searchByValueLinkedList(value))
+                .subscribe(s-> getViewState().showSearchByValueLinkedList(s + " ms"));
+
+        createObservable(() ->  removingInTheBeginningLinkedList())
+                .subscribe(s-> getViewState().showRemovingInTheBeginningLinkedList(s + " ms"));
+
+        createObservable(() ->  removingInTheMiddleLinkedList())
+                .subscribe(s-> getViewState().showRemovingInTheMiddleLinkedList(s + " ms"));
+
+        createObservable(() ->  removingInTheEndLinkedList())
+                .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));
+
+       /* Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     addingInTheBeginningLinkedList();
@@ -228,11 +310,32 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 })
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));
+                .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));*/
 
         //CopyOnWriteArrayList
 
-        Observable
+        createObservable(() -> addingInTheBeginningCopyOnWriteArrayList())
+                .subscribe(s-> getViewState().showAddingInTheBeginningCopyOnWriteArrayList(s + " ms"));
+
+        createObservable(() -> addingInTheMiddleCopyOnWriteArrayList())
+                .subscribe(s-> getViewState().showAddingInTheMiddleCopyOnWriteArrayList(s + " ms"));
+
+        createObservable(() -> addingInTheEndCopyOnWriteArrayList())
+                .subscribe(s-> getViewState().showAddingInTheEndCopyOnWriteArrayList(s + " ms"));
+
+        createObservable(() ->  searchByValueCopyOnWriteArrayList(value))
+                .subscribe(s-> getViewState().showSearchByValueCopyOnWriteArrayList(s + " ms"));
+
+        createObservable(() ->  removingInTheBeginningCopyOnWriteArrayList())
+                .subscribe(s-> getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(s + " ms"));
+
+        createObservable(() ->  removingInTheMiddleCopyOnWriteArrayList())
+                .subscribe(s-> getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(s + " ms"));
+
+        createObservable(() ->  removingInTheEndCopyOnWriteArrayList())
+                .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));
+
+       /* Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     addingInTheBeginningCopyOnWriteArrayList();
@@ -307,22 +410,22 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 })
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));*/
 
     }
 
 
-    ArrayList<Integer> arrayList = new ArrayList();
-    LinkedList<Integer> linkedList = new LinkedList();
-    CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList();
+    ArrayList<Integer> arrayList = new ArrayList<>();
+    LinkedList<Integer> linkedList = new LinkedList<>();
+    CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
 
 
-    private void addingInTheBeginningArrayList(){
-        synchronized(this) {
-                arrayList.add(0);
+    private void addingInTheBeginningArrayList() {
+        synchronized (this) {
+            arrayList.add(0);
         }
     }
-    private void addingInTheMiddleArrayList(){
+    public void addingInTheMiddleArrayList(){
         synchronized(this) {
                 arrayList.add(arrayList.size() / 2);
         }
@@ -394,7 +497,6 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
                 linkedList.remove(linkedList.size() - 1);
             }
     }
-
 
     private void addingInTheBeginningCopyOnWriteArrayList(){
         synchronized(this) {

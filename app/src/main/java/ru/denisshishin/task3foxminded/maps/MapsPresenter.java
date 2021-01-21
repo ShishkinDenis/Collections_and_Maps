@@ -29,19 +29,34 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
 
     public void launchMaps(String inputValue){
 
-        ReadyCallback readyCallback = () -> new Handler(Looper.getMainLooper()).post(() ->
+        ReadyCallback readyCallback = () -> handler.post(() ->
                 executeMapsThreads(inputValue));
 
-        new Thread(() -> {
-            fillMaps(inputValue);
-            readyCallback.onReady();
-        }).start();
-    }
+    /*    new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MapsPresenter.this.fillMaps(inputValue);
+                //  fillMaps2(inputValue,hashMap,treeMap);
+                readyCallback.onReady();
+            }
+        }).start();*/
 
+        Observable
+                .create(o -> {
+                    fillMaps(inputValue);
+                    readyCallback.onReady();
+                })
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler)
+                .subscribe();
+
+    }
+///Тестовую TextView положить
     private void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
 
         handler.post(() -> getViewState().showProgressBarFillingMaps());
+
         if (hashMap.size() < intValue) {
             for (int i = 0; i < (intValue-hashMap.size()); i++) {
                 hashMap.put(i,i);
@@ -57,13 +72,76 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
         handler.post(() -> getViewState().hideProgressBarFillingMaps());
     }
 
+    public Observable createObservable(Runnable runnable) {
+        return Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    runnable.run();
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler);
+    }
+
+
+   /* public void fillMaps2(String value,HashMap hashMap,TreeMap treeMap) {
+        int intValue = Integer.parseInt(value);
+
+   //     handler.post(() -> getViewState().showProgressBarFillingMaps());
+        if (hashMap.size() < intValue) {
+            for (int i = 0; i < (intValue-hashMap.size()); i++) {
+                hashMap.put(i,i);
+                treeMap.put(i,i);
+            }
+        }
+        else {
+            for (int i = 0; i < (hashMap.size()-intValue); i++) {
+                hashMap.remove(i);
+                treeMap.remove(i);
+            }
+        }
+   //     handler.post(() -> getViewState().hideProgressBarFillingMaps());
+    }
+
+    public void fillMaps3(String value,HashMap hashMap,TreeMap treeMap) {
+        int intValue = Integer.parseInt(value);
+
+            for (int i = 0; i < intValue; i++) {
+                hashMap.put(i,i);
+                treeMap.put(i,i);
+            }
+
+    }
+
+    public Observable createObservable(Runnable runnable){
+        return  Observable
+                .create(o -> {
+                    long time = System.currentTimeMillis();
+                    runnable.run();
+                    long threadTime = System.currentTimeMillis() - time;
+                    o.onNext(threadTime);
+                })
+                .subscribeOn(processScheduler)
+                .observeOn(observerScheduler);*/
+
     private void executeMapsThreads(String value) {
 
         getViewState().hideTextViewMapsFragment();
         getViewState().showProgressBarMapsFragment();
 
         //HashMap
-        Observable
+
+        createObservable(() ->  addingNewElementHashMap(value))
+                .subscribe(s-> getViewState().showTvAddingNewHashMap(s + " ms"));
+
+        createObservable(() ->   removingElementHashMap(value))
+                .subscribe(s-> getViewState().showTvRemovingHashMap(s + " ms"));
+
+        createObservable(() ->   searchByKeyHashMap(value))
+                .subscribe(s-> getViewState().showTvSearchByKeyHashMap(s + " ms"));
+
+    /*    Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     addingNewElementHashMap(value);
@@ -94,10 +172,20 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                 })
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showTvSearchByKeyHashMap(s + " ms"));
+                .subscribe(s-> getViewState().showTvSearchByKeyHashMap(s + " ms"));*/
 
         //TreeMap
-        Observable
+
+        createObservable(() ->     addingNewElementTreeMap(value))
+                .subscribe(s-> getViewState().showTvAddingNewTreeMap(s + " ms"));
+
+        createObservable(() ->   removingElementTreeMap(value))
+                .subscribe(s-> getViewState().showTvRemovingTreeMap(s + " ms"));
+
+        createObservable(() ->   searchByKeyTreeMap(value))
+                .subscribe(s-> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
+
+       /* Observable
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     addingNewElementTreeMap(value);
@@ -128,7 +216,7 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                 })
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
+                .subscribe(s-> getViewState().showTvSearchByKeyTreeMap(s + " ms"));*/
 
     }
 

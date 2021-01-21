@@ -15,25 +15,25 @@ import ru.denisshishin.task3foxminded.maps.MapsPresenter;
 
 @Module
 
-public class ApplicationModule {
+public class SchedulerModule {
     Scheduler processScheduler = Schedulers.computation();
     Scheduler observerScheduler = AndroidSchedulers.mainThread();
     Handler handler = new Handler(Looper.getMainLooper());
 
 
-    @Provides
-    CollectionsPresenter provideCollectionsPresenter(@Named("Observer") Scheduler observerScheduler,
-                                                     @Named("Process") Scheduler processScheduler,
-                                                     Handler handler){
-        return new CollectionsPresenter(observerScheduler, processScheduler, handler);
-    }
-
-    @Provides
-    MapsPresenter provideMapsPresenter(@Named("Observer") Scheduler observerScheduler,
-                                       @Named("Process") Scheduler processScheduler,
-                                       Handler handler){
-        return new MapsPresenter(observerScheduler, processScheduler, handler);
-    }
+//    @Provides
+//    CollectionsPresenter provideCollectionsPresenter(@Named("Observer") Scheduler observerScheduler,
+//                                                     @Named("Process") Scheduler processScheduler,
+//                                                     Handler handler){
+//        return new CollectionsPresenter(observerScheduler, processScheduler, handler);
+//    }
+//
+//    @Provides
+//    MapsPresenter provideMapsPresenter(@Named("Observer") Scheduler observerScheduler,
+//                                       @Named("Process") Scheduler processScheduler,
+//                                       Handler handler){
+//        return new MapsPresenter(observerScheduler, processScheduler, handler);
+//    }
 
     @Provides
     @Named("Observer")
