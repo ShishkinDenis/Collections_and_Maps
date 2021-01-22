@@ -20,29 +20,19 @@ public class SchedulerModule {
     Scheduler observerScheduler = AndroidSchedulers.mainThread();
     Handler handler = new Handler(Looper.getMainLooper());
 
+    public static final String OBSERVER  = "Observer";
+    public static final String PROCESS  = "Process";
 
-//    @Provides
-//    CollectionsPresenter provideCollectionsPresenter(@Named("Observer") Scheduler observerScheduler,
-//                                                     @Named("Process") Scheduler processScheduler,
-//                                                     Handler handler){
-//        return new CollectionsPresenter(observerScheduler, processScheduler, handler);
-//    }
-//
-//    @Provides
-//    MapsPresenter provideMapsPresenter(@Named("Observer") Scheduler observerScheduler,
-//                                       @Named("Process") Scheduler processScheduler,
-//                                       Handler handler){
-//        return new MapsPresenter(observerScheduler, processScheduler, handler);
-//    }
+
 
     @Provides
-    @Named("Observer")
+    @Named(OBSERVER)
     Scheduler provideObserverScheduler(){
         return  observerScheduler;
     }
 
     @Provides
-    @Named("Process")
+    @Named(PROCESS)
     Scheduler provideProcessScheduler(){
         return processScheduler;
     }

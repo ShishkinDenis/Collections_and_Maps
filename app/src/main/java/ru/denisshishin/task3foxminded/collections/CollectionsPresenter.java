@@ -16,16 +16,19 @@ import moxy.InjectViewState;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
+import static ru.denisshishin.task3foxminded.SchedulerModule.OBSERVER;
+import static ru.denisshishin.task3foxminded.SchedulerModule.PROCESS;
+
 @InjectViewState
 public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
-    Scheduler observerScheduler;
-    Scheduler processScheduler;
-    Handler handler;
+   private Scheduler observerScheduler;
+   private Scheduler processScheduler;
+   private Handler handler;
 
     @Inject
-    public CollectionsPresenter(@Named("Observer") Scheduler observerScheduler,
-                                @Named("Process") Scheduler processScheduler, Handler handler) {
+    public CollectionsPresenter(@Named(OBSERVER) Scheduler observerScheduler,
+                                @Named(PROCESS) Scheduler processScheduler, Handler handler) {
         this.observerScheduler = observerScheduler;
         this.processScheduler = processScheduler;
         this.handler = handler;
@@ -36,29 +39,15 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
         ReadyCallback readyCallback = () -> handler.post(() ->
                 executeCollectionsThreads(inputValue));
 
-       /* new Thread(() -> {
-            fillCollections(inputValue);
-                readyCallback.onReady();
-        }).start();*/
-//упростить
-        Observable
-                .create(o -> {
+        Observable.create(o -> {
                     fillCollections(inputValue);
                     readyCallback.onReady();
                 })
                 .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
                 .subscribe();
 
     }
-    /*public void test(String value) {
-        getViewState().showAddingInTheBeginningArrayList(value);
-    }
-    public void test2(){
 
-    getViewState().showProgressBarCollectionsFragment();
-
-}*/
     public void fillCollections(String value) {
         int intValue = Integer.parseInt(value);
 
@@ -135,82 +124,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
         createObservable(() ->  removingInTheEndArrayList())
                 .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));
 
-/*
-Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheBeginningArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
 
-Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheMiddleArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheEndArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheEndArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    searchByValueArrayList(value);
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showSearchByValueArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheBeginningArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheBeginningArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheMiddleArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheMiddleArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheEndArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));*/
 
         //LinkedList
 
@@ -235,82 +149,7 @@ Observable
         createObservable(() ->  removingInTheEndLinkedList())
                 .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));
 
-       /* Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheBeginningLinkedList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheBeginningLinkedList(s + " ms"));
 
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheMiddleLinkedList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheMiddleLinkedList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheEndLinkedList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheEndLinkedList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    searchByValueLinkedList(value);
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showSearchByValueLinkedList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheBeginningLinkedList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheBeginningLinkedList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheMiddleLinkedList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheMiddleLinkedList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheEndLinkedList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));*/
 
         //CopyOnWriteArrayList
 
@@ -335,82 +174,7 @@ Observable
         createObservable(() ->  removingInTheEndCopyOnWriteArrayList())
                 .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));
 
-       /* Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheBeginningCopyOnWriteArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheBeginningCopyOnWriteArrayList(s + " ms"));
 
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheMiddleCopyOnWriteArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheMiddleCopyOnWriteArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheEndCopyOnWriteArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheEndCopyOnWriteArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    searchByValueCopyOnWriteArrayList(value);
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showSearchByValueCopyOnWriteArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheBeginningCopyOnWriteArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheMiddleCopyOnWriteArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(s + " ms"));
-
-        Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    removingInTheEndCopyOnWriteArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));*/
 
     }
 
@@ -420,11 +184,12 @@ Observable
     CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
 
 
-    private void addingInTheBeginningArrayList() {
+    public void addingInTheBeginningArrayList() {
         synchronized (this) {
             arrayList.add(0);
         }
     }
+//    сделал public
     public void addingInTheMiddleArrayList(){
         synchronized(this) {
                 arrayList.add(arrayList.size() / 2);

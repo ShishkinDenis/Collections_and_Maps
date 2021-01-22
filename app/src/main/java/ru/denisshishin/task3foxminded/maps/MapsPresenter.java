@@ -1,7 +1,6 @@
 package ru.denisshishin.task3foxminded.maps;
 
 import android.os.Handler;
-import android.os.Looper;
 
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -14,14 +13,17 @@ import io.reactivex.rxjava3.core.Scheduler;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
 
+import static ru.denisshishin.task3foxminded.SchedulerModule.OBSERVER;
+import static ru.denisshishin.task3foxminded.SchedulerModule.PROCESS;
+
 public class MapsPresenter extends MvpPresenter<MapsView> {
 
-    Scheduler observerScheduler;
-    Scheduler processScheduler;
-    Handler handler;
+    private Scheduler observerScheduler;
+    private Scheduler processScheduler;
+    private Handler handler;
 
     @Inject
-    public MapsPresenter(@Named("Observer") Scheduler observerScheduler,  @Named("Process") Scheduler processScheduler,Handler handler){
+    public MapsPresenter(@Named(OBSERVER) Scheduler observerScheduler,  @Named(PROCESS) Scheduler processScheduler,Handler handler){
         this.observerScheduler = observerScheduler;
         this.processScheduler = processScheduler;
         this.handler = handler;
@@ -51,8 +53,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                 .subscribe();
 
     }
-///Тестовую TextView положить
-    private void fillMaps(String value) {
+
+    public void fillMaps(String value) {
         int intValue = Integer.parseInt(value);
 
         handler.post(() -> getViewState().showProgressBarFillingMaps());
@@ -125,7 +127,7 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler);*/
 
-    private void executeMapsThreads(String value) {
+    public void executeMapsThreads(String value) {
 
         getViewState().hideTextViewMapsFragment();
         getViewState().showProgressBarMapsFragment();

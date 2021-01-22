@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import moxy.presenter.ProvidePresenter;
-import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
+import ru.denisshishin.task3foxminded.MyApplication;
 import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
 
 
@@ -59,7 +59,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        DaggerApplicationComponent.create().inject(this);
+        MyApplication.appComponent.inject(this);
 
     }
 

@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import moxy.presenter.ProvidePresenter;
-import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
+import ru.denisshishin.task3foxminded.MyApplication;
 import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
 
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
@@ -58,8 +58,10 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        DaggerApplicationComponent.create().inject(this);
+        MyApplication.appComponent.inject(this);
+
     }
+
 
     @Override
     public void showProgressBarCollectionsFragment() {
@@ -70,6 +72,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
         binding.pbRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
         binding.pbRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
+
 
         binding.pbAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
         binding.pbAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
