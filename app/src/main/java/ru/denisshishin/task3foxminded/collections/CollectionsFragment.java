@@ -128,7 +128,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.tvFillingCollections.setVisibility(View.INVISIBLE);
     }
 
-
     @Override
     public void showAddingInTheBeginningArrayList(String string) {
         binding.tvAddingInTheBeginningArrayList.setText(string);
@@ -179,8 +178,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
     }
-
-
 
     @Override
     public void showAddingInTheBeginningLinkedList(String string) {

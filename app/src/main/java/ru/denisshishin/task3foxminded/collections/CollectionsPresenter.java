@@ -22,11 +22,11 @@ import static ru.denisshishin.task3foxminded.SchedulerModule.PROCESS;
 @InjectViewState
 public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
-//    вернуть private
 
-   public Scheduler observerScheduler;
-   public Scheduler processScheduler;
-   public Handler handler;
+
+   private Scheduler observerScheduler;
+   private Scheduler processScheduler;
+   private Handler handler;
 
     @Inject
     public CollectionsPresenter(@Named(OBSERVER) Scheduler observerScheduler,
@@ -52,7 +52,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
     public void fillCollections(String value) {
         int intValue = Integer.parseInt(value);
-//        getViewState().showProgressBarFillingCollections();
+
 
         handler.post(() -> getViewState().showProgressBarFillingCollections());
 
@@ -91,20 +91,6 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
         getViewState().hideTextViewCollectionsFragment();
         getViewState().showProgressBarCollectionsFragment();
 
-//       getViewState().showAddingInTheBeginningArrayList("50000");
-
-        //ArrayList
-
-    /*    Observable
-                .create(o -> {
-                    long time = System.currentTimeMillis();
-                    addingInTheBeginningArrayList();
-                    long threadTime = System.currentTimeMillis() - time;
-                    o.onNext(threadTime);
-                })
-                .subscribeOn(processScheduler)
-                .observeOn(observerScheduler)
-                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));*/
 
         createObservable(() -> addingInTheBeginningArrayList())
                 .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));

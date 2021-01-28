@@ -32,7 +32,6 @@ public class UITests {
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-
     @Test
     public void instanceOfCollectionsFragmentIsSavedWhenRotating() {
         MainActivity mainActivityCollectionsFragment = activityTestRule.launchActivity(new Intent());
@@ -40,7 +39,6 @@ public class UITests {
         mainActivityCollectionsFragment.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
         onView(withId(R.id.tietInputNumberCollectionsFragment)).check(matches(withText("50000")));
     }
-
 
     @Test
     public void instanceOfMapsFragmentIsSavedWhenRotating() {
@@ -73,8 +71,6 @@ public class UITests {
         onView(withId(R.id.btnMapsFragment)).perform(click());
         onView(withText("Please input number")).inRoot(ToastMatcher.isToast()).check(matches(isDisplayed()));
     }
-
-
 }
 
 

@@ -18,11 +18,11 @@ import static ru.denisshishin.task3foxminded.SchedulerModule.PROCESS;
 
 public class MapsPresenter extends MvpPresenter<MapsView> {
 
-    //    вернуть private
 
-    public Scheduler observerScheduler;
-    public Scheduler processScheduler;
-    public Handler handler;
+
+    private Scheduler observerScheduler;
+    private Scheduler processScheduler;
+    private Handler handler;
 
     @Inject
     public MapsPresenter(@Named(OBSERVER) Scheduler observerScheduler,  @Named(PROCESS) Scheduler processScheduler,Handler handler){
@@ -36,14 +36,7 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
         ReadyCallback readyCallback = () -> handler.post(() ->
                 executeMapsThreads(inputValue));
 
-    /*    new Thread(new Runnable() {
-            @Override
-            public void run() {
-                MapsPresenter.this.fillMaps(inputValue);
-                //  fillMaps2(inputValue,hashMap,treeMap);
-                readyCallback.onReady();
-            }
-        }).start();*/
+
 
         Observable
                 .create(o -> {
