@@ -22,9 +22,11 @@ import static ru.denisshishin.task3foxminded.SchedulerModule.PROCESS;
 @InjectViewState
 public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
-   private Scheduler observerScheduler;
-   private Scheduler processScheduler;
-   private Handler handler;
+//    вернуть private
+
+   public Scheduler observerScheduler;
+   public Scheduler processScheduler;
+   public Handler handler;
 
     @Inject
     public CollectionsPresenter(@Named(OBSERVER) Scheduler observerScheduler,
@@ -50,6 +52,7 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
     public void fillCollections(String value) {
         int intValue = Integer.parseInt(value);
+//        getViewState().showProgressBarFillingCollections();
 
         handler.post(() -> getViewState().showProgressBarFillingCollections());
 
@@ -189,35 +192,34 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
             arrayList.add(0);
         }
     }
-//    сделал public
     public void addingInTheMiddleArrayList(){
         synchronized(this) {
                 arrayList.add(arrayList.size() / 2);
         }
 
     }
-    private void addingInTheEndArrayList(){
+    public void addingInTheEndArrayList(){
         synchronized(this) {
                 arrayList.add(arrayList.size()-1);
             }
     }
-    private void searchByValueArrayList(String value){
+    public void searchByValueArrayList(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
             arrayList.indexOf(intValue);
         }
     }
-    private void removingInTheBeginningArrayList(){
+    public void removingInTheBeginningArrayList(){
         synchronized(this) {
                 arrayList.remove(0);
         }
     }
-    private void removingInTheMiddleArrayList(){
+    public void removingInTheMiddleArrayList(){
         synchronized(this) {
                 arrayList.remove(arrayList.size() / 2);
             }
     }
-    private void removingInTheEndArrayList(){
+    public void removingInTheEndArrayList(){
 
         synchronized(this){
             arrayList.remove(arrayList.size()-1);
@@ -225,76 +227,76 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
     }
 
 
-    private void addingInTheBeginningLinkedList(){
+    public void addingInTheBeginningLinkedList(){
         synchronized(this) {
                 linkedList.add(0);
             }
     }
-    private void addingInTheMiddleLinkedList(){
+    public void addingInTheMiddleLinkedList(){
         synchronized(this) {
                 linkedList.add(linkedList.size() / 2);
             }
     }
-    private void addingInTheEndLinkedList(){
+    public void addingInTheEndLinkedList(){
             synchronized (this) {
                 linkedList.add(linkedList.size() - 1);
             }
     }
-    private void searchByValueLinkedList(String value){
+    public void searchByValueLinkedList(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
             linkedList.indexOf(intValue);
         }
     }
-    private void removingInTheBeginningLinkedList(){
+    public void removingInTheBeginningLinkedList(){
 
             synchronized (this) {
                 linkedList.remove(0);
             }
     }
-    private void removingInTheMiddleLinkedList(){
+    public void removingInTheMiddleLinkedList(){
             synchronized (this) {
                 linkedList.remove(linkedList.size() / 2);
             }
     }
-    private void removingInTheEndLinkedList(){
+    public void removingInTheEndLinkedList(){
             synchronized (this) {
                 linkedList.remove(linkedList.size() - 1);
             }
     }
 
-    private void addingInTheBeginningCopyOnWriteArrayList(){
+    public void addingInTheBeginningCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.add(0);
             }
     }
-    private void addingInTheMiddleCopyOnWriteArrayList(){
+    public void addingInTheMiddleCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.add(copyOnWriteArrayList.size() / 2);
         }
     }
-    private void addingInTheEndCopyOnWriteArrayList(){
+    public void addingInTheEndCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.add(copyOnWriteArrayList.size()-1);
             }
     }
-    private void searchByValueCopyOnWriteArrayList(String value){
+    public void searchByValueCopyOnWriteArrayList(String value){
         int intValue = Integer.parseInt(value);
         synchronized(this) {
             copyOnWriteArrayList.indexOf(intValue);
         }
     }
-    private void removingInTheBeginningCopyOnWriteArrayList(){
+    public void removingInTheBeginningCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.remove(0);
         }
     }
-    private void removingInTheMiddleCopyOnWriteArrayList(){
+    public void removingInTheMiddleCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.remove(copyOnWriteArrayList.size() / 2);
             }
     }
-    private void removingInTheEndCopyOnWriteArrayList(){
+    public void removingInTheEndCopyOnWriteArrayList(){
         synchronized(this) {
                 copyOnWriteArrayList.remove(copyOnWriteArrayList.size()-1);
             }

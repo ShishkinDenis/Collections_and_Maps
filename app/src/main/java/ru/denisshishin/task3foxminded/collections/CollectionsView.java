@@ -40,6 +40,4 @@ public interface CollectionsView extends MvpView {
     void showRemovingInTheBeginningCopyOnWriteArrayList(String string);
     void showRemovingInTheMiddleCopyOnWriteArrayList(String string);
     void showRemovingInTheEndCopyOnWriteArrayList(String string);
-
-
 }
