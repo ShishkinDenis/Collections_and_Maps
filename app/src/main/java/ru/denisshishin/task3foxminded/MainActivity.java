@@ -1,12 +1,14 @@
 package ru.denisshishin.task3foxminded;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import ru.denisshishin.task3foxminded.databinding.ActivityMainBinding;
 
 public class MainActivity extends FragmentActivity {
@@ -32,6 +34,7 @@ public class MainActivity extends FragmentActivity {
             }
         })
                 .attach();
+        RxJavaPlugins.setErrorHandler(e ->   Log.d("onError",e.getMessage()));
     }
 
     private ViewPagerAdapter createCardAdapter() {

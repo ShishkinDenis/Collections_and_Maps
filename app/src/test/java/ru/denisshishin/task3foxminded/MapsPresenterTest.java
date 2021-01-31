@@ -29,15 +29,15 @@ public class MapsPresenterTest {
     MapsView$$State mapsView$$State;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         testObserver = new TestObserver();
 
-        mapsPresenter = new MapsPresenter(Schedulers.trampoline(),Schedulers.trampoline(),handler);
+        mapsPresenter = new MapsPresenter(Schedulers.trampoline(), Schedulers.trampoline(), handler);
         mapsPresenter.setViewState(mapsView$$State);
     }
 
     @Test
-    public void mapsHashMapOperationsAreCalled(){
+    public void mapsHashMapOperationsAreCalled() {
         mapsPresenter.executeMapsThreads("100000");
 
         verify(mapsView$$State).showTvAddingNewHashMap(endsWith("ms"));
@@ -46,7 +46,7 @@ public class MapsPresenterTest {
     }
 
     @Test
-    public void mapsTreeMapOperationsAreCalled(){
+    public void mapsTreeMapOperationsAreCalled() {
         mapsPresenter.executeMapsThreads("200000");
 
         verify(mapsView$$State).showTvAddingNewTreeMap(endsWith("ms"));
@@ -55,7 +55,7 @@ public class MapsPresenterTest {
     }
 
     @Test
-    public void mapsProgressBarsAreCalled(){
+    public void mapsProgressBarsAreCalled() {
         mapsPresenter.executeMapsThreads("50000");
         verify(mapsView$$State).hideTextViewMapsFragment();
         verify(mapsView$$State).showProgressBarMapsFragment();
@@ -67,17 +67,20 @@ public class MapsPresenterTest {
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
+
     @Test
     public void noErrorsInSearchByKeyHashMap() {
         mapsPresenter.createObservable(() -> mapsPresenter.searchByKeyHashMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
+
     @Test
     public void noErrorsInRemovingElementHashMap() {
         mapsPresenter.createObservable(() -> mapsPresenter.removingElementHashMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
+
     }
 
     @Test
@@ -86,12 +89,14 @@ public class MapsPresenterTest {
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
+
     @Test
     public void noErrorsInSearchByKeyTreeMap() {
         mapsPresenter.createObservable(() -> mapsPresenter.searchByKeyTreeMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
+
     @Test
     public void noErrorsInRemovingElementTreeMap() {
         mapsPresenter.createObservable(() -> mapsPresenter.removingElementTreeMap("50000"))

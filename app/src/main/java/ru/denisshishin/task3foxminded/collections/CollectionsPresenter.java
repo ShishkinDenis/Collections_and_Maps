@@ -2,6 +2,7 @@ package ru.denisshishin.task3foxminded.collections;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,8 +11,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import moxy.InjectViewState;
 import moxy.MvpPresenter;
 import ru.denisshishin.task3foxminded.ReadyCallback;
@@ -76,24 +84,53 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
     public Observable createObservable(Runnable runnable){
         return  Observable
+//                .error(new NumberFormatException())
                 .create(o -> {
                     long time = System.currentTimeMillis();
                     runnable.run();
                     long threadTime = System.currentTimeMillis() - time;
                     o.onNext(threadTime);
+//                    o.onError(new NumberFormatException());
                 })
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler);
+//                .doOnError();
 }
 
     public void executeCollectionsThreads(String value) {
 
+//        RxJavaPlugins.setErrorHandler(e -> {
+//            System.out.println("Ошибка");
+//        });
+
         getViewState().hideTextViewCollectionsFragment();
         getViewState().showProgressBarCollectionsFragment();
 
+      /*  createObservable(() -> addingInTheBeginningArrayList())
+                .subscribe(s -> getViewState().showAddingInTheBeginningArrayList(s + " ms"));*/
 
         createObservable(() -> addingInTheBeginningArrayList())
-                .subscribe(s-> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
+                .subscribe(new Observer() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Object o) {
+                      getViewState().showAddingInTheBeginningArrayList(o +" ms");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("onError",e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
         createObservable(() -> addingInTheMiddleArrayList())
                 .subscribe(s-> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
@@ -112,8 +149,6 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
         createObservable(() ->  removingInTheEndArrayList())
                 .subscribe(s-> getViewState().showRemovingInTheEndArrayList(s + " ms"));
-
-
 
         //LinkedList
 
@@ -138,8 +173,6 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
         createObservable(() ->  removingInTheEndLinkedList())
                 .subscribe(s-> getViewState().showRemovingInTheEndLinkedList(s + " ms"));
 
-
-
         //CopyOnWriteArrayList
 
         createObservable(() -> addingInTheBeginningCopyOnWriteArrayList())
@@ -162,16 +195,11 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
 
         createObservable(() ->  removingInTheEndCopyOnWriteArrayList())
                 .subscribe(s-> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));
-
-
-
     }
-
 
     ArrayList<Integer> arrayList = new ArrayList<>();
     LinkedList<Integer> linkedList = new LinkedList<>();
     CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
-
 
     public void addingInTheBeginningArrayList() {
         synchronized (this) {
@@ -211,7 +239,6 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
             arrayList.remove(arrayList.size()-1);
         }
     }
-
 
     public void addingInTheBeginningLinkedList(){
         synchronized(this) {

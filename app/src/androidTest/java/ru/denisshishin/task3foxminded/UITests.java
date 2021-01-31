@@ -41,6 +41,12 @@ public class UITests {
     }
 
     @Test
+    public void instanceOfCollectionsFragmentIsSavedWhenRotating2() {
+        MainActivity mainActivityCollectionsFragment = activityTestRule.launchActivity(new Intent());
+        onView(withId(R.id.tietInputNumberCollectionsFragment)).perform(replaceText("-2"));
+        onView(withId(R.id.tietInputNumberCollectionsFragment)).check(matches(withText("-2")));
+    }
+    @Test
     public void instanceOfMapsFragmentIsSavedWhenRotating() {
         MainActivity mainActivityMapsFragment = activityTestRule.launchActivity(new Intent());
         onView(withId(R.id.viewPager)).perform(swipeLeft());

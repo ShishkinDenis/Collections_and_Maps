@@ -8,7 +8,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.exceptions.OnErrorNotImplementedException;
 import io.reactivex.rxjava3.observers.TestObserver;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import ru.denisshishin.task3foxminded.collections.CollectionsPresenter;
 import ru.denisshishin.task3foxminded.collections.CollectionsView$$State;
@@ -30,15 +33,15 @@ public class CollectionsPresenterTest {
     CollectionsView$$State collectionsView$$State;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         testObserver = new TestObserver();
 
-        collectionsPresenter = new CollectionsPresenter(Schedulers.trampoline(),Schedulers.trampoline(), handler);
+        collectionsPresenter = new CollectionsPresenter(Schedulers.trampoline(), Schedulers.trampoline(), handler);
         collectionsPresenter.setViewState(collectionsView$$State);
     }
 
     @Test
-    public void collectionsArrayListOperationsAreCalled(){
+    public void collectionsArrayListOperationsAreCalled() {
         collectionsPresenter.executeCollectionsThreads("50000");
 
         verify(collectionsView$$State).showAddingInTheBeginningArrayList(endsWith("ms"));
@@ -56,7 +59,7 @@ public class CollectionsPresenterTest {
     }
 
     @Test
-    public void collectionsLinkedListOperationsAreCalled(){
+    public void collectionsLinkedListOperationsAreCalled() {
         collectionsPresenter.executeCollectionsThreads("60000");
 
         verify(collectionsView$$State).showAddingInTheBeginningLinkedList(endsWith("ms"));
@@ -73,8 +76,45 @@ public class CollectionsPresenterTest {
         verify(collectionsView$$State).showRemovingInTheEndLinkedList(endsWith("ms"));
     }
 
+
+
+
+
     @Test
-    public void collectionsCopyOnWriteArrayListOperationsAreCalled(){
+    public void collectionsLinkedListOperationsAreCalled2() {
+//        RxJavaPlugins.setErrorHandler(e -> {
+//            System.out.println("Ошибка");
+//        });
+
+//        collectionsPresenter.executeCollectionsThreads(",");
+//        collectionsPresenter.launchCollections("s");
+//        collectionsPresenter.createObservable(() -> collectionsPresenter.searchByValueArrayList("abc"))
+//                .subscribe(testObserver);
+        collectionsPresenter.createObservable(() -> collectionsPresenter.executeCollectionsThreads("abc"))
+                .subscribe(testObserver);
+       testObserver.assertError(NumberFormatException.class);
+//       testObserver.assertNoErrors();
+
+    }
+
+    @Test
+    public void testException(){
+        Observable
+                .error(new NumberFormatException())
+                .subscribe(testObserver);
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void testException2(){
+        Example2 example2 = new Example2();
+//        example2.execute();
+        example2.createObservableTest().subscribe(testObserver);
+        testObserver.assertError(RuntimeException.class);
+    }
+
+    @Test
+    public void collectionsCopyOnWriteArrayListOperationsAreCalled() {
         collectionsPresenter.executeCollectionsThreads("70000");
 
         verify(collectionsView$$State).showAddingInTheBeginningCopyOnWriteArrayList(endsWith("ms"));
@@ -92,7 +132,7 @@ public class CollectionsPresenterTest {
     }
 
     @Test
-    public void collectionsProgressBarsAreCalled(){
+    public void collectionsProgressBarsAreCalled() {
         collectionsPresenter.executeCollectionsThreads("50000");
         verify(collectionsView$$State).hideTextViewCollectionsFragment();
         verify(collectionsView$$State).showProgressBarCollectionsFragment();
@@ -105,6 +145,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoErrors();
 
     }
+
     @Test
     public void noErrorsInAddingInTheMiddleArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.addingInTheMiddleArrayList())
@@ -112,6 +153,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoErrors();
 
     }
+
     @Test
     public void noErrorsInAddingInTheEndArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.addingInTheEndArrayList())
@@ -132,15 +174,24 @@ public class CollectionsPresenterTest {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheBeginningArrayList())
                 .subscribe(testObserver);
         testObserver.assertNoValues();
-
+        testObserver.assertError(IndexOutOfBoundsException.class);
     }
+
+
+
+
     @Test
-    public void noValuesInRemovingInTheMiddleArrayList() {
+    public void ThrowExceptionInRemovingInTheMiddleArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheMiddleArrayList())
                 .subscribe(testObserver);
         testObserver.assertNoValues();
-
+        testObserver.assertError(IndexOutOfBoundsException.class);
     }
+
+
+
+
+
     @Test
     public void noValuesInRemovingInTheEndArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheEndArrayList())
@@ -156,6 +207,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoErrors();
 
     }
+
     @Test
     public void noErrorsInAddingInTheMiddleLinkedList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.addingInTheMiddleLinkedList())
@@ -163,6 +215,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoErrors();
 
     }
+
     @Test
     public void noErrorsInAddingInTheEndLinkedList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.addingInTheEndLinkedList())
@@ -185,6 +238,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoValues();
 
     }
+
     @Test
     public void noValuesInRemovingInTheMiddleLinkedList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheMiddleLinkedList())
@@ -192,6 +246,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoValues();
 
     }
+
     @Test
     public void noValuesInRemovingInTheEndLinkedList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheEndLinkedList())
@@ -207,6 +262,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoErrors();
 
     }
+
     @Test
     public void noErrorsInAddingInTheMiddleCopyOnWriteArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.addingInTheMiddleCopyOnWriteArrayList())
@@ -214,6 +270,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoErrors();
 
     }
+
     @Test
     public void noErrorsInAddingInTheEndCopyOnWriteArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.addingInTheEndCopyOnWriteArrayList())
@@ -236,6 +293,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoValues();
 
     }
+
     @Test
     public void noValuesInRemovingInTheMiddleCopyOnWriteArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheMiddleCopyOnWriteArrayList())
@@ -243,6 +301,7 @@ public class CollectionsPresenterTest {
         testObserver.assertNoValues();
 
     }
+
     @Test
     public void noValuesInRemovingInTheEndCopyOnWriteArrayList() {
         collectionsPresenter.createObservable(() -> collectionsPresenter.removingInTheEndCopyOnWriteArrayList())
