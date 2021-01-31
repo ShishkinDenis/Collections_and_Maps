@@ -57,19 +57,68 @@ public class MapsPresenterTest {
     @Test
     public void mapsProgressBarsAreCalled() {
         mapsPresenter.executeMapsThreads("50000");
+
         verify(mapsView$$State).hideTextViewMapsFragment();
         verify(mapsView$$State).showProgressBarMapsFragment();
     }
 
     @Test
-    public void noErrorsInAddingNewElementHashMap() {
+    public void throwsExceptionsInAddingNewElementHashMapWhenInputLetters() {
+        mapsPresenter.createObservable(() -> mapsPresenter.addingNewElementHashMap("abc"))
+                .subscribe(testObserver);
+        testObserver.assertNoValues();
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void throwsExceptionsInSearchByKeyHashMapWhenInputLetters() {
+        mapsPresenter.createObservable(() -> mapsPresenter.searchByKeyHashMap("abc"))
+                .subscribe(testObserver);
+        testObserver.assertNoValues();
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void throwsExceptionsInRemovingElementHashMapWhenInputLetters() {
+        mapsPresenter.createObservable(() -> mapsPresenter.removingElementHashMap("abc"))
+                .subscribe(testObserver);
+        testObserver.assertNoValues();
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void throwsExceptionsInAddingNewElementTreeMapWhenInputLetters() {
+        mapsPresenter.createObservable(() -> mapsPresenter.addingNewElementTreeMap("abc"))
+                .subscribe(testObserver);
+        testObserver.assertNoValues();
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void throwsExceptionsInSearchByKeyTreeMapWhenInputLetters() {
+        mapsPresenter.createObservable(() -> mapsPresenter.searchByKeyTreeMap("abc"))
+                .subscribe(testObserver);
+        testObserver.assertNoValues();
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void throwsExceptionsInRemovingElementTreeMapWhenInputLetters() {
+        mapsPresenter.createObservable(() -> mapsPresenter.removingElementTreeMap("abc"))
+                .subscribe(testObserver);
+        testObserver.assertNoValues();
+        testObserver.assertError(NumberFormatException.class);
+    }
+
+    @Test
+    public void noErrorsInAddingNewElementHashMapWhenInputNumber() {
         mapsPresenter.createObservable(() -> mapsPresenter.addingNewElementHashMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
 
     @Test
-    public void noErrorsInSearchByKeyHashMap() {
+    public void noErrorsInSearchByKeyHashMapWhenInputNumber() {
         mapsPresenter.createObservable(() -> mapsPresenter.searchByKeyHashMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
@@ -80,25 +129,24 @@ public class MapsPresenterTest {
         mapsPresenter.createObservable(() -> mapsPresenter.removingElementHashMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
-
     }
 
     @Test
-    public void noErrorsInAddingNewElementTreeMap() {
+    public void noErrorsInAddingNewElementTreeMapWhenInputNumber() {
         mapsPresenter.createObservable(() -> mapsPresenter.addingNewElementTreeMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
 
     @Test
-    public void noErrorsInSearchByKeyTreeMap() {
+    public void noErrorsInSearchByKeyTreeMapWhenInputNumber() {
         mapsPresenter.createObservable(() -> mapsPresenter.searchByKeyTreeMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();
     }
 
     @Test
-    public void noErrorsInRemovingElementTreeMap() {
+    public void noErrorsInRemovingElementTreeMapWhenInputNumber() {
         mapsPresenter.createObservable(() -> mapsPresenter.removingElementTreeMap("50000"))
                 .subscribe(testObserver);
         testObserver.assertNoErrors();

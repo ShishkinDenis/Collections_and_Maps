@@ -18,25 +18,21 @@ import static ru.denisshishin.task3foxminded.SchedulerModule.PROCESS;
 
 public class MapsPresenter extends MvpPresenter<MapsView> {
 
-
-
     private Scheduler observerScheduler;
     private Scheduler processScheduler;
     private Handler handler;
 
     @Inject
-    public MapsPresenter(@Named(OBSERVER) Scheduler observerScheduler,  @Named(PROCESS) Scheduler processScheduler,Handler handler){
+    public MapsPresenter(@Named(OBSERVER) Scheduler observerScheduler, @Named(PROCESS) Scheduler processScheduler, Handler handler) {
         this.observerScheduler = observerScheduler;
         this.processScheduler = processScheduler;
         this.handler = handler;
     }
 
-    public void launchMaps(String inputValue){
+    public void launchMaps(String inputValue) {
 
         ReadyCallback readyCallback = () -> handler.post(() ->
                 executeMapsThreads(inputValue));
-
-
 
         Observable
                 .create(o -> {
@@ -46,7 +42,6 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
                 .subscribeOn(processScheduler)
                 .observeOn(observerScheduler)
                 .subscribe();
-
     }
 
     public void fillMaps(String value) {
@@ -55,13 +50,12 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
         handler.post(() -> getViewState().showProgressBarFillingMaps());
 
         if (hashMap.size() < intValue) {
-            for (int i = 0; i < (intValue-hashMap.size()); i++) {
-                hashMap.put(i,i);
-                treeMap.put(i,i);
+            for (int i = 0; i < (intValue - hashMap.size()); i++) {
+                hashMap.put(i, i);
+                treeMap.put(i, i);
             }
-        }
-        else {
-            for (int i = 0; i < (hashMap.size()-intValue); i++) {
+        } else {
+            for (int i = 0; i < (hashMap.size() - intValue); i++) {
                 hashMap.remove(i);
                 treeMap.remove(i);
             }
@@ -88,72 +82,72 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
 
         //HashMap
 
-        createObservable(() ->  addingNewElementHashMap(value))
-                .subscribe(s-> getViewState().showTvAddingNewHashMap(s + " ms"));
+        createObservable(() -> addingNewElementHashMap(value))
+                .subscribe(s -> getViewState().showTvAddingNewHashMap(s + " ms"));
 
-        createObservable(() ->   removingElementHashMap(value))
-                .subscribe(s-> getViewState().showTvRemovingHashMap(s + " ms"));
+        createObservable(() -> removingElementHashMap(value))
+                .subscribe(s -> getViewState().showTvRemovingHashMap(s + " ms"));
 
-        createObservable(() ->   searchByKeyHashMap(value))
-                .subscribe(s-> getViewState().showTvSearchByKeyHashMap(s + " ms"));
+        createObservable(() -> searchByKeyHashMap(value))
+                .subscribe(s -> getViewState().showTvSearchByKeyHashMap(s + " ms"));
 
         //TreeMap
 
-        createObservable(() ->     addingNewElementTreeMap(value))
-                .subscribe(s-> getViewState().showTvAddingNewTreeMap(s + " ms"));
+        createObservable(() -> addingNewElementTreeMap(value))
+                .subscribe(s -> getViewState().showTvAddingNewTreeMap(s + " ms"));
 
-        createObservable(() ->   removingElementTreeMap(value))
-                .subscribe(s-> getViewState().showTvRemovingTreeMap(s + " ms"));
+        createObservable(() -> removingElementTreeMap(value))
+                .subscribe(s -> getViewState().showTvRemovingTreeMap(s + " ms"));
 
-        createObservable(() ->   searchByKeyTreeMap(value))
-                .subscribe(s-> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
-
-
+        createObservable(() -> searchByKeyTreeMap(value))
+                .subscribe(s -> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
     }
 
     HashMap hashMap = new HashMap();
 
     TreeMap treeMap = new TreeMap();
 
-    public void addingNewElementHashMap(String value){
+    public void addingNewElementHashMap(String value) {
         int intValue = Integer.parseInt(value);
-        synchronized(this) {
-                hashMap.put(intValue, intValue);
+        synchronized (this) {
+            hashMap.put(intValue, intValue);
         }
     }
-    public void removingElementHashMap(String value){
+
+    public void removingElementHashMap(String value) {
         int intValue = Integer.parseInt(value);
-        synchronized(this) {
-                hashMap.remove(intValue);
-            }
+        synchronized (this) {
+            hashMap.remove(intValue);
+        }
     }
-    public void searchByKeyHashMap(String value){
+
+    public void searchByKeyHashMap(String value) {
         int intValue = Integer.parseInt(value);
-        synchronized(this) {
+        synchronized (this) {
             hashMap.get(intValue);
         }
     }
 
+    public void addingNewElementTreeMap(String value) {
+        int intValue = Integer.parseInt(value);
+        synchronized (this) {
+            treeMap.put(intValue, intValue);
+        }
+    }
 
-    public void addingNewElementTreeMap(String value){
+    public void removingElementTreeMap(String value) {
         int intValue = Integer.parseInt(value);
-        synchronized(this) {
-                treeMap.put(intValue, intValue);
+        synchronized (this) {
+            treeMap.remove(intValue);
         }
     }
-    public void removingElementTreeMap(String value){
+
+    public void searchByKeyTreeMap(String value) {
         int intValue = Integer.parseInt(value);
-        synchronized(this) {
-                treeMap.remove(intValue);
-        }
-    }
-    public void searchByKeyTreeMap(String value){
-        int intValue = Integer.parseInt(value);
-        synchronized(this) {
+        synchronized (this) {
             treeMap.get(intValue);
         }
     }
-
 
 }
 

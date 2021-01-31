@@ -10,37 +10,33 @@ import dagger.Provides;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import ru.denisshishin.task3foxminded.collections.CollectionsPresenter;
-import ru.denisshishin.task3foxminded.maps.MapsPresenter;
 
 @Module
 
 public class SchedulerModule {
+
     Scheduler processScheduler = Schedulers.computation();
     Scheduler observerScheduler = AndroidSchedulers.mainThread();
     Handler handler = new Handler(Looper.getMainLooper());
 
-    public static final String OBSERVER  = "Observer";
-    public static final String PROCESS  = "Process";
-
-
+    public static final String OBSERVER = "Observer";
+    public static final String PROCESS = "Process";
 
     @Provides
     @Named(OBSERVER)
-    Scheduler provideObserverScheduler(){
-        return  observerScheduler;
+    Scheduler provideObserverScheduler() {
+        return observerScheduler;
     }
 
     @Provides
     @Named(PROCESS)
-    Scheduler provideProcessScheduler(){
+    Scheduler provideProcessScheduler() {
         return processScheduler;
     }
 
     @Provides
-    Handler provideHandler(){
+    Handler provideHandler() {
         return handler;
     }
-
 
 }

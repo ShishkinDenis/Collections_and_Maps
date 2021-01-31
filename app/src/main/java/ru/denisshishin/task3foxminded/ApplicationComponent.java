@@ -9,8 +9,11 @@ import ru.denisshishin.task3foxminded.maps.MapsPresenter;
 
 @Component(modules = {SchedulerModule.class})
 public interface ApplicationComponent {
-   void inject(MapsFragment mapsFragment);
-   void inject(CollectionsFragment collectionsFragment);
-   void inject(CollectionsPresenter collectionsPresenter);
-   void inject(MapsPresenter mapsPresenter);
+    void inject(MapsFragment mapsFragment);
+
+    void inject(CollectionsFragment collectionsFragment);
+
+    void inject(CollectionsPresenter collectionsPresenter);
+
+    void inject(MapsPresenter mapsPresenter);
 }

@@ -19,14 +19,14 @@ public class PresenterModule {
     @Provides
     CollectionsPresenter provideCollectionsPresenter(@Named(OBSERVER) Scheduler observerScheduler,
                                                      @Named(PROCESS) Scheduler processScheduler,
-                                                     Handler handler){
+                                                     Handler handler) {
         return new CollectionsPresenter(observerScheduler, processScheduler, handler);
     }
 
     @Provides
     MapsPresenter provideMapsPresenter(@Named(OBSERVER) Scheduler observerScheduler,
                                        @Named(PROCESS) Scheduler processScheduler,
-                                       Handler handler){
+                                       Handler handler) {
         return new MapsPresenter(observerScheduler, processScheduler, handler);
     }
 }

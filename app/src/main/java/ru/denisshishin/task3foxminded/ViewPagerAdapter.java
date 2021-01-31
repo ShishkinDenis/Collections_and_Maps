@@ -14,7 +14,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         super(fragmentActivity);
     }
 
-    public String[] titles = new String[]{"Collections","Maps"};
+    public String[] titles = new String[]{"Collections", "Maps"};
 
     @NonNull
     @Override
@@ -26,8 +26,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new MapsFragment();
         }
         return new CollectionsFragment();
-        }
-
+    }
 
     @Override
     public int getItemCount() {
