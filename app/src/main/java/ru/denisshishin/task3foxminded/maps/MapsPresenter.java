@@ -22,6 +22,8 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
     private Scheduler processScheduler;
     private Handler handler;
 
+    private static final String MILLISECONDS = " ms";
+
     @Inject
     public MapsPresenter(@Named(OBSERVER) Scheduler observerScheduler, @Named(PROCESS) Scheduler processScheduler, Handler handler) {
         this.observerScheduler = observerScheduler;
@@ -83,24 +85,24 @@ public class MapsPresenter extends MvpPresenter<MapsView> {
         //HashMap
 
         createObservable(() -> addingNewElementHashMap(value))
-                .subscribe(s -> getViewState().showTvAddingNewHashMap(s + " ms"));
+                .subscribe(s -> getViewState().showTvAddingNewHashMap(s + MILLISECONDS));
 
         createObservable(() -> removingElementHashMap(value))
-                .subscribe(s -> getViewState().showTvRemovingHashMap(s + " ms"));
+                .subscribe(s -> getViewState().showTvRemovingHashMap(s + MILLISECONDS));
 
         createObservable(() -> searchByKeyHashMap(value))
-                .subscribe(s -> getViewState().showTvSearchByKeyHashMap(s + " ms"));
+                .subscribe(s -> getViewState().showTvSearchByKeyHashMap(s + MILLISECONDS));
 
         //TreeMap
 
         createObservable(() -> addingNewElementTreeMap(value))
-                .subscribe(s -> getViewState().showTvAddingNewTreeMap(s + " ms"));
+                .subscribe(s -> getViewState().showTvAddingNewTreeMap(s + MILLISECONDS));
 
         createObservable(() -> removingElementTreeMap(value))
-                .subscribe(s -> getViewState().showTvRemovingTreeMap(s + " ms"));
+                .subscribe(s -> getViewState().showTvRemovingTreeMap(s + MILLISECONDS));
 
         createObservable(() -> searchByKeyTreeMap(value))
-                .subscribe(s -> getViewState().showTvSearchByKeyTreeMap(s + " ms"));
+                .subscribe(s -> getViewState().showTvSearchByKeyTreeMap(s + MILLISECONDS));
     }
 
     HashMap hashMap = new HashMap();

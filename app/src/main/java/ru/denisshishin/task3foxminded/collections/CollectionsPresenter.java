@@ -29,6 +29,8 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
     private Scheduler processScheduler;
     private Handler handler;
 
+    private static final String MILLISECONDS = " ms";
+
     @Inject
     public CollectionsPresenter(@Named(OBSERVER) Scheduler observerScheduler,
                                 @Named(PROCESS) Scheduler processScheduler, Handler handler) {
@@ -90,71 +92,71 @@ public class CollectionsPresenter extends MvpPresenter<CollectionsView> {
         getViewState().showProgressBarCollectionsFragment();
 
         createObservable(() -> addingInTheBeginningArrayList())
-                .subscribe(s -> getViewState().showAddingInTheBeginningArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheBeginningArrayList(s + MILLISECONDS));
 
         createObservable(() -> addingInTheMiddleArrayList())
-                .subscribe(s -> getViewState().showAddingInTheMiddleArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheMiddleArrayList(s + MILLISECONDS));
 
         createObservable(() -> addingInTheEndArrayList())
-                .subscribe(s -> getViewState().showAddingInTheEndArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheEndArrayList(s + MILLISECONDS));
 
         createObservable(() -> searchByValueArrayList(value))
-                .subscribe(s -> getViewState().showSearchByValueArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showSearchByValueArrayList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheBeginningArrayList())
-                .subscribe(s -> getViewState().showRemovingInTheBeginningArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheBeginningArrayList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheMiddleArrayList())
-                .subscribe(s -> getViewState().showRemovingInTheMiddleArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheMiddleArrayList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheEndArrayList())
-                .subscribe(s -> getViewState().showRemovingInTheEndArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheEndArrayList(s + MILLISECONDS));
 
         //LinkedList
 
         createObservable(() -> addingInTheBeginningLinkedList())
-                .subscribe(s -> getViewState().showAddingInTheBeginningLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheBeginningLinkedList(s + MILLISECONDS));
 
         createObservable(() -> addingInTheMiddleLinkedList())
-                .subscribe(s -> getViewState().showAddingInTheMiddleLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheMiddleLinkedList(s + MILLISECONDS));
 
         createObservable(() -> addingInTheEndLinkedList())
-                .subscribe(s -> getViewState().showAddingInTheEndLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheEndLinkedList(s + MILLISECONDS));
 
         createObservable(() -> searchByValueLinkedList(value))
-                .subscribe(s -> getViewState().showSearchByValueLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showSearchByValueLinkedList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheBeginningLinkedList())
-                .subscribe(s -> getViewState().showRemovingInTheBeginningLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheBeginningLinkedList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheMiddleLinkedList())
-                .subscribe(s -> getViewState().showRemovingInTheMiddleLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheMiddleLinkedList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheEndLinkedList())
-                .subscribe(s -> getViewState().showRemovingInTheEndLinkedList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheEndLinkedList(s + MILLISECONDS));
 
         //CopyOnWriteArrayList
 
         createObservable(() -> addingInTheBeginningCopyOnWriteArrayList())
-                .subscribe(s -> getViewState().showAddingInTheBeginningCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheBeginningCopyOnWriteArrayList(s + MILLISECONDS));
 
         createObservable(() -> addingInTheMiddleCopyOnWriteArrayList())
-                .subscribe(s -> getViewState().showAddingInTheMiddleCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheMiddleCopyOnWriteArrayList(s + MILLISECONDS));
 
         createObservable(() -> addingInTheEndCopyOnWriteArrayList())
-                .subscribe(s -> getViewState().showAddingInTheEndCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showAddingInTheEndCopyOnWriteArrayList(s + MILLISECONDS));
 
         createObservable(() -> searchByValueCopyOnWriteArrayList(value))
-                .subscribe(s -> getViewState().showSearchByValueCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showSearchByValueCopyOnWriteArrayList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheBeginningCopyOnWriteArrayList())
-                .subscribe(s -> getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheBeginningCopyOnWriteArrayList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheMiddleCopyOnWriteArrayList())
-                .subscribe(s -> getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheMiddleCopyOnWriteArrayList(s + MILLISECONDS));
 
         createObservable(() -> removingInTheEndCopyOnWriteArrayList())
-                .subscribe(s -> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + " ms"));
+                .subscribe(s -> getViewState().showRemovingInTheEndCopyOnWriteArrayList(s + MILLISECONDS));
     }
 
     ArrayList<Integer> arrayList = new ArrayList<>();

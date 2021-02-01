@@ -16,6 +16,7 @@ import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import moxy.presenter.ProvidePresenter;
 import ru.denisshishin.task3foxminded.MyApplication;
+import ru.denisshishin.task3foxminded.R;
 import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
 
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
@@ -47,7 +48,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
             if (!binding.tietInputNumberCollectionsFragment.getText().toString().isEmpty()) {
                 collectionsPresenter.launchCollections(binding.tietInputNumberCollectionsFragment.getText().toString());
             } else {
-                Toast toast = Toast.makeText(getActivity(), "Please input number",
+                Toast toast = Toast.makeText(getActivity(), R.string.InputNumber,
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
