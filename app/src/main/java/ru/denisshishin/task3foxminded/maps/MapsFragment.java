@@ -49,7 +49,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
             if (!binding.tietInputNumberMapsFragment.getText().toString().isEmpty()) {
                 mapsPresenter.launchMaps(binding.tietInputNumberMapsFragment.getText().toString());
             } else {
-                Toast toast = Toast.makeText(getActivity(), R.string.InputNumber,
+                Toast toast = Toast.makeText(getActivity(), R.string.input_number,
                         Toast.LENGTH_SHORT);
                 toast.show();
             }

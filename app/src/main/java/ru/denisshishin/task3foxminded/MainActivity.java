@@ -23,9 +23,9 @@ public class MainActivity extends FragmentActivity {
         binding.viewPager.setAdapter(createCardAdapter());
         new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> {
             if (position == 0) {
-                tab.setText(R.string.Collections);
+                tab.setText(R.string.collections);
             } else {
-                tab.setText(R.string.Maps);
+                tab.setText(R.string.maps);
             }
         })
                 .attach();

@@ -48,7 +48,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
             if (!binding.tietInputNumberCollectionsFragment.getText().toString().isEmpty()) {
                 collectionsPresenter.launchCollections(binding.tietInputNumberCollectionsFragment.getText().toString());
             } else {
-                Toast toast = Toast.makeText(getActivity(), R.string.InputNumber,
+                Toast toast = Toast.makeText(getActivity(), R.string.input_number,
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
