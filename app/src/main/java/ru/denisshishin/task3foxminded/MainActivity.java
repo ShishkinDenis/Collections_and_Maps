@@ -11,9 +11,7 @@ import ru.denisshishin.task3foxminded.databinding.ActivityMainBinding;
 
 public class MainActivity extends FragmentActivity {
 
-
     private ActivityMainBinding binding;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +21,15 @@ public class MainActivity extends FragmentActivity {
         setContentView(view);
 
         binding.viewPager.setAdapter(createCardAdapter());
-        new TabLayoutMediator(binding.tabLayout,binding.viewPager, (tab, position) -> {
-            if (position == 0){
-                tab.setText("Collections");
-            }
-            else{
-                tab.setText("Maps");
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> {
+            if (position == 0) {
+                tab.setText(R.string.collections);
+            } else {
+                tab.setText(R.string.maps);
             }
         })
                 .attach();
+
     }
 
     private ViewPagerAdapter createCardAdapter() {

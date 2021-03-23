@@ -14,7 +14,9 @@ import javax.inject.Inject;
 
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
-import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
+import moxy.presenter.ProvidePresenter;
+import ru.denisshishin.task3foxminded.MyApplication;
+import ru.denisshishin.task3foxminded.R;
 import ru.denisshishin.task3foxminded.databinding.FragmentMapsBinding;
 
 
@@ -24,8 +26,12 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     @InjectPresenter
     MapsPresenter mapsPresenter;
 
-    private FragmentMapsBinding binding;
+    @ProvidePresenter
+    MapsPresenter providePresenter() {
+        return mapsPresenter;
+    }
 
+    private FragmentMapsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,9 +48,8 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
         binding.btnMapsFragment.setOnClickListener(v -> {
             if (!binding.tietInputNumberMapsFragment.getText().toString().isEmpty()) {
                 mapsPresenter.launchMaps(binding.tietInputNumberMapsFragment.getText().toString());
-            }
-            else {
-                Toast toast = Toast.makeText(getActivity(),"Please input number",
+            } else {
+                Toast toast = Toast.makeText(getActivity(), R.string.input_number,
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
@@ -54,7 +59,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        DaggerApplicationComponent.create().inject(this);
+        MyApplication.appComponent.inject(this);
     }
 
     @Override
@@ -78,6 +83,7 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
         binding.pbRemovingTreeMap.setVisibility(View.VISIBLE);
         binding.pbSearchByKeyTreeMap.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void hideTextViewMapsFragment() {
         binding.tvAddingNewHashMap.setVisibility(View.INVISIBLE);
@@ -88,20 +94,20 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
         binding.tvSearchByKeyTreeMap.setVisibility(View.INVISIBLE);
     }
 
-
     @Override
     public void showTvAddingNewHashMap(String string) {
         binding.tvAddingNewHashMap.setText(string);
         binding.pbAddingNewHashMap.setVisibility(View.INVISIBLE);
         binding.tvAddingNewHashMap.setVisibility(View.VISIBLE);
-
     }
+
     @Override
     public void showTvRemovingHashMap(String string) {
         binding.tvRemovingHashMap.setText(string);
         binding.pbRemovingHashMap.setVisibility(View.INVISIBLE);
         binding.tvRemovingHashMap.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showTvSearchByKeyHashMap(String string) {
         binding.tvSearchByKeyHashMap.setText(string);
@@ -109,19 +115,20 @@ public class MapsFragment extends MvpAppCompatFragment implements MapsView {
         binding.tvSearchByKeyHashMap.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public void showTvAddingNewTreeMap(String string) {
         binding.tvAddingNewTreeMap.setText(string);
         binding.pbAddingNewTreeMap.setVisibility(View.INVISIBLE);
         binding.tvAddingNewTreeMap.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showTvRemovingTreeMap(String string) {
         binding.tvRemovingTreeMap.setText(string);
         binding.pbRemovingTreeMap.setVisibility(View.INVISIBLE);
         binding.tvRemovingTreeMap.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showTvSearchByKeyTreeMap(String string) {
         binding.tvSearchByKeyTreeMap.setText(string);

@@ -14,7 +14,9 @@ import javax.inject.Inject;
 
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
-import ru.denisshishin.task3foxminded.DaggerApplicationComponent;
+import moxy.presenter.ProvidePresenter;
+import ru.denisshishin.task3foxminded.MyApplication;
+import ru.denisshishin.task3foxminded.R;
 import ru.denisshishin.task3foxminded.databinding.FragmentCollectionsBinding;
 
 public class CollectionsFragment extends MvpAppCompatFragment implements CollectionsView {
@@ -22,6 +24,11 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @Inject
     @InjectPresenter
     CollectionsPresenter collectionsPresenter;
+
+    @ProvidePresenter
+    CollectionsPresenter providePresenter() {
+        return collectionsPresenter;
+    }
 
     private FragmentCollectionsBinding binding;
 
@@ -38,11 +45,10 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         super.onViewCreated(view, savedInstanceState);
 
         binding.btnCollectionsFragment.setOnClickListener(v -> {
-            if(!binding.tietInputNumberCollectionsFragment.getText().toString().isEmpty() ) {
+            if (!binding.tietInputNumberCollectionsFragment.getText().toString().isEmpty()) {
                 collectionsPresenter.launchCollections(binding.tietInputNumberCollectionsFragment.getText().toString());
-            }
-            else {
-                Toast toast = Toast.makeText(getActivity(),"Please input number",
+            } else {
+                Toast toast = Toast.makeText(getActivity(), R.string.input_number,
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
@@ -52,7 +58,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        DaggerApplicationComponent.create().inject(this);
+        MyApplication.appComponent.inject(this);
     }
 
     @Override
@@ -81,6 +87,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
         binding.pbRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void hideTextViewCollectionsFragment() {
         binding.tvAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
@@ -113,12 +120,12 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbFillingCollections.setVisibility(View.VISIBLE);
         binding.tvFillingCollections.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void hideProgressBarFillingCollections() {
         binding.pbFillingCollections.setVisibility(View.INVISIBLE);
         binding.tvFillingCollections.setVisibility(View.INVISIBLE);
     }
-
 
     @Override
     public void showAddingInTheBeginningArrayList(String string) {
@@ -126,8 +133,8 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
 
         binding.pbAddingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheBeginningArrayList.setVisibility(View.VISIBLE);
-
     }
+
     @Override
     public void showAddingInTheMiddleArrayList(String string) {
         binding.tvAddingInTheMiddleArrayList.setText(string);
@@ -135,6 +142,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheMiddleArrayList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showAddingInTheEndArrayList(String string) {
         binding.tvAddingInTheEndArrayList.setText(string);
@@ -142,6 +150,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheEndArrayList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheEndArrayList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showSearchByValueArrayList(String string) {
         binding.tvSearchByValueArrayList.setText(string);
@@ -149,6 +158,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbSearchByValueArrayList.setVisibility(View.INVISIBLE);
         binding.tvSearchByValueArrayList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheBeginningArrayList(String string) {
         binding.tvRemovingInTheBeginningArrayList.setText(string);
@@ -156,6 +166,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheBeginningArrayList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheBeginningArrayList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheMiddleArrayList(String string) {
         binding.tvRemovingInTheMiddleArrayList.setText(string);
@@ -163,15 +174,14 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheMiddleArrayList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheMiddleArrayList.setVisibility(View.VISIBLE);
     }
+
     @Override
-    public void showRemovingInTheEndArrayList(String string){
+    public void showRemovingInTheEndArrayList(String string) {
         binding.tvRemovingInTheEndArrayList.setText(string);
 
         binding.pbRemovingInTheEndArrayList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheEndArrayList.setVisibility(View.VISIBLE);
     }
-
-
 
     @Override
     public void showAddingInTheBeginningLinkedList(String string) {
@@ -180,6 +190,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showAddingInTheMiddleLinkedList(String string) {
         binding.tvAddingInTheMiddleLinkedList.setText(string);
@@ -187,6 +198,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showAddingInTheEndLinkedList(String string) {
         binding.tvAddingInTheEndLinkedList.setText(string);
@@ -194,6 +206,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheEndLinkedList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheEndLinkedList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showSearchByValueLinkedList(String string) {
         binding.tvSearchByValueLinkedList.setText(string);
@@ -201,6 +214,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbSearchByValueLinkedList.setVisibility(View.INVISIBLE);
         binding.tvSearchByValueLinkedList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheBeginningLinkedList(String string) {
         binding.tvRemovingInTheBeginningLinkedList.setText(string);
@@ -208,6 +222,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheBeginningLinkedList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheBeginningLinkedList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheMiddleLinkedList(String string) {
         binding.tvRemovingInTheMiddleLinkedList.setText(string);
@@ -215,6 +230,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheMiddleLinkedList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheMiddleLinkedList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheEndLinkedList(String string) {
         binding.tvRemovingInTheEndLinkedList.setText(string);
@@ -223,7 +239,6 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.tvRemovingInTheEndLinkedList.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public void showAddingInTheBeginningCopyOnWriteArrayList(String string) {
         binding.tvAddingInTheBeginningCopyOnWriteList.setText(string);
@@ -231,6 +246,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showAddingInTheMiddleCopyOnWriteArrayList(String string) {
         binding.tvAddingInTheMiddleCopyOnWriteList.setText(string);
@@ -238,6 +254,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showAddingInTheEndCopyOnWriteArrayList(String string) {
         binding.tvAddingInTheEndCopyOnWriteList.setText(string);
@@ -245,6 +262,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbAddingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvAddingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showSearchByValueCopyOnWriteArrayList(String string) {
         binding.tvSearchByValueCopyOnWriteList.setText(string);
@@ -252,6 +270,7 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbSearchByValueCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvSearchByValueCopyOnWriteList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheBeginningCopyOnWriteArrayList(String string) {
         binding.tvRemovingInTheBeginningCopyOnWriteList.setText(string);
@@ -259,22 +278,21 @@ public class CollectionsFragment extends MvpAppCompatFragment implements Collect
         binding.pbRemovingInTheBeginningCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheBeginningCopyOnWriteList.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void showRemovingInTheMiddleCopyOnWriteArrayList(String string) {
         binding.tvRemovingInTheMiddleCopyOnWriteList.setText(string);
 
         binding.pbRemovingInTheMiddleCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheMiddleCopyOnWriteList.setVisibility(View.VISIBLE);
-
     }
+
     @Override
     public void showRemovingInTheEndCopyOnWriteArrayList(String string) {
         binding.tvRemovingInTheEndCopyOnWriteList.setText(string);
 
         binding.pbRemovingInTheEndCopyOnWriteList.setVisibility(View.INVISIBLE);
         binding.tvRemovingInTheEndCopyOnWriteList.setVisibility(View.VISIBLE);
-
     }
-
 
 }
